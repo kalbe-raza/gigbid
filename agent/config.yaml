@@ -1,0 +1,146 @@
+# GigBid runtime configuration. Rules, models, thresholds and budgets live here, never in code.
+# Every value can be overridden per deployment with GIGBID_CONFIG=<path to another yaml>.
+
+marketplace:
+  mode: gigsim                 # gigsim | upwork_live  (R1: one port, two adapters, switched here)
+  gigsim:
+    base_url_env: GIGSIM_BASE_URL
+    token_env: GIGSIM_API_TOKEN
+    max_requests_per_minute: 40   # GigSim allows 60; we stay well under it
+  upwork_live:
+    mcp_url: https://mcp.upwork.com/mcp
+    max_requests_per_minute: 10
+    scout_interval_minutes: 120   # see docs/RUNBOOK.md for the justification
+  timeouts_s: {read: 15, write: 30}
+  retries: {attempts: 3, backoff_base_s: 1.5}
+
+models:
+  profile: open                # open (required, open-weight only) | paid (optional)
+  providers:
+    groq: {base_url: "https://api.groq.com/openai/v1", key_env: GROQ_API_KEY}
+    openrouter: {base_url: "https://openrouter.ai/api/v1", key_env: OPENROUTER_API_KEY}
+    ollama: {base_url_env: OLLAMA_BASE_URL, base_url: "http://ollama:11434/v1", key_env: OLLAMA_API_KEY}
+  # list price per 1M tokens (input, output) in USD, used to report cost. Free tiers cost $0 in practice;
+  # we report list-price-equivalent cost so the number is meaningful once you pay. Verify before quoting.
+  prices_usd_per_mtok:
+    "groq:openai/gpt-oss-20b": [0.075, 0.30]
+    "groq:openai/gpt-oss-120b": [0.15, 0.60]
+    "groq:qwen/qwen3.8-27b": [0.29, 0.59]
+    "groq:openai/gpt-oss-safeguard-20b": [0.075, 0.30]
+    "groq:meta-llama/llama-prompt-guard-2-86m": [0.04, 0.04]
+    "openrouter:google/gemma-4-26b-a4b-it:free": [0.0, 0.0]
+    "ollama:qwen3:4b": [0.0, 0.0]
+  tokens_per_minute:           # client-side pacing so free tiers never 429
+    groq: 7500
+    openrouter: 20000
+    ollama: 1000000
+  profiles:
+    open:
+      nodes:
+        analyst: "groq:openai/gpt-oss-20b"
+        risk_assessor: "groq:openai/gpt-oss-20b"
+        injection_classifier: "groq:meta-llama/llama-prompt-guard-2-86m"
+        writer: "groq:openai/gpt-oss-120b"
+        verifier: "groq:openai/gpt-oss-20b"
+        critic: "groq:qwen/qwen3.8-27b"
+        compliance: "groq:openai/gpt-oss-safeguard-20b"
+        liaison_intent: "groq:openai/gpt-oss-20b"
+        liaison: "groq:openai/gpt-oss-120b"
+        judge: "groq:qwen/qwen3.8-27b"
+        baseline_agent: "groq:openai/gpt-oss-120b"
+      fallback:                # cheap nodes fall back to a different provider on errors / exhausted quota
+        default: "openrouter:google/gemma-4-26b-a4b-it:free"
+        local: "ollama:qwen3:4b"
+    open_b:                    # second open configuration compared on the dev set (docs/adr/0003)
+      nodes:
+        analyst: "groq:openai/gpt-oss-20b"
+        risk_assessor: "groq:openai/gpt-oss-20b"
+        injection_classifier: "groq:meta-llama/llama-prompt-guard-2-86m"
+        writer: "groq:qwen/qwen3.8-27b"
+        verifier: "groq:openai/gpt-oss-20b"
+        critic: "groq:openai/gpt-oss-120b"
+        compliance: "groq:openai/gpt-oss-20b"
+        liaison_intent: "groq:openai/gpt-oss-20b"
+        liaison: "groq:qwen/qwen3.8-27b"
+        judge: "groq:qwen/qwen3.8-27b"
+        baseline_agent: "groq:openai/gpt-oss-120b"
+      fallback:
+        default: "openrouter:google/gemma-4-26b-a4b-it:free"
+        local: "ollama:qwen3:4b"
+    paid:                      # optional; not used by the deployment
+      nodes: {}
+      fallback: {default: "openrouter:google/gemma-4-26b-a4b-it:free"}
+
+rag:
+  variant: best                # chosen by evals/results/rag_variants.json (docs/adr/0002)
+  embed_model: "BAAI/bge-small-en-v1.5"
+  rerank_model: "Xenova/ms-marco-MiniLM-L-6-v2"
+  k: 8
+  best:
+    chunking: structured
+    query: decomposed
+    retrieval: hybrid
+    rerank: cross
+    outcome: true
+    corrective: false
+
+thresholds:
+  bid_min_fit: 0.55            # fit at or above this (and risk below max) -> bid
+  watch_min_fit: 0.35          # between watch and bid -> watch
+  max_risk: 0.60               # risk above this -> skip, whatever the fit
+  scam_risk: 0.80              # risk above this -> flagged as scam in the UI
+  claim_support_min: 0.45      # verifier: lexical/semantic support needed for "supported"
+
+budgets:
+  max_graph_steps: 40          # per thread; exceeding moves the thread to needs_attention
+  max_tokens_per_job: 30000    # per bid-graph thread
+  max_tokens_per_conversation: 15000
+  max_revisions: 2             # critic can send a draft back at most twice
+  declared:                    # R8 / E5: declared budgets, checked by evals/runners/budget_report.py
+    p95_latency_s_per_job_analysed: 25
+    p95_latency_s_per_proposal: 90
+    usd_per_job_analysed: 0.002
+    usd_per_proposal: 0.01
+
+pricing:
+  connects_usd: 0.15           # what one Connect costs on the platform
+  min_expected_value_ratio: 3  # bid only if expected value >= this x Connects cost
+  # platform Connects rules mirrored from the marketplace policy (GET /v1/policy). Empty until the
+  # 2026-11-02 change request is absorbed (docs/CHANGE_REQUEST.md).
+  connects_surcharge_rules: []
+
+proposal:
+  max_cover_letter_chars: null # set by the 2026-11-02 change request
+  target_words: [120, 220]
+  max_screening_answer_words: 90
+
+compliance:
+  policy_pack: data/policy_pack/marketplace_policy.md
+  banned_patterns:             # deterministic checks run before the LLM check
+    contact: '[\w.+-]+@[\w-]+\.[\w.]+|\+?\d[\d\s().-]{8,}\d|\b(whats ?app|telegram|skype|signal)\b'
+    guarantee: '\b(guarantee[sd]?|100% (success|satisfaction|accuracy)|risk[- ]free|first[- ]page results)\b'
+    off_platform_payment: '\b(paypal|wise|western union|crypto|bitcoin|usdt|bank transfer)\b'
+    urls: 'https?://(?!portfolio\b)[^\s)]+'
+
+autonomy:
+  default: manual              # manual | auto_skip_low_fit ; auto-send does not exist
+  auto_skip_below_fit: 0.25
+
+memory:
+  style:
+    min_occurrences: 3         # a style rule is promoted only after the same edit pattern in >= 3 edits
+    min_distinct_jobs: 2       # ... made on at least 2 different jobs
+    max_rules: 20
+  outcome:
+    min_samples: 5             # per job category before an outcome insight is promoted
+    min_rate_delta: 0.15       # promote only if the pattern beats the category base rate by 15 points
+
+scheduler:
+  saved_search_interval_s: 900   # GigSim
+  live_interval_s: 7200          # Upwork live mode, see RUNBOOK
+  max_jobs_per_scan: 15
+
+tracing:
+  project: gigbid-kalbe
+  endpoint_env: PHOENIX_COLLECTOR_ENDPOINT
+  ui_url_env: PHOENIX_PUBLIC_URL

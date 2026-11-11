@@ -192,7 +192,7 @@ def historical_jobs(rows60k: list[dict], n: int, rng: random.Random) -> list[dic
             by_domain[d].append(r)
     per = n // len(by_domain)
     out = []
-    for d, rows in sorted(by_domain.items()):
+    for _d, rows in sorted(by_domain.items()):
         rng.shuffle(rows)
         out.extend(rows[:per])
     return out

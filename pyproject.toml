@@ -53,7 +53,7 @@ packages = ["agent", "rag", "mcp_servers", "apps", "worker", "gigsim", "evals"]
 [tool.ruff]
 line-length = 110
 target-version = "py311"
-extend-exclude = ["apps/web", "gigsim"]
+extend-exclude = ["apps/web", "gigsim", "data"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]

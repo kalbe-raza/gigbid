@@ -31,7 +31,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 from persona_specs import OTHER_TECH, PERSONAS  # noqa: E402
 
-from rag.skills import GENERIC_SKILLS, STOP_SKILLS, canon, canon_set, mentions  # noqa: E402
+from rag.skills import GENERIC_SKILLS, STOP_SKILLS, canon_set, mentions  # noqa: E402
 
 SCAM_TEMPLATES = [
     ("Quick paid test task for {role}",
@@ -164,7 +164,7 @@ def make_client(rng: random.Random, pool: list[dict], job: dict, scam: bool, ski
     if scam:
         base.update(payment_verified=rng.random() < 0.25, total_spent=0.0, rating=None, feedback_count=0, hires=0)
     budget = job.get("budget") or (job.get("hourly_high") or 30) * 40
-    rec = [s for s in canon_set(skills) if s in VOCAB]
+    rec = sorted(s for s in canon_set(skills) if s in VOCAB)  # sorted: set order is hash-randomised
     hidden = {  # never exposed through the public GigSim API
         "must_have": rng.sample(rec, min(2, len(rec))),
         "budget_ceiling": round(budget * rng.uniform(1.0, 1.3), 2),
@@ -193,7 +193,6 @@ def connects_cost(job: dict, rng: random.Random) -> int:
 
 
 def build(seed: int, n_per: int, out_dev: Path, out_test: Path, out_sim: Path) -> None:
-    rng = random.Random(seed)
     posts = [json.loads(line) for line in open(ROOT / "data/market/job_posts.jsonl")]
     stats = json.loads((ROOT / "data/market/market_stats.json").read_text())
     pool = json.loads((ROOT / "data/market/client_pool.json").read_text())

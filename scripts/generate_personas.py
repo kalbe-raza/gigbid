@@ -152,7 +152,10 @@ def sigmoid(x: float) -> float:
 
 
 def write_cv_pdf(path: Path, key: str, p: dict, projects: list[tuple]) -> None:
+    from reportlab import rl_config
     from reportlab.lib.pagesizes import A4
+
+    rl_config.invariant = 1  # byte-identical PDFs across runs
     from reportlab.lib.styles import getSampleStyleSheet
     from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
@@ -195,7 +198,7 @@ def readme(proj: tuple, files: list[str]) -> str:
     return (f"# {pid}\n\n{title}. Built {year}. (Synthetic portfolio repository.)\n\n"
             f"## Architecture\n{approach[0].upper() + approach[1:]}.\n\n"
             f"## Tech\n" + "\n".join(f"- {t}" for t in techs if t in SNIPPETS or t in MAIN_FILES or t in skills) +
-            f"\n\n## Layout\n" + "\n".join(f"- `{f}`" for f in files) +
+            "\n\n## Layout\n" + "\n".join(f"- `{f}`" for f in files) +
             "\n\n## Running\n```bash\ncp .env.example .env\nmake run\n```\n")
 
 
@@ -206,7 +209,6 @@ def main() -> None:
     ap.add_argument("--posts", default="data/market/job_posts.jsonl")
     ap.add_argument("--proposals", type=int, default=150)
     a = ap.parse_args()
-    rng = random.Random(a.seed)
     out = Path(a.out)
 
     posts = [json.loads(line) for line in open(a.posts)]
@@ -218,7 +220,6 @@ def main() -> None:
         (root / "_gold").mkdir(exist_ok=True)
         projects = p["projects"]
         explicit = sorted({s for pr in projects for s in pr[4]})
-        implied = sorted({s for pr in projects for s in pr[5]} - set(explicit))
         generic = {"ai_ml": ["Artificial Intelligence", "Data Science", "Neural Network", "AI Development", "API"],
                    "fullstack": ["Web Development", "HTML", "CSS", "Web Application", "API", "API Integration", "MySQL"],
                    "data_analyst": ["Dashboard", "Business Intelligence", "Data Mining", "Data Modeling"]}[key]
@@ -260,7 +261,7 @@ def main() -> None:
             for i, proj in enumerate(prng.sample(projects, 12)):
                 rating = prng.choice([5, 5, 5, 4.8, 4.5, 4])
                 vague = i % 4 == 3
-                text = (f"Great to work with, communicative and on time. Would hire again." if vague else
+                text = ("Great to work with, communicative and on time. Would hire again." if vague else
                         f"{p['name'].split()[0]} took on our {proj[1].lower()} and {proj[8]}. "
                         f"Clear updates every week and solid documentation.")
                 f.write(json.dumps({
