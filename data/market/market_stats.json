@@ -1,0 +1,128 @@
+{
+  "price": {
+    "ai_ml": {
+      "fixed": {
+        "n": 217,
+        "p10": 33.0,
+        "p25": 100.0,
+        "p50": 300.0,
+        "p75": 1000.0,
+        "p90": 5000.0
+      },
+      "hourly": {
+        "n": 283,
+        "p10": 12.5,
+        "p25": 20.0,
+        "p50": 30.0,
+        "p75": 52.5,
+        "p90": 75.0
+      },
+      "connects": {
+        "n": 500,
+        "p25": 4.0,
+        "p50": 6.0,
+        "p75": 6.0
+      }
+    },
+    "data_analyst": {
+      "fixed": {
+        "n": 188,
+        "p10": 15.0,
+        "p25": 40.0,
+        "p50": 100.0,
+        "p75": 350.0,
+        "p90": 1000.0
+      },
+      "hourly": {
+        "n": 312,
+        "p10": 10.0,
+        "p25": 17.5,
+        "p50": 25.0,
+        "p75": 40.0,
+        "p90": 60.0
+      },
+      "connects": {
+        "n": 500,
+        "p25": 2.0,
+        "p50": 4.0,
+        "p75": 6.0
+      }
+    },
+    "fullstack": {
+      "fixed": {
+        "n": 230,
+        "p10": 15.0,
+        "p25": 50.0,
+        "p50": 200.0,
+        "p75": 837.5,
+        "p90": 2050.0
+      },
+      "hourly": {
+        "n": 270,
+        "p10": 10.0,
+        "p25": 17.5,
+        "p50": 25.0,
+        "p75": 36.88,
+        "p90": 55.0
+      },
+      "connects": {
+        "n": 500,
+        "p25": 4.0,
+        "p50": 6.0,
+        "p75": 6.0
+      }
+    }
+  },
+  "contract_hourly_rates": {
+    "data_analyst": {
+      "n": 18343,
+      "p10": 7.78,
+      "p25": 15.0,
+      "p50": 30.0,
+      "p75": 50.0,
+      "p90": 80.0
+    },
+    "fullstack": {
+      "n": 29576,
+      "p10": 10.0,
+      "p25": 15.0,
+      "p50": 25.0,
+      "p75": 40.0,
+      "p90": 60.0
+    },
+    "ai_ml": {
+      "n": 8593,
+      "p10": 8.0,
+      "p25": 15.0,
+      "p50": 30.0,
+      "p75": 50.0,
+      "p90": 80.0
+    }
+  },
+  "freelancer_benchmarks": {
+    "ai_ml": {
+      "n": 1403,
+      "hourly_rate_p50": 280.0,
+      "job_success_p50": 86.4,
+      "note": "dataset is self-described as 'real-world style'; used only for persona calibration"
+    },
+    "fullstack": {
+      "n": 1859,
+      "hourly_rate_p50": 280.0,
+      "job_success_p50": 86.7,
+      "note": "dataset is self-described as 'real-world style'; used only for persona calibration"
+    },
+    "data_analyst": {
+      "n": 1063,
+      "hourly_rate_p50": 280.0,
+      "job_success_p50": 86.5,
+      "note": "dataset is self-described as 'real-world style'; used only for persona calibration"
+    }
+  },
+  "sources": {
+    "upwork50k": "kaggle:asaniczka/upwork-job-postings-dataset-2024-50k-records (ODC-By)",
+    "upwork60k": "kaggle:ahmedmyalo/upwork-freelance-jobs-60k (Apache-2.0)",
+    "contracts": "kaggle:asaniczka/freelance-contracts-dataset-1-3-million-entries (ODC-By)",
+    "gigsuccess": "kaggle:sarveshchhetri/freelancer-success-earnings-and-churn-prediction (Apache-2.0)"
+  }
+}

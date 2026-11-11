@@ -1,0 +1,5 @@
+sources:
+  - facebook_marketing
+  - google_ads
+  - tiktok_marketing
+destination: bigquery

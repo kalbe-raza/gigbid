@@ -1,0 +1,308 @@
+{
+  "churn-radar": {
+    "title": "Customer churn early-warning model",
+    "industry": "telecom",
+    "year": 2023,
+    "skills": [
+      "Python",
+      "scikit-learn",
+      "XGBoost",
+      "Machine Learning",
+      "Pandas"
+    ],
+    "implied": [
+      "SHAP",
+      "MLflow"
+    ],
+    "has_repo": true,
+    "client": "Lumen Telecom Co."
+  },
+  "helpdesk-rag": {
+    "title": "Retrieval-augmented support assistant",
+    "industry": "B2B SaaS",
+    "year": 2024,
+    "skills": [
+      "LangChain",
+      "OpenAI API",
+      "Retrieval-Augmented Generation",
+      "Python",
+      "FastAPI"
+    ],
+    "implied": [
+      "Pinecone",
+      "Redis"
+    ],
+    "has_repo": true,
+    "client": "Northwind B2B Co."
+  },
+  "invoice-reader": {
+    "title": "Invoice field extraction",
+    "industry": "logistics",
+    "year": 2022,
+    "skills": [
+      "Computer Vision",
+      "PyTorch",
+      "OCR",
+      "Python"
+    ],
+    "implied": [
+      "Tesseract",
+      "OpenCV",
+      "Docker"
+    ],
+    "has_repo": true,
+    "client": "Orchard Logistics Co."
+  },
+  "shelf-forecast": {
+    "title": "Store-level demand forecasting",
+    "industry": "retail",
+    "year": 2023,
+    "skills": [
+      "Time Series Forecasting",
+      "Python",
+      "Prophet",
+      "Pandas"
+    ],
+    "implied": [
+      "LightGBM",
+      "Airflow"
+    ],
+    "has_repo": false,
+    "client": "Bluegate Retail Co."
+  },
+  "urdu-sentiment": {
+    "title": "Urdu and English review sentiment classifier",
+    "industry": "e-commerce",
+    "year": 2022,
+    "skills": [
+      "Natural Language Processing",
+      "Hugging Face",
+      "Transformers",
+      "PyTorch"
+    ],
+    "implied": [
+      "Weights & Biases"
+    ],
+    "has_repo": true,
+    "client": "Meridian E-Commerce Co."
+  },
+  "talent-match": {
+    "title": "CV-to-job semantic matching",
+    "industry": "HR tech",
+    "year": 2024,
+    "skills": [
+      "Natural Language Processing",
+      "Sentence Transformers",
+      "Python",
+      "Semantic Search"
+    ],
+    "implied": [
+      "FAISS",
+      "FastAPI"
+    ],
+    "has_repo": false,
+    "client": "Lumen Hr Co."
+  },
+  "loom-inspect": {
+    "title": "Fabric defect detection on the production line",
+    "industry": "textile manufacturing",
+    "year": 2023,
+    "skills": [
+      "Computer Vision",
+      "YOLO",
+      "PyTorch",
+      "Object Detection"
+    ],
+    "implied": [
+      "ONNX",
+      "OpenCV"
+    ],
+    "has_repo": true,
+    "client": "Crescent Textile Co."
+  },
+  "lexeval": {
+    "title": "LLM evaluation harness for contract review",
+    "industry": "legal tech",
+    "year": 2025,
+    "skills": [
+      "Large Language Models",
+      "Prompt Engineering",
+      "Python",
+      "LLM Evaluation"
+    ],
+    "implied": [
+      "pytest",
+      "Pydantic"
+    ],
+    "has_repo": true,
+    "client": "Pinecrest Legal Co."
+  },
+  "txn-sentinel": {
+    "title": "Card-transaction anomaly detection",
+    "industry": "fintech",
+    "year": 2022,
+    "skills": [
+      "Anomaly Detection",
+      "Python",
+      "scikit-learn",
+      "SQL"
+    ],
+    "implied": [
+      "Isolation Forest",
+      "PostgreSQL"
+    ],
+    "has_repo": false,
+    "client": "Maple Fintech Co."
+  },
+  "basket-recs": {
+    "title": "Product recommendation engine",
+    "industry": "e-commerce",
+    "year": 2023,
+    "skills": [
+      "Recommender Systems",
+      "Python",
+      "Collaborative Filtering",
+      "Machine Learning"
+    ],
+    "implied": [
+      "Redis",
+      "FastAPI"
+    ],
+    "has_repo": false,
+    "client": "Harbor E-Commerce Co."
+  },
+  "callnotes": {
+    "title": "Call-centre transcription and summarisation",
+    "industry": "BPO",
+    "year": 2024,
+    "skills": [
+      "Speech Recognition",
+      "Whisper",
+      "Large Language Models",
+      "Python"
+    ],
+    "implied": [
+      "Celery",
+      "Docker"
+    ],
+    "has_repo": true,
+    "client": "Saltmarsh Bpo Co."
+  },
+  "deploy-lane": {
+    "title": "Model deployment pipeline",
+    "industry": "health tech",
+    "year": 2023,
+    "skills": [
+      "MLOps",
+      "Docker",
+      "AWS",
+      "CI/CD"
+    ],
+    "implied": [
+      "MLflow",
+      "GitHub Actions",
+      "SageMaker"
+    ],
+    "has_repo": false,
+    "client": "Saltmarsh Health Co."
+  },
+  "orderbot": {
+    "title": "WhatsApp order-taking chatbot",
+    "industry": "restaurants",
+    "year": 2024,
+    "skills": [
+      "Chatbot Development",
+      "Python",
+      "OpenAI API",
+      "Conversational AI"
+    ],
+    "implied": [
+      "Twilio",
+      "Redis"
+    ],
+    "has_repo": false,
+    "client": "Lumen Restaurants Co."
+  },
+  "xray-triage": {
+    "title": "Chest X-ray triage prototype",
+    "industry": "healthcare research",
+    "year": 2021,
+    "skills": [
+      "Deep Learning",
+      "TensorFlow",
+      "Keras",
+      "Computer Vision"
+    ],
+    "implied": [
+      "Grad-CAM"
+    ],
+    "has_repo": false,
+    "client": "Maple Healthcare Co."
+  },
+  "ride-pricing": {
+    "title": "Dynamic pricing model for car rentals",
+    "industry": "mobility",
+    "year": 2022,
+    "skills": [
+      "Machine Learning",
+      "Python",
+      "Regression",
+      "LightGBM"
+    ],
+    "implied": [
+      "Optuna"
+    ],
+    "has_repo": false,
+    "client": "Lumen Mobility Co."
+  },
+  "clause-tagger": {
+    "title": "Contract clause classifier",
+    "industry": "legal services",
+    "year": 2023,
+    "skills": [
+      "Natural Language Processing",
+      "spaCy",
+      "scikit-learn",
+      "Text Classification"
+    ],
+    "implied": [
+      "Label Studio"
+    ],
+    "has_repo": true,
+    "client": "Lumen Legal Co."
+  },
+  "meetmate": {
+    "title": "Multi-agent meeting scheduler",
+    "industry": "productivity SaaS",
+    "year": 2025,
+    "skills": [
+      "LangGraph",
+      "Large Language Models",
+      "Python",
+      "AI Agents"
+    ],
+    "implied": [
+      "PostgreSQL",
+      "Google Calendar API"
+    ],
+    "has_repo": true,
+    "client": "Meridian Productivity Co."
+  },
+  "agri-labels": {
+    "title": "Active-learning labelling workflow",
+    "industry": "agritech",
+    "year": 2024,
+    "skills": [
+      "Active Learning",
+      "Python",
+      "PyTorch",
+      "Image Classification"
+    ],
+    "implied": [
+      "Label Studio",
+      "Docker"
+    ],
+    "has_repo": false,
+    "client": "Crescent Agritech Co."
+  }
+}

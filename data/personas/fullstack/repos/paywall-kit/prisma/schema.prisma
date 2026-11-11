@@ -1,0 +1,7 @@
+model Subscription {
+  id        String   @id @default(cuid())
+  customer  String
+  plan      String
+  status    String
+  periodEnd DateTime
+}

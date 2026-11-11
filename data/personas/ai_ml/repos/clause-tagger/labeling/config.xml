@@ -1,0 +1,6 @@
+<View>
+  <Text name="clause" value="$text"/>
+  <Choices name="type" toName="clause">
+    <Choice value="indemnity"/><Choice value="termination"/><Choice value="other"/>
+  </Choices>
+</View>

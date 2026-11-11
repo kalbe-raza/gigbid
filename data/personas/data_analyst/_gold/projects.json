@@ -1,0 +1,294 @@
+{
+  "salespulse": {
+    "title": "Sales performance dashboard",
+    "industry": "FMCG distribution",
+    "year": 2023,
+    "skills": [
+      "Power BI",
+      "DAX",
+      "SQL",
+      "Data Visualization"
+    ],
+    "implied": [
+      "Power Query"
+    ],
+    "has_repo": true,
+    "client": "Bluegate Fmcg Co."
+  },
+  "cohort-lens": {
+    "title": "Subscription cohort and retention analysis",
+    "industry": "SaaS",
+    "year": 2024,
+    "skills": [
+      "SQL",
+      "Python",
+      "Pandas",
+      "Data Analysis"
+    ],
+    "implied": [
+      "BigQuery",
+      "Looker Studio"
+    ],
+    "has_repo": true,
+    "client": "Juniper Saas Co."
+  },
+  "people-pulse": {
+    "title": "HR attrition dashboard",
+    "industry": "human resources",
+    "year": 2022,
+    "skills": [
+      "Tableau",
+      "Microsoft Excel",
+      "Data Visualization",
+      "HR Analytics"
+    ],
+    "implied": [
+      "Tableau Prep"
+    ],
+    "has_repo": false,
+    "client": "Saltmarsh Human Co."
+  },
+  "runway-model": {
+    "title": "Financial model and cash-flow forecast",
+    "industry": "startup",
+    "year": 2023,
+    "skills": [
+      "Microsoft Excel",
+      "Financial Modeling",
+      "Financial Analysis",
+      "Forecasting"
+    ],
+    "implied": [
+      "VBA",
+      "Power Pivot"
+    ],
+    "has_repo": false,
+    "client": "Indus Startup Co."
+  },
+  "checkout-test": {
+    "title": "Checkout A/B test analysis",
+    "industry": "e-commerce",
+    "year": 2024,
+    "skills": [
+      "A/B Testing",
+      "Statistics",
+      "Python",
+      "Data Analysis"
+    ],
+    "implied": [
+      "SciPy",
+      "statsmodels"
+    ],
+    "has_repo": true,
+    "client": "Corvid E-Commerce Co."
+  },
+  "adstack-dw": {
+    "title": "Marketing data warehouse",
+    "industry": "digital agency",
+    "year": 2024,
+    "skills": [
+      "dbt",
+      "SQL",
+      "ETL",
+      "BigQuery"
+    ],
+    "implied": [
+      "Airbyte",
+      "Looker Studio"
+    ],
+    "has_repo": true,
+    "client": "Granite Digital Co."
+  },
+  "sheet-robot": {
+    "title": "Google Sheets reporting automation",
+    "industry": "nonprofit",
+    "year": 2022,
+    "skills": [
+      "Google Sheets",
+      "Google Apps Script",
+      "Data Cleaning",
+      "Automation"
+    ],
+    "implied": [
+      "Looker Studio"
+    ],
+    "has_repo": false,
+    "client": "Tidewater Nonprofit Co."
+  },
+  "guest-voice": {
+    "title": "Customer survey analysis",
+    "industry": "hospitality",
+    "year": 2023,
+    "skills": [
+      "Survey Analysis",
+      "Python",
+      "Statistics",
+      "Data Analysis"
+    ],
+    "implied": [
+      "NLTK"
+    ],
+    "has_repo": false,
+    "client": "Indus Hospitality Co."
+  },
+  "plant-kpis": {
+    "title": "Supply-chain KPI dashboard",
+    "industry": "manufacturing",
+    "year": 2022,
+    "skills": [
+      "Power BI",
+      "SQL Server",
+      "ETL",
+      "Supply Chain Analytics"
+    ],
+    "implied": [
+      "SSIS"
+    ],
+    "has_repo": true,
+    "client": "Lumen Manufacturing Co."
+  },
+  "attribution-lab": {
+    "title": "Marketing attribution analysis",
+    "industry": "DTC brand",
+    "year": 2024,
+    "skills": [
+      "Google Analytics",
+      "SQL",
+      "Data Analysis",
+      "Marketing Analytics"
+    ],
+    "implied": [
+      "GA4 BigQuery Export"
+    ],
+    "has_repo": false,
+    "client": "Pinecrest Dtc Co."
+  },
+  "price-watch": {
+    "title": "Competitor price tracker built on official APIs",
+    "industry": "retail",
+    "year": 2023,
+    "skills": [
+      "Python",
+      "Data Extraction",
+      "Pandas",
+      "API Integration"
+    ],
+    "implied": [
+      "Requests",
+      "Airflow"
+    ],
+    "has_repo": false,
+    "client": "Granite Retail Co."
+  },
+  "ward-outcomes": {
+    "title": "Clinical outcomes statistics report",
+    "industry": "hospital",
+    "year": 2021,
+    "skills": [
+      "R",
+      "Statistics",
+      "Data Visualization",
+      "Biostatistics"
+    ],
+    "implied": [
+      "ggplot2",
+      "Survival Analysis"
+    ],
+    "has_repo": true,
+    "client": "Northwind Hospital Co."
+  },
+  "exec-board": {
+    "title": "Executive KPI dashboard",
+    "industry": "logistics",
+    "year": 2024,
+    "skills": [
+      "Looker Studio",
+      "BigQuery",
+      "SQL",
+      "Data Visualization"
+    ],
+    "implied": [],
+    "has_repo": false,
+    "client": "Northwind Logistics Co."
+  },
+  "recon-check": {
+    "title": "Payment reconciliation analysis",
+    "industry": "fintech",
+    "year": 2022,
+    "skills": [
+      "SQL",
+      "Microsoft Excel",
+      "Python",
+      "Reconciliation"
+    ],
+    "implied": [
+      "Pandas"
+    ],
+    "has_repo": false,
+    "client": "Meridian Fintech Co."
+  },
+  "stock-forecast": {
+    "title": "Inventory demand forecast",
+    "industry": "retail",
+    "year": 2023,
+    "skills": [
+      "Time Series Forecasting",
+      "Microsoft Excel",
+      "Python",
+      "Forecasting"
+    ],
+    "implied": [
+      "statsmodels"
+    ],
+    "has_repo": true,
+    "client": "Orchard Retail Co."
+  },
+  "crm-tidy": {
+    "title": "CRM data cleaning and deduplication",
+    "industry": "real estate",
+    "year": 2022,
+    "skills": [
+      "Data Cleaning",
+      "Python",
+      "Pandas",
+      "Data Quality"
+    ],
+    "implied": [
+      "RapidFuzz"
+    ],
+    "has_repo": false,
+    "client": "Orchard Real Co."
+  },
+  "self-serve-bi": {
+    "title": "Self-serve analytics with Metabase",
+    "industry": "edtech",
+    "year": 2023,
+    "skills": [
+      "Metabase",
+      "PostgreSQL",
+      "SQL",
+      "Business Intelligence"
+    ],
+    "implied": [
+      "Docker"
+    ],
+    "has_repo": false,
+    "client": "Granite Edtech Co."
+  },
+  "room-rates": {
+    "title": "Price elasticity analysis",
+    "industry": "hospitality",
+    "year": 2024,
+    "skills": [
+      "Statistics",
+      "Python",
+      "Regression Analysis",
+      "Pricing Analysis"
+    ],
+    "implied": [
+      "statsmodels"
+    ],
+    "has_repo": false,
+    "client": "Juniper Hospitality Co."
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "clinicq": {
+    "title": "Clinic appointment booking platform",
+    "industry": "healthcare",
+    "year": 2023,
+    "skills": [
+      "React",
+      "Node.js",
+      "Express",
+      "PostgreSQL"
+    ],
+    "implied": [
+      "Twilio",
+      "Redis"
+    ],
+    "has_repo": true,
+    "client": "Northwind Healthcare Co."
+  },
+  "paywall-kit": {
+    "title": "Subscription billing for a SaaS product",
+    "industry": "SaaS",
+    "year": 2024,
+    "skills": [
+      "Next.js",
+      "TypeScript",
+      "Stripe",
+      "SaaS Development"
+    ],
+    "implied": [
+      "Prisma",
+      "PostgreSQL",
+      "Webhooks"
+    ],
+    "has_repo": true,
+    "client": "Crescent Saas Co."
+  },
+  "tutorhub": {
+    "title": "Course platform for a tutoring academy",
+    "industry": "education",
+    "year": 2022,
+    "skills": [
+      "Django",
+      "Python",
+      "PostgreSQL",
+      "JavaScript"
+    ],
+    "implied": [
+      "Celery",
+      "Redis",
+      "AWS S3"
+    ],
+    "has_repo": true,
+    "client": "Pinecrest Education Co."
+  },
+  "plotfinder": {
+    "title": "Property listing portal with map search",
+    "industry": "real estate",
+    "year": 2023,
+    "skills": [
+      "React",
+      "Django REST Framework",
+      "PostgreSQL",
+      "REST API"
+    ],
+    "implied": [
+      "PostGIS",
+      "Mapbox"
+    ],
+    "has_repo": false,
+    "client": "Sable Real Co."
+  },
+  "stockwise": {
+    "title": "Inventory and order management system",
+    "industry": "wholesale",
+    "year": 2021,
+    "skills": [
+      "Laravel",
+      "PHP",
+      "MySQL",
+      "Vue.js"
+    ],
+    "implied": [
+      "Redis"
+    ],
+    "has_repo": false,
+    "client": "Saltmarsh Wholesale Co."
+  },
+  "chatline": {
+    "title": "Real-time support chat widget",
+    "industry": "SaaS",
+    "year": 2023,
+    "skills": [
+      "Node.js",
+      "Socket.IO",
+      "React",
+      "MongoDB"
+    ],
+    "implied": [
+      "Redis Pub/Sub"
+    ],
+    "has_repo": true,
+    "client": "Maple Saas Co."
+  },
+  "bundle-boost": {
+    "title": "Shopify app for bundle discounts",
+    "industry": "e-commerce",
+    "year": 2024,
+    "skills": [
+      "Shopify",
+      "Node.js",
+      "React",
+      "Shopify App Development"
+    ],
+    "implied": [
+      "GraphQL",
+      "Polaris"
+    ],
+    "has_repo": false,
+    "client": "Saltmarsh E-Commerce Co."
+  },
+  "brightsite": {
+    "title": "Headless CMS marketing site",
+    "industry": "marketing agency",
+    "year": 2024,
+    "skills": [
+      "Next.js",
+      "Tailwind CSS",
+      "Headless CMS",
+      "TypeScript"
+    ],
+    "implied": [
+      "Vercel"
+    ],
+    "has_repo": false,
+    "client": "Silverline Marketing Co."
+  },
+  "trackline": {
+    "title": "Logistics tracking microservices",
+    "industry": "logistics",
+    "year": 2022,
+    "skills": [
+      "FastAPI",
+      "Python",
+      "Docker",
+      "PostgreSQL"
+    ],
+    "implied": [
+      "Celery",
+      "RabbitMQ",
+      "Kubernetes"
+    ],
+    "has_repo": true,
+    "client": "Maple Logistics Co."
+  },
+  "ledgerview": {
+    "title": "Admin analytics dashboard",
+    "industry": "fintech",
+    "year": 2023,
+    "skills": [
+      "React",
+      "TypeScript",
+      "Chart.js",
+      "REST API"
+    ],
+    "implied": [
+      "React Query"
+    ],
+    "has_repo": false,
+    "client": "Kestrel Fintech Co."
+  },
+  "gigmarket": {
+    "title": "Two-sided freelance marketplace MVP",
+    "industry": "startup",
+    "year": 2022,
+    "skills": [
+      "MERN Stack",
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js"
+    ],
+    "implied": [
+      "Stripe Connect",
+      "JWT"
+    ],
+    "has_repo": true,
+    "client": "Indus Startup Co."
+  },
+  "freshcart": {
+    "title": "Grocery delivery progressive web app",
+    "industry": "retail",
+    "year": 2023,
+    "skills": [
+      "Vue.js",
+      "Firebase",
+      "Progressive Web App",
+      "JavaScript"
+    ],
+    "implied": [
+      "Google Maps API"
+    ],
+    "has_repo": false,
+    "client": "Crescent Retail Co."
+  },
+  "fitgraph": {
+    "title": "GraphQL API for a fitness app",
+    "industry": "fitness",
+    "year": 2024,
+    "skills": [
+      "GraphQL",
+      "Node.js",
+      "Apollo",
+      "PostgreSQL"
+    ],
+    "implied": [
+      "Redis",
+      "Docker"
+    ],
+    "has_repo": false,
+    "client": "Silverline Fitness Co."
+  },
+  "policy-portal": {
+    "title": "jQuery to React migration",
+    "industry": "insurance",
+    "year": 2021,
+    "skills": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Front-End Development"
+    ],
+    "implied": [
+      "Jest",
+      "Testing Library"
+    ],
+    "has_repo": true,
+    "client": "Kestrel Insurance Co."
+  },
+  "gatekeeper": {
+    "title": "Single sign-on and role-based access",
+    "industry": "B2B SaaS",
+    "year": 2024,
+    "skills": [
+      "OAuth",
+      "Node.js",
+      "Next.js",
+      "Authentication"
+    ],
+    "implied": [
+      "JWT",
+      "OpenID Connect"
+    ],
+    "has_repo": false,
+    "client": "Granite B2B Co."
+  },
+  "threadshop": {
+    "title": "WooCommerce store rebuild",
+    "industry": "fashion retail",
+    "year": 2022,
+    "skills": [
+      "WordPress",
+      "WooCommerce",
+      "PHP",
+      "E-commerce Development"
+    ],
+    "implied": [
+      "Stripe"
+    ],
+    "has_repo": false,
+    "client": "Orchard Fashion Co."
+  },
+  "shipyard-ci": {
+    "title": "CI/CD pipeline for a web agency",
+    "industry": "digital agency",
+    "year": 2023,
+    "skills": [
+      "Docker",
+      "GitHub Actions",
+      "AWS",
+      "DevOps"
+    ],
+    "implied": [
+      "Nginx",
+      "Terraform"
+    ],
+    "has_repo": false,
+    "client": "Granite Digital Co."
+  },
+  "inkwell": {
+    "title": "AI writing assistant inside a CMS",
+    "industry": "digital media",
+    "year": 2025,
+    "skills": [
+      "Next.js",
+      "OpenAI API",
+      "TypeScript",
+      "AI Integration"
+    ],
+    "implied": [
+      "Streaming Responses"
+    ],
+    "has_repo": true,
+    "client": "Kestrel Digital Co."
+  }
+}
