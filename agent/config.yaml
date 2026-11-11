@@ -72,7 +72,7 @@ models:
       fallback: {default: "openrouter:google/gemma-4-26b-a4b-it:free"}
 
 rag:
-  variant: best                # chosen by evals/results/rag_variants.json (docs/adr/0002)
+  variant: best                # chosen by measurement: evals/results/shipped_choice.json (docs/adr/0002)
   embed_model: "BAAI/bge-small-en-v1.5"
   rerank_model: "Xenova/ms-marco-MiniLM-L-6-v2"
   k: 8
@@ -80,8 +80,8 @@ rag:
     chunking: structured
     query: decomposed
     retrieval: hybrid
-    rerank: cross
-    outcome: true
+    rerank: none               # cross-encoder lowered Recall@5 0.290 -> 0.226 and cost ~200x latency (rag_variants.json)
+    outcome: false             # outcome prior lowered Recall@5 0.333 -> 0.329 and nDCG 0.402 -> 0.375 (shipped_choice.json)
     corrective: false
 
 thresholds:
