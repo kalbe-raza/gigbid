@@ -38,6 +38,14 @@ class NodeContext:
         self.toolboxes: list[ToolBox] = []
 
     def tools(self, agent: str | None = None) -> ToolBox:
+        import os
+
+        if os.getenv("GIGBID_LOCAL_TOOLS") == "1":  # evals: same tool contract, answered in-process (no HTTP)
+            from evals.runners.common import LocalToolBox
+
+            tb = LocalToolBox(self.corpus or "fullstack")
+            self.toolboxes.append(tb)  # type: ignore[arg-type]
+            return tb  # type: ignore[return-value]
         tb = ToolBox(agent or self.name, self.user_id, self.corpus, self.trace_id)
         self.toolboxes.append(tb)
         return tb

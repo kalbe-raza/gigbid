@@ -1,0 +1,245 @@
+[
+ {
+  "annotations": {
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false,
+   "readOnlyHint": false
+  },
+  "description": "Save an email DRAFT (never sends). Useful for interview confirmations outside the marketplace thread.",
+  "inputSchema": {
+   "properties": {
+    "body": {
+     "maxLength": 8000,
+     "minLength": 1,
+     "title": "Body",
+     "type": "string"
+    },
+    "idempotency_key": {
+     "pattern": "^[A-Za-z0-9:_.-]{8,128}$",
+     "title": "Idempotency Key",
+     "type": "string"
+    },
+    "subject": {
+     "maxLength": 200,
+     "minLength": 1,
+     "title": "Subject",
+     "type": "string"
+    },
+    "to": {
+     "maxLength": 200,
+     "title": "To",
+     "type": "string"
+    }
+   },
+   "required": [
+    "to",
+    "subject",
+    "body",
+    "idempotency_key"
+   ],
+   "title": "create_email_draftArguments",
+   "type": "object"
+  },
+  "name": "create_email_draft",
+  "outputSchema": {
+   "properties": {
+    "draft_id": {
+     "title": "Draft Id",
+     "type": "string"
+    },
+    "status": {
+     "default": "draft",
+     "title": "Status",
+     "type": "string"
+    },
+    "subject": {
+     "title": "Subject",
+     "type": "string"
+    },
+    "to": {
+     "title": "To",
+     "type": "string"
+    }
+   },
+   "required": [
+    "draft_id",
+    "to",
+    "subject"
+   ],
+   "title": "EmailDraft",
+   "type": "object"
+  }
+ },
+ {
+  "annotations": {
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false,
+   "readOnlyHint": false
+  },
+  "description": "Create a TENTATIVE calendar hold for an interview slot (same key -> same hold).",
+  "inputSchema": {
+   "properties": {
+    "end": {
+     "title": "End",
+     "type": "string"
+    },
+    "idempotency_key": {
+     "pattern": "^[A-Za-z0-9:_.-]{8,128}$",
+     "title": "Idempotency Key",
+     "type": "string"
+    },
+    "start": {
+     "title": "Start",
+     "type": "string"
+    },
+    "title": {
+     "maxLength": 120,
+     "minLength": 3,
+     "title": "Title",
+     "type": "string"
+    }
+   },
+   "required": [
+    "start",
+    "end",
+    "title",
+    "idempotency_key"
+   ],
+   "title": "create_interview_holdArguments",
+   "type": "object"
+  },
+  "name": "create_interview_hold",
+  "outputSchema": {
+   "properties": {
+    "end": {
+     "title": "End",
+     "type": "string"
+    },
+    "hold_id": {
+     "title": "Hold Id",
+     "type": "string"
+    },
+    "start": {
+     "title": "Start",
+     "type": "string"
+    },
+    "status": {
+     "title": "Status",
+     "type": "string"
+    },
+    "title": {
+     "title": "Title",
+     "type": "string"
+    }
+   },
+   "required": [
+    "hold_id",
+    "start",
+    "end",
+    "title",
+    "status"
+   ],
+   "title": "Hold",
+   "type": "object"
+  }
+ },
+ {
+  "annotations": {
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false,
+   "readOnlyHint": true
+  },
+  "description": "Free interview slots in working hours (Mon-Fri 10:00-18:00 local), avoiding existing holds.",
+  "inputSchema": {
+   "properties": {
+    "days_ahead": {
+     "default": 5,
+     "maximum": 14,
+     "minimum": 1,
+     "title": "Days Ahead",
+     "type": "integer"
+    },
+    "duration_minutes": {
+     "default": 30,
+     "maximum": 120,
+     "minimum": 15,
+     "title": "Duration Minutes",
+     "type": "integer"
+    },
+    "max_slots": {
+     "default": 3,
+     "maximum": 10,
+     "minimum": 1,
+     "title": "Max Slots",
+     "type": "integer"
+    },
+    "not_before": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Not Before"
+    }
+   },
+   "title": "list_free_slotsArguments",
+   "type": "object"
+  },
+  "name": "list_free_slots",
+  "outputSchema": {
+   "$defs": {
+    "Slot": {
+     "properties": {
+      "end": {
+       "title": "End",
+       "type": "string"
+      },
+      "label": {
+       "description": "Human-readable, e.g. 'Tue 12 Nov, 15:00-15:30 PKT'",
+       "title": "Label",
+       "type": "string"
+      },
+      "start": {
+       "description": "ISO 8601 with timezone",
+       "title": "Start",
+       "type": "string"
+      }
+     },
+     "required": [
+      "start",
+      "end",
+      "label"
+     ],
+     "title": "Slot",
+     "type": "object"
+    }
+   },
+   "properties": {
+    "slots": {
+     "items": {
+      "$ref": "#/$defs/Slot"
+     },
+     "title": "Slots",
+     "type": "array"
+    },
+    "timezone": {
+     "title": "Timezone",
+     "type": "string"
+    }
+   },
+   "required": [
+    "timezone",
+    "slots"
+   ],
+   "title": "SlotList",
+   "type": "object"
+  }
+ }
+]

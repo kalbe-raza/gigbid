@@ -1,0 +1,1728 @@
+{
+ "generated_at": "2026-11-12T02:55:18+0500",
+ "commit": "aa7277d",
+ "hardware": "x86_64 4 CPU, Linux",
+ "question": "Does tool granularity change agent behaviour?",
+ "model": "groq:qwen/qwen3.8-27b",
+ "results": {
+  "fine": {
+   "n_tools": 16,
+   "n_tasks": 40,
+   "tool_selection_accuracy": 0.5,
+   "tool_ci95": [
+    0.352,
+    0.648
+   ],
+   "argument_accuracy": 0.5,
+   "arg_ci95": [
+    0.352,
+    0.648
+   ],
+   "tokens_per_task": 1077.0,
+   "by_task_type": {
+    "case_study": {
+     "tool_acc": 0.6,
+     "arg_acc": 0.6
+    },
+    "client_trust": {
+     "tool_acc": 0.8,
+     "arg_acc": 0.8
+    },
+    "connects": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    },
+    "evidence": {
+     "tool_acc": 0.4,
+     "arg_acc": 0.4
+    },
+    "find_jobs": {
+     "tool_acc": 0.4,
+     "arg_acc": 0.4
+    },
+    "market_rate": {
+     "tool_acc": 0.0,
+     "arg_acc": 0.0
+    },
+    "read_job": {
+     "tool_acc": 0.8,
+     "arg_acc": 0.8
+    },
+    "slots": {
+     "tool_acc": 0.0,
+     "arg_acc": 0.0
+    }
+   }
+  },
+  "coarse": {
+   "n_tools": 3,
+   "n_tasks": 40,
+   "tool_selection_accuracy": 0.55,
+   "tool_ci95": [
+    0.3983,
+    0.6929
+   ],
+   "argument_accuracy": 0.55,
+   "arg_ci95": [
+    0.3983,
+    0.6929
+   ],
+   "tokens_per_task": 460.6,
+   "by_task_type": {
+    "case_study": {
+     "tool_acc": 0.6,
+     "arg_acc": 0.6
+    },
+    "client_trust": {
+     "tool_acc": 0.6,
+     "arg_acc": 0.6
+    },
+    "connects": {
+     "tool_acc": 0.0,
+     "arg_acc": 0.0
+    },
+    "evidence": {
+     "tool_acc": 0.8,
+     "arg_acc": 0.8
+    },
+    "find_jobs": {
+     "tool_acc": 0.8,
+     "arg_acc": 0.8
+    },
+    "market_rate": {
+     "tool_acc": 0.0,
+     "arg_acc": 0.0
+    },
+    "read_job": {
+     "tool_acc": 0.6,
+     "arg_acc": 0.6
+    },
+    "slots": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    }
+   }
+  },
+  "best": {
+   "n_tools": 8,
+   "n_tasks": 40,
+   "tool_selection_accuracy": 0.85,
+   "tool_ci95": [
+    0.7093,
+    0.9294
+   ],
+   "argument_accuracy": 0.8,
+   "arg_ci95": [
+    0.6524,
+    0.895
+   ],
+   "tokens_per_task": 832.8,
+   "by_task_type": {
+    "case_study": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    },
+    "client_trust": {
+     "tool_acc": 0.6,
+     "arg_acc": 0.6
+    },
+    "connects": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    },
+    "evidence": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    },
+    "find_jobs": {
+     "tool_acc": 1.0,
+     "arg_acc": 0.6
+    },
+    "market_rate": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    },
+    "read_job": {
+     "tool_acc": 0.2,
+     "arg_acc": 0.2
+    },
+    "slots": {
+     "tool_acc": 1.0,
+     "arg_acc": 1.0
+    }
+   }
+  }
+ },
+ "hypothesis": "H-A: the curated set with explicit 'use this when' descriptions beats both extremes on argument accuracy; coarse tools cost the fewest tokens but lose argument accuracy to nested params.",
+ "per_task": [
+  {
+   "design": "fine",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-271ae4fa97.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 907
+  },
+  {
+   "design": "fine",
+   "type": "client_trust",
+   "prompt": "Is the client cl-4f04a7d63c trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_rating",
+    "args": {
+     "client_id": "cl-4f04a7d63c"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1188
+  },
+  {
+   "design": "fine",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1152
+  },
+  {
+   "design": "fine",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 907
+  },
+  {
+   "design": "fine",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 908
+  },
+  {
+   "design": "fine",
+   "type": "case_study",
+   "prompt": "Open my case study 'self-serve-bi' so I can reread it.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 909
+  },
+  {
+   "design": "fine",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 910
+  },
+  {
+   "design": "fine",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-acb71f0aa5.",
+   "call": {
+    "name": "get_job_description",
+    "args": {
+     "job_id": "job-acb71f0aa5"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1178
+  },
+  {
+   "design": "fine",
+   "type": "client_trust",
+   "prompt": "Is the client cl-c8e4194982 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_rating",
+    "args": {
+     "client_id": "cl-c8e4194982"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1186
+  },
+  {
+   "design": "fine",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1152
+  },
+  {
+   "design": "fine",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "search_job_titles",
+    "args": {
+     "query": "power bi report"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1162
+  },
+  {
+   "design": "fine",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with React?",
+   "call": {
+    "name": "search_case_studies",
+    "args": {
+     "query": "React"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1164
+  },
+  {
+   "design": "fine",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "read_case_study",
+    "args": {
+     "case_id": "sheet-robot"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1172
+  },
+  {
+   "design": "fine",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 910
+  },
+  {
+   "design": "fine",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-0d02c7220a.",
+   "call": {
+    "name": "get_job_description",
+    "args": {
+     "job_id": "job-0d02c7220a"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1184
+  },
+  {
+   "design": "fine",
+   "type": "client_trust",
+   "prompt": "Is the client cl-2c9c402a10 trustworthy? Check their history before I bid.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 914
+  },
+  {
+   "design": "fine",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1152
+  },
+  {
+   "design": "fine",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 907
+  },
+  {
+   "design": "fine",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 908
+  },
+  {
+   "design": "fine",
+   "type": "case_study",
+   "prompt": "Open my case study 'stock-forecast' so I can reread it.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 909
+  },
+  {
+   "design": "fine",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 910
+  },
+  {
+   "design": "fine",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-81c64c2d86.",
+   "call": {
+    "name": "get_job_description",
+    "args": {
+     "job_id": "job-81c64c2d86"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1184
+  },
+  {
+   "design": "fine",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f50bc4eea1 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_rating",
+    "args": {
+     "client_id": "cl-f50bc4eea1"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1180
+  },
+  {
+   "design": "fine",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1152
+  },
+  {
+   "design": "fine",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about react dashboard.",
+   "call": {
+    "name": "search_repositories",
+    "args": {
+     "query": "react dashboard"
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Tableau?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 908
+  },
+  {
+   "design": "fine",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "read_case_study",
+    "args": {
+     "case_id": "sheet-robot"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1172
+  },
+  {
+   "design": "fine",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 910
+  },
+  {
+   "design": "fine",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-9b22643e31.",
+   "call": {
+    "name": "get_job_description",
+    "args": {
+     "job_id": "job-9b22643e31"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1184
+  },
+  {
+   "design": "fine",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f1dab1dd17 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_rating",
+    "args": {
+     "client_id": "cl-f1dab1dd17"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1182
+  },
+  {
+   "design": "fine",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1152
+  },
+  {
+   "design": "fine",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 1160
+  },
+  {
+   "design": "fine",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "search_job_titles",
+    "args": {
+     "query": "power bi report"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1162
+  },
+  {
+   "design": "fine",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Power BI?",
+   "call": {
+    "name": "search_repositories",
+    "args": {
+     "query": "Power BI"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1165
+  },
+  {
+   "design": "fine",
+   "type": "case_study",
+   "prompt": "Open my case study 'price-watch' so I can reread it.",
+   "call": {
+    "name": "read_case_study",
+    "args": {
+     "case_id": "price-watch"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 1170
+  },
+  {
+   "design": "fine",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 910
+  },
+  {
+   "design": "coarse",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-271ae4fa97.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_job",
+     "params": {
+      "job_id": "job-271ae4fa97"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 543
+  },
+  {
+   "design": "coarse",
+   "type": "client_trust",
+   "prompt": "Is the client cl-4f04a7d63c trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_client",
+     "params": {
+      "client_id": "cl-4f04a7d63c"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 551
+  },
+  {
+   "design": "coarse",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_market_stats",
+     "params": {}
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 522
+  },
+  {
+   "design": "coarse",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "search_jobs",
+     "params": {
+      "query": "machine learning model"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 526
+  },
+  {
+   "design": "coarse",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "search",
+     "params": {
+      "skill": "Celery"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 527
+  },
+  {
+   "design": "coarse",
+   "type": "case_study",
+   "prompt": "Open my case study 'self-serve-bi' so I can reread it.",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "get_case_study",
+     "params": {
+      "id": "self-serve-bi"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "coarse",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "workspace",
+    "args": {
+     "action": "free_slots",
+     "params": {
+      "duration_minutes": 30,
+      "range": "this_week"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "coarse",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-acb71f0aa5.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 305
+  },
+  {
+   "design": "coarse",
+   "type": "client_trust",
+   "prompt": "Is the client cl-c8e4194982 trustworthy? Check their history before I bid.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_market_stats",
+     "params": {}
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 522
+  },
+  {
+   "design": "coarse",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "search_jobs",
+     "params": {
+      "query": "power bi report"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 526
+  },
+  {
+   "design": "coarse",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with React?",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "search",
+     "params": {
+      "skill": "React"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 525
+  },
+  {
+   "design": "coarse",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "get_case_study",
+     "params": {
+      "slug": "sheet-robot"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 534
+  },
+  {
+   "design": "coarse",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "workspace",
+    "args": {
+     "action": "free_slots",
+     "params": {
+      "duration_minutes": 30,
+      "range": "this_week"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "coarse",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-0d02c7220a.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_job",
+     "params": {
+      "job_id": "job-0d02c7220a"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 547
+  },
+  {
+   "design": "coarse",
+   "type": "client_trust",
+   "prompt": "Is the client cl-2c9c402a10 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_client",
+     "params": {
+      "client_id": "cl-2c9c402a10"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 551
+  },
+  {
+   "design": "coarse",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_market_stats",
+     "params": {}
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 522
+  },
+  {
+   "design": "coarse",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "search_jobs",
+     "params": {
+      "query": "machine learning model"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 526
+  },
+  {
+   "design": "coarse",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "search",
+     "params": {
+      "skill": "Celery"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 527
+  },
+  {
+   "design": "coarse",
+   "type": "case_study",
+   "prompt": "Open my case study 'stock-forecast' so I can reread it.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 308
+  },
+  {
+   "design": "coarse",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "workspace",
+    "args": {
+     "action": "free_slots",
+     "params": {
+      "duration_minutes": 30,
+      "range": "this_week"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "coarse",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-81c64c2d86.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_job",
+     "params": {
+      "job_id": "job-81c64c2d86"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 547
+  },
+  {
+   "design": "coarse",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f50bc4eea1 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_client",
+     "params": {
+      "client_id": "cl-f50bc4eea1"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 543
+  },
+  {
+   "design": "coarse",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_market_stats",
+     "params": {}
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 522
+  },
+  {
+   "design": "coarse",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about react dashboard.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 304
+  },
+  {
+   "design": "coarse",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Tableau?",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "search",
+     "params": {
+      "skill": "Tableau"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 526
+  },
+  {
+   "design": "coarse",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "portfolio",
+    "args": {
+     "action": "get_case_study",
+     "params": {
+      "slug": "sheet-robot"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 534
+  },
+  {
+   "design": "coarse",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "workspace",
+    "args": {
+     "action": "free_slots",
+     "params": {
+      "duration_minutes": 30,
+      "range": "this_week"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "coarse",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-9b22643e31.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 305
+  },
+  {
+   "design": "coarse",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f1dab1dd17 trustworthy? Check their history before I bid.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "get_market_stats",
+     "params": {}
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 522
+  },
+  {
+   "design": "coarse",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 313
+  },
+  {
+   "design": "coarse",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "marketplace",
+    "args": {
+     "action": "search_jobs",
+     "params": {
+      "query": "power bi report"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 526
+  },
+  {
+   "design": "coarse",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Power BI?",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 307
+  },
+  {
+   "design": "coarse",
+   "type": "case_study",
+   "prompt": "Open my case study 'price-watch' so I can reread it.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 307
+  },
+  {
+   "design": "coarse",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "workspace",
+    "args": {
+     "action": "free_slots",
+     "params": {
+      "duration_minutes": 30,
+      "range": "this_week"
+     }
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 538
+  },
+  {
+   "design": "best",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-271ae4fa97.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 636
+  },
+  {
+   "design": "best",
+   "type": "client_trust",
+   "prompt": "Is the client cl-4f04a7d63c trustworthy? Check their history before I bid.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 643
+  },
+  {
+   "design": "best",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 842
+  },
+  {
+   "design": "best",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_market_stats",
+    "args": {
+     "domain": "data_analyst"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 863
+  },
+  {
+   "design": "best",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": {
+    "name": "search_jobs",
+    "args": {
+     "domain": "ai_ml",
+     "query": "machine learning model"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 864
+  },
+  {
+   "design": "best",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "Celery"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 856
+  },
+  {
+   "design": "best",
+   "type": "case_study",
+   "prompt": "Open my case study 'self-serve-bi' so I can reread it.",
+   "call": {
+    "name": "get_case_study",
+    "args": {
+     "case_id": "self-serve-bi"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 866
+  },
+  {
+   "design": "best",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "list_free_slots",
+    "args": {
+     "days_ahead": 7,
+     "duration_minutes": 30
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  },
+  {
+   "design": "best",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-acb71f0aa5.",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "job-acb71f0aa5"
+    }
+   },
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 867
+  },
+  {
+   "design": "best",
+   "type": "client_trust",
+   "prompt": "Is the client cl-c8e4194982 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_history",
+    "args": {
+     "client_id": "cl-c8e4194982"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 876
+  },
+  {
+   "design": "best",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 842
+  },
+  {
+   "design": "best",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_market_stats",
+    "args": {
+     "domain": "data_analyst"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 863
+  },
+  {
+   "design": "best",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "search_jobs",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": false,
+   "tokens": 852
+  },
+  {
+   "design": "best",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with React?",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "React"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 854
+  },
+  {
+   "design": "best",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "get_case_study",
+    "args": {
+     "case_id": "sheet-robot"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 862
+  },
+  {
+   "design": "best",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "list_free_slots",
+    "args": {
+     "days_ahead": 7,
+     "duration_minutes": 30
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  },
+  {
+   "design": "best",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-0d02c7220a.",
+   "call": {
+    "name": "get_job",
+    "args": {
+     "job_id": "job-0d02c7220a"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  },
+  {
+   "design": "best",
+   "type": "client_trust",
+   "prompt": "Is the client cl-2c9c402a10 trustworthy? Check their history before I bid.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 643
+  },
+  {
+   "design": "best",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 842
+  },
+  {
+   "design": "best",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_market_stats",
+    "args": {
+     "domain": "data_analyst"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 863
+  },
+  {
+   "design": "best",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about machine learning model.",
+   "call": {
+    "name": "search_jobs",
+    "args": {
+     "domain": "ai_ml",
+     "query": "machine learning model"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 864
+  },
+  {
+   "design": "best",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Celery?",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "Celery"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 856
+  },
+  {
+   "design": "best",
+   "type": "case_study",
+   "prompt": "Open my case study 'stock-forecast' so I can reread it.",
+   "call": {
+    "name": "get_case_study",
+    "args": {
+     "case_id": "stock-forecast"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 862
+  },
+  {
+   "design": "best",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "list_free_slots",
+    "args": {
+     "days_ahead": 7,
+     "duration_minutes": 30
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  },
+  {
+   "design": "best",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-81c64c2d86.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 636
+  },
+  {
+   "design": "best",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f50bc4eea1 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_history",
+    "args": {
+     "client_id": "cl-f50bc4eea1"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 870
+  },
+  {
+   "design": "best",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 842
+  },
+  {
+   "design": "best",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_market_stats",
+    "args": {
+     "domain": "data_analyst"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 863
+  },
+  {
+   "design": "best",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about react dashboard.",
+   "call": {
+    "name": "search_jobs",
+    "args": {
+     "query": "react dashboard"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 849
+  },
+  {
+   "design": "best",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Tableau?",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "Tableau"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 855
+  },
+  {
+   "design": "best",
+   "type": "case_study",
+   "prompt": "Open my case study 'sheet-robot' so I can reread it.",
+   "call": {
+    "name": "get_case_study",
+    "args": {
+     "case_id": "sheet-robot"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 862
+  },
+  {
+   "design": "best",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "list_free_slots",
+    "args": {
+     "days_ahead": 7,
+     "duration_minutes": 30
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  },
+  {
+   "design": "best",
+   "type": "read_job",
+   "prompt": "Show me the full post for job job-9b22643e31.",
+   "call": null,
+   "tool_ok": false,
+   "args_ok": false,
+   "tokens": 636
+  },
+  {
+   "design": "best",
+   "type": "client_trust",
+   "prompt": "Is the client cl-f1dab1dd17 trustworthy? Check their history before I bid.",
+   "call": {
+    "name": "get_client_history",
+    "args": {
+     "client_id": "cl-f1dab1dd17"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 872
+  },
+  {
+   "design": "best",
+   "type": "connects",
+   "prompt": "How many Connects do I have left this week?",
+   "call": {
+    "name": "get_connects_balance",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 842
+  },
+  {
+   "design": "best",
+   "type": "market_rate",
+   "prompt": "What do data analyst jobs usually pay per hour? Domain id is data_analyst.",
+   "call": {
+    "name": "get_market_stats",
+    "args": {
+     "domain": "data_analyst"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 863
+  },
+  {
+   "design": "best",
+   "type": "find_jobs",
+   "prompt": "Find me new jobs about power bi report.",
+   "call": {
+    "name": "search_jobs",
+    "args": {}
+   },
+   "tool_ok": true,
+   "args_ok": false,
+   "tokens": 852
+  },
+  {
+   "design": "best",
+   "type": "evidence",
+   "prompt": "What proof do I have that I've worked with Power BI?",
+   "call": {
+    "name": "search_evidence",
+    "args": {
+     "requirement": "Power BI"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 856
+  },
+  {
+   "design": "best",
+   "type": "case_study",
+   "prompt": "Open my case study 'price-watch' so I can reread it.",
+   "call": {
+    "name": "get_case_study",
+    "args": {
+     "case_id": "price-watch"
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 860
+  },
+  {
+   "design": "best",
+   "type": "slots",
+   "prompt": "When am I free for a 30-minute interview call this week?",
+   "call": {
+    "name": "list_free_slots",
+    "args": {
+     "days_ahead": 7,
+     "duration_minutes": 30
+    }
+   },
+   "tool_ok": true,
+   "args_ok": true,
+   "tokens": 873
+  }
+ ]
+}

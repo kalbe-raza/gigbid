@@ -62,7 +62,10 @@ async def scout_scan(ctx, user_id: str) -> dict:
     new = 0
     try:
         for s in searches:
-            res = await tb.call("marketplace", "search_jobs", {"query": s["query"] or "", "domain": s["domain"], "limit": limit})
+            args = {"query": s["query"] or "", "domain": s["domain"], "limit": limit}
+            if s["last_run"]:  # polite polling: only what was released since the previous scan
+                args["posted_after"] = s["last_run"].timestamp() - 60
+            res = await tb.call("marketplace", "search_jobs", args)
             for item in res.get("items", []):
                 if item["job_id"] in known:
                     continue

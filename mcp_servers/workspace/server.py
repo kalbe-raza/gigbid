@@ -64,7 +64,8 @@ async def _holds(user: str) -> list[dict]:
         from apps.api import db
 
         return await db.fetch("SELECT start_at, end_at FROM workspace_holds WHERE user_id=%s AND end_at > now()", user)
-    return [h for h in _MEM_HOLDS.values() if h["user_id"] == user]
+    now = datetime.now(TZ)
+    return [h for h in _MEM_HOLDS.values() if h["user_id"] == user and h["end_at"] > now]
 
 
 def _label(s: datetime, e: datetime) -> str:

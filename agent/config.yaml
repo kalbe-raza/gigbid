@@ -63,7 +63,7 @@ models:
         liaison_intent: "groq:openai/gpt-oss-20b"
         liaison: "groq:qwen/qwen3.8-27b"
         judge: "groq:qwen/qwen3.8-27b"
-        baseline_agent: "groq:openai/gpt-oss-120b"
+        baseline_agent: "groq:qwen/qwen3.8-27b"
       fallback:
         default: "openrouter:google/gemma-4-26b-a4b-it:free"
         local: "ollama:qwen3:4b"
@@ -138,7 +138,7 @@ memory:
 scheduler:
   saved_search_interval_s: 900   # GigSim
   live_interval_s: 7200          # Upwork live mode, see RUNBOOK
-  max_jobs_per_scan: 15
+  max_jobs_per_scan: 10
 
 tracing:
   project: gigbid-kalbe

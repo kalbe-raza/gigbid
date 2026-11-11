@@ -1,0 +1,97 @@
+# docker compose -f infra/docker-compose.yml --env-file .env up --build
+# Starts: web, api, worker, three MCP servers, GigSim, Postgres, Redis, Qdrant (vector store), Phoenix (tracing)
+# and Ollama (local open-model runtime for the open profile's local fallback).
+name: gigbid
+
+x-py-env: &py-env
+  DATABASE_URL: postgresql://gigbid:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/gigbid
+  REDIS_URL: redis://redis:6379/0
+  QDRANT_URL: http://qdrant:6333
+  GIGSIM_BASE_URL: http://gigsim:8081
+  PORTFOLIO_MCP_URL: http://mcp-portfolio:8101/mcp
+  MARKETPLACE_MCP_URL: http://mcp-marketplace:8102/mcp
+  WORKSPACE_MCP_URL: http://mcp-workspace:8103/mcp
+  PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006
+  PHOENIX_PUBLIC_URL: ${PHOENIX_PUBLIC_URL:-http://localhost:6006}
+  OLLAMA_BASE_URL: http://ollama:11434/v1
+  UPLOADS_DIR: /data/uploads
+  APP_SECRET_KEY: ${APP_SECRET_KEY:?set APP_SECRET_KEY in .env}
+  TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY:?set TOKEN_ENCRYPTION_KEY in .env}
+  APPROVAL_SIGNING_KEY: ${APPROVAL_SIGNING_KEY:?set APPROVAL_SIGNING_KEY in .env}
+  MCP_SERVICE_TOKENS: ${MCP_SERVICE_TOKEN:?set MCP_SERVICE_TOKEN in .env}
+  MCP_SERVICE_TOKEN: ${MCP_SERVICE_TOKEN}
+  GROQ_API_KEY: ${GROQ_API_KEY:-}
+  OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+  GIGSIM_API_TOKEN: ${GIGSIM_API_TOKEN:-gs-dev-token}
+  GIGSIM_DEMO_TOKEN: ${GIGSIM_DEMO_TOKEN:-gs-dev-token}
+  MARKETPLACE_MODE: ${MARKETPLACE_MODE:-gigsim}
+  REVIEWER_ACCOUNTS: ${REVIEWER_ACCOUNTS:-}
+  CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+
+x-py-build: &py-build
+  context: ..
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: {POSTGRES_USER: gigbid, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-gigbid}", POSTGRES_DB: gigbid}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U gigbid"], interval: 5s, retries: 20}
+  redis:
+    image: redis:7-alpine
+    healthcheck: {test: ["CMD", "redis-cli", "ping"], interval: 5s, retries: 20}
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    volumes: [qdrant:/qdrant/storage]
+  phoenix:
+    image: arizephoenix/phoenix:version-11.38.0
+    ports: ["6006:6006"]
+    environment: {PHOENIX_WORKING_DIR: /mnt/data}
+    volumes: [phoenix:/mnt/data]
+  ollama:
+    image: ollama/ollama:0.12.6
+    volumes: [ollama:/root/.ollama]
+    # pull the local fallback once: docker compose exec ollama ollama pull qwen3:4b
+  gigsim:
+    build: {<<: *py-build, dockerfile: infra/docker/gigsim.Dockerfile}
+    environment:
+      GIGSIM_TOKENS: ${GIGSIM_TOKENS:-gs-dev-token:demo,gs-eval-token:eval}
+      GIGSIM_ADMIN_TOKEN: ${GIGSIM_ADMIN_TOKEN:-gigsim-admin}
+      GIGSIM_CLIENT_MODE: ${GIGSIM_CLIENT_MODE:-rules}
+      GIGSIM_LLM_API_KEY: ${GROQ_API_KEY:-}
+    volumes: [gigsim:/app/gigsim/state]
+  mcp-portfolio:
+    build: {<<: *py-build, dockerfile: infra/docker/mcp-portfolio.Dockerfile}
+    environment: *py-env
+    volumes: [uploads:/data/uploads]
+    depends_on: [qdrant, postgres]
+  mcp-marketplace:
+    build: {<<: *py-build, dockerfile: infra/docker/mcp-marketplace.Dockerfile}
+    environment: *py-env
+    depends_on: [gigsim, postgres]
+  mcp-workspace:
+    build: {<<: *py-build, dockerfile: infra/docker/mcp-workspace.Dockerfile}
+    environment: *py-env
+    depends_on: [postgres]
+  api:
+    build: {<<: *py-build, dockerfile: infra/docker/api.Dockerfile}
+    environment: *py-env
+    ports: ["8000:8000"]
+    volumes: [uploads:/data/uploads]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  worker:
+    build: {<<: *py-build, dockerfile: infra/docker/worker.Dockerfile}
+    environment: *py-env
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      mcp-portfolio: {condition: service_started}
+      mcp-marketplace: {condition: service_started}
+  web:
+    build: {<<: *py-build, dockerfile: infra/docker/web.Dockerfile, args: {API_URL: "http://api:8000"}}
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes: {pgdata: {}, qdrant: {}, phoenix: {}, ollama: {}, gigsim: {}, uploads: {}}
