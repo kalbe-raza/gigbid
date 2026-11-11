@@ -32,3 +32,8 @@ ground truth for the Compliance Guard.
 
 ## 7. Respectful conduct
 - No discriminatory, harassing or misleading language. Do not disparage other freelancers or the client.
+
+## 8. Policy update 2026-11-02
+- Proposals to jobs with a fixed budget of at least $1,000 or an hourly ceiling of at least $50 cost 1.5x the listed
+  Connects (rounded up).
+- Cover letters longer than 1,500 characters are rejected at submission.

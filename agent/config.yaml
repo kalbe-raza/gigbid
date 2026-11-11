@@ -105,12 +105,14 @@ budgets:
 pricing:
   connects_usd: 0.15           # what one Connect costs on the platform
   min_expected_value_ratio: 3  # bid only if expected value >= this x Connects cost
-  # platform Connects rules mirrored from the marketplace policy (GET /v1/policy). Empty until the
-  # 2026-11-02 change request is absorbed (docs/CHANGE_REQUEST.md).
-  connects_surcharge_rules: []
+  # platform Connects rules mirrored from the marketplace policy (GET /v1/policy); see docs/CHANGE_REQUEST.md
+  connects_surcharge_rules:
+    - name: high_value_job      # policy 2026-11-02: fixed >= $1,000 or hourly ceiling >= $50 costs 1.5x Connects
+      when: {min_fixed_budget: 1000, min_hourly_high: 50}
+      multiplier: 1.5
 
 proposal:
-  max_cover_letter_chars: null # set by the 2026-11-02 change request
+  max_cover_letter_chars: 1500 # policy 2026-11-02: longer cover letters are rejected at submission
   target_words: [120, 220]
   max_screening_answer_words: 90
 

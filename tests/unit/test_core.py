@@ -76,7 +76,7 @@ def test_pricing_respects_floor_and_ceiling():
     assert p.amount >= 30  # never below the floor, even when the client's ceiling is lower
     f = quote({"is_hourly": False, "budget": 1000, "connects_cost": 6}, 0.8, 0.1, 0.7,
               {"hourly_rate": 40, "hourly_floor": 30, "min_project": 250}, {"price": {"fixed": {"p50": 300}}}, 80)
-    assert 900 <= f.amount <= 1100 and f.connects_cost == 6
+    assert 900 <= f.amount <= 1100 and f.connects_cost == 9  # 6 x 1.5 under the 2026-11-02 policy
 
 
 def test_config_surcharge_rules(monkeypatch):
@@ -136,3 +136,14 @@ def test_no_inline_prompts():
         assert not re.search(r"(?i)[\"']you are the (job analyst|risk assessor|proposal writer|critic)", src), f.name
     for node in ("analyst", "risk_assessor", "writer", "verifier", "critic", "compliance", "liaison", "liaison_intent"):
         assert (ROOT / f"agent/prompts/{node}.md").read_text().startswith(f"<!-- node: {node} |")
+
+
+def test_change_request_2026_11_02_is_config_only():
+    """The policy update is absorbed through config: surcharge rule + cover-letter limit enforced before sending."""
+    from agent.settings import settings
+
+    assert settings()["proposal"]["max_cover_letter_chars"] == 1500
+    assert apply_config_surcharges({"hourly_high": 60}, 4) == (6, ["high_value_job"])
+    long = ("I built a Power BI dashboard for a distributor. " * 40).strip()
+    text, viol, _ = deterministic(long)
+    assert len(text) <= 1500 and any(v.rule == "max_cover_letter_chars" for v in viol)
