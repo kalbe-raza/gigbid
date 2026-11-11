@@ -87,7 +87,7 @@ def tasks(seed: int = 40) -> list[dict]:
     rows = [r for p in PERSONAS for r in dev(p)[:60]]
     projects = {p: json.loads((ROOT / f"data/personas/{p}/_gold/projects.json").read_text()) for p in PERSONAS}
     out = []
-    for i in range(5):
+    for _i in range(5):
         r = rng.choice(rows)
         j, c = r["job"]["job_id"], r["job"]["client_id"]
         p = rng.choice(PERSONAS)
@@ -156,7 +156,7 @@ async def ask(spec: str, prompt: str, tools: list, cache: dict) -> dict:
     if "qwen" in model:
         body["reasoning_effort"] = "none"
     await PACER.acquire(spec, len(json.dumps(body)) // 3 + 400, settings().models["tokens_per_minute"][provider])
-    for attempt in range(4):
+    for _attempt in range(4):
         async with httpx.AsyncClient(timeout=60) as c:
             r = await c.post(f"{base}/chat/completions", json=body, headers={"Authorization": f"Bearer {k}"})
         if r.status_code == 429:
