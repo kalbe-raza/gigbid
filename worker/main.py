@@ -145,7 +145,8 @@ async def _after_bid(user_id: str, job_id: str, tid: str, snap: dict) -> None:
         sub = v.get("submission") or {}
         letter = (v.get("drafts") or [{}])[-1].get("cover_letter", "")
         ceiling = job.get("budget") or job.get("hourly_high")
-        feats = promotion_rules.proposal_features(letter, (price.get("amount") / ceiling) if ceiling and price.get("amount") else None)
+        feats = promotion_rules.proposal_features(letter, (price.get("amount") / ceiling) if ceiling and price.get("amount") else None,
+                                                  v.get("experiment_arm"))
         await db.execute("INSERT INTO pipeline (user_id, job_id, thread_id, title, stage, category, connects, amount, "
                          "proposal_id, features) VALUES (%s,%s,%s,%s,'submitted',%s,%s,%s,%s,%s) ON CONFLICT (user_id, job_id) "
                          "DO UPDATE SET stage='submitted', proposal_id=EXCLUDED.proposal_id, connects=EXCLUDED.connects, "

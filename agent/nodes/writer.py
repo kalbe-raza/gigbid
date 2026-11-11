@@ -16,6 +16,19 @@ from agent.settings import settings
 from rag.verify import CITE
 
 
+def experiment_arm(state: dict) -> str | None:
+    """X2: deterministic arm per job (or forced by the A/B runner), recorded with the draft and the pipeline card."""
+    import hashlib
+
+    cfg = (settings().raw.get("experiments") or {}).get("proposal_ab") or {}
+    if state.get("experiment_arm"):
+        return state["experiment_arm"]
+    if not cfg.get("enabled"):
+        return None
+    arms = cfg.get("arms") or ["A", "B"]
+    return arms[int(hashlib.sha1(state["job"]["job_id"].encode()).hexdigest(), 16) % len(arms)]
+
+
 def evidence_block(evidence: list[dict], limit: int = 12) -> tuple[str, list[dict]]:
     seen, rows = set(), []
     for e in evidence:
@@ -52,6 +65,9 @@ async def write(state: dict, ctx: NodeContext) -> tuple[ProposalDraft, list[dict
         style += "\nSTYLE RULES LEARNED FROM THE FREELANCER'S EDITS (follow them):\n" + "\n".join(f"- {r['rule']}" for r in rules)
     if insights:
         style += "\nWHAT HAS WORKED FOR THIS FREELANCER:\n" + "\n".join(f"- {i['insight']}" for i in insights[:4])
+    arm = experiment_arm(state)
+    if arm:
+        style += "\n" + load_prompt(f"writer_strategy_{arm}").split("-->", 1)[-1].strip()
     system = fill(load_prompt("writer"), length_rule=length_rule, style_rules=style,
                   max_answer_words=cfg["max_screening_answer_words"])
     unsupported = fit.get("unsupported_requirements") or []
@@ -88,4 +104,5 @@ async def writer(state: dict, ctx: NodeContext) -> dict:
     rules = await memory.style_rules(ctx.user_id)
     return {"drafts": [draft.model_dump()], "evidence": evidence,
             "memory_used": {"style_rules": [r["key"] for r in rules]}, "status": "drafting",
+            "experiment_arm": experiment_arm(state),
             "_summary": f"draft v{draft.version}: {draft.word_count} words, {len(draft.evidence_ids)} citations"}

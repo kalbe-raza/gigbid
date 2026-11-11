@@ -124,6 +124,11 @@ compliance:
     off_platform_payment: '\b(paypal|transferwise|wise\.com|western union|crypto|bitcoin|usdt|bank transfer)\b'
     urls: 'https?://(?!portfolio\b)[^\s)]+'
 
+experiments:                   # X2: proposal A/B test (docs/EXTENSION.md)
+  proposal_ab:
+    enabled: true
+    arms: [A, B]               # prompts: agent/prompts/writer_strategy_<arm>.md; assignment by hash(job_id)
+
 autonomy:
   default: manual              # manual | auto_skip_low_fit ; auto-send does not exist
   auto_skip_below_fit: 0.25

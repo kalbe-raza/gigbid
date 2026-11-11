@@ -86,7 +86,7 @@ def should_promote_style(candidate: dict) -> bool:
     return candidate.get("count", 0) >= needed and len(jobs) >= cfg["min_distinct_jobs"]
 
 
-def proposal_features(text: str, price_ratio: float | None = None) -> dict:
+def proposal_features(text: str, price_ratio: float | None = None, arm: str | None = None) -> dict:
     words = len(_words(text))
     opening = "generic" if re.search(r"^(dear|hello,? i am|hi,? i am|i am (very )?passionate|i am an expert)", text.strip(),
                                      re.I) else "specific"
@@ -96,6 +96,7 @@ def proposal_features(text: str, price_ratio: float | None = None) -> dict:
         "evidence": "2+ citations" if cites >= 2 else ("1 citation" if cites == 1 else "no citations"),
         "length": "short (<150 words)" if words < 150 else ("medium" if words <= 220 else "long (>220 words)"),
         "price": "unknown" if price_ratio is None else ("at/below client budget" if price_ratio <= 1.0 else "above budget"),
+        **({"strategy": arm} if arm else {}),
     }
 
 

@@ -64,6 +64,7 @@ class BidState(TypedDict, total=False):
     errors: Annotated[list[str], operator.add]
     exec_trace: Annotated[list[dict], operator.add]
     memory_used: dict
+    experiment_arm: str     # X2 proposal A/B arm
 
 
 class ConversationState(TypedDict, total=False):

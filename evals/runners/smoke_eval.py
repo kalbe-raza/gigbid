@@ -18,7 +18,16 @@ import yaml
 
 from agent.settings import ROOT
 from evals.runners import decision_eval
-from evals.runners.common import PERSONAS, RESULTS, LocalToolBox, build_indexes, dev, mean, sample, write_result
+from evals.runners.common import (
+    PERSONAS,
+    RESULTS,
+    LocalToolBox,
+    build_indexes,
+    dev,
+    mean,
+    sample,
+    write_result,
+)
 from evals.runners.rag_eval import metrics
 from rag.retriever import variant_config
 from rag.variants.base import Pipeline

@@ -94,7 +94,7 @@ async def judge(job: dict, text: str) -> dict | None:
         return None
 
 
-async def run_one(graph, row: dict, persona: str, profile: dict) -> dict:
+async def run_one(graph, row: dict, persona: str, profile: dict, extra: dict | None = None) -> dict:
     led = Ledger()
     tok = current_ledger.set(led)
     t0 = time.perf_counter()
@@ -103,11 +103,11 @@ async def run_one(graph, row: dict, persona: str, profile: dict) -> dict:
     out = {"persona": persona, "job_id": row["job"]["job_id"], "title": row["job"]["title"]}
     try:
         state = {"thread_id": tid, "user_id": "eval", "corpus": persona, "trace_id": uuid.uuid4().hex, "profile": profile,
-                 "job": {"job_id": row["job"]["job_id"]}, "autonomy": "manual", "steps": 0}
+                 "job": {"job_id": row["job"]["job_id"]}, "autonomy": "manual", "steps": 0, **(extra or {})}
         await graph.ainvoke(state, cfg)
         snap = await graph.aget_state(cfg)
         v = snap.values
-        out.update(decision=(v.get("decision") or {}).get("action"), status=v.get("status"),
+        out.update(decision=(v.get("decision") or {}).get("action"), status=v.get("status"), arm=v.get("experiment_arm"),
                    interrupted=bool(snap.next), latency_s=round(time.perf_counter() - t0, 2))
         if snap.next and v.get("dry_run"):
             sent = v["dry_run"]["would_send"]
