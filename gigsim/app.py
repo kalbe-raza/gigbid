@@ -48,7 +48,7 @@ ACCOUNTS = dict(
     pair.split(":", 1) for pair in os.getenv("GIGSIM_TOKENS", "gs-dev-token:demo,gs-eval-token:eval").split(",") if ":" in pair
 )
 
-app = FastAPI(title="GigSim", version="1.2.0", description="Marketplace simulator for GigBid (synthetic).")
+app = FastAPI(title="GigSim", version="1.2.1", description="Marketplace simulator for GigBid (synthetic).")
 _lock = threading.RLock()
 _hits: dict[str, deque] = {}
 _rng = random.Random(int(os.getenv("GIGSIM_SEED", "794")))
@@ -238,6 +238,18 @@ def proposal_features(job: dict, client: dict, p: dict) -> dict:
     }
 
 
+def reply_probability(f: dict, client: dict) -> float:
+    h = client["hidden"]
+    s = -0.6 + 1.3 * f["must_have_hit"] + 0.5 * f["personalised"] + 0.3 * f["question"]
+    s += (0.9 if f["evidence"] else -0.4) * (1.0 if h.get("wants_evidence") else 0.4)
+    s -= (1.3 if h.get("dislikes_generic_openings") else 0.3) * f["generic_opening"]
+    s += 0.4 if f["price_ratio"] <= 1.0 else (-0.4 if f["price_ratio"] <= 1.2 else -1.4)
+    s -= 0.5 if f["chars"] > 1800 else 0.0
+    s -= 1.5 if f["red_flags"] else 0.0
+    s += (h.get("responsiveness", 0.8) - 0.8)
+    return 1 / (1 + math.exp(-(s - 0.4)))
+
+
 def rule_decision(f: dict, client: dict, seed: str) -> str:
     h = client["hidden"]
     s = -0.6 + 1.3 * f["must_have_hit"] + 0.5 * f["personalised"] + 0.3 * f["question"]
@@ -264,8 +276,13 @@ def llm_decision(job: dict, client: dict, p: dict, f: dict) -> tuple[str, str] |
         f"preferences: must-have skills {h.get('must_have')}; budget ceiling {h.get('budget_ceiling')} "
         f"(hourly ceiling {h.get('hourly_ceiling')}); you {'dislike' if h.get('dislikes_generic_openings') else 'tolerate'} "
         f"generic openings; you {'want' if h.get('wants_evidence') else 'do not need'} concrete evidence of past work.\n"
-        f"Job title: {job['title']}\nProposal (price {p.get('bid_amount')}):\n<<<\n{p['cover_letter'][:2500]}\n>>>\n"
-        "Most clients ignore most proposals. Reply ONLY with JSON: "
+        f"Job title: {job['title']}\nYou received more than 30 proposals for this job and will reply to only a few. "
+        f"Observations about this proposal: must-have skills addressed {f['must_have_hit']:.0%}; price is "
+        f"{f['price_ratio']:.2f}x your ceiling; generic opening: {f['generic_opening']}; references to past work: "
+        f"{f['evidence']}; length {f['chars']} characters.\nReply only if it clearly proves your must-have skills with "
+        "specific past work, fits your budget and is written for YOUR job; otherwise ignore it.\n"
+        f"Proposal (price {p.get('bid_amount')}):\n<<<\n{p['cover_letter'][:2500]}\n>>>\n"
+        "Reply ONLY with JSON: "
         '{"decision": "ignored"|"replied"|"interview", "message": "<your reply to the freelancer, empty if ignored>"}'
     )
     try:
@@ -472,6 +489,12 @@ def submit(proposal_id: str, uid: str = Depends(user), idempotency_key: str | No
         client = _client(job["client_id"])
         f = proposal_features(job, client, body)
         llm = llm_decision(job, client, body, f) if CLIENT_MODE == "llm" else None
+        if llm and llm[0] != "ignored":
+            # calibration (v1.2.1): the LLM's "reply" is necessary but not sufficient; it is accepted with the rule
+            # model's reply probability (seeded per proposal), which anchors the overall reply rate to a realistic level
+            gate = min(1.0, max(0.15, 1.6 * reply_probability(f, client)))
+            if random.Random(proposal_id + "gate").random() > gate:
+                llm = ("ignored", "")
         decision = llm or (rule_decision(f, client, proposal_id), "")
         if not decision[1] and decision[0] != "ignored":
             pool = CLIENT_REPLIES["scam"] if client["hidden"].get("scammer") else CLIENT_REPLIES[decision[0]]

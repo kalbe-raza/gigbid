@@ -90,6 +90,7 @@ thresholds:
   max_risk: 0.60               # risk above this -> skip, whatever the fit
   scam_risk: 0.80              # risk above this -> flagged as scam in the UI
   claim_support_min: 0.45      # verifier: lexical/semantic support needed for "supported"
+  critic_min_score: 6.5        # E5 optimisation: soft issues alone no longer force a rewrite (docs/adr/0004)
 
 budgets:
   max_graph_steps: 40          # per thread; exceeding moves the thread to needs_attention

@@ -26,8 +26,10 @@ def precheck(draft: dict, verification: dict | None) -> list[CritiqueIssue]:
     if limit and len(draft["cover_letter"]) > limit:
         issues.append(CritiqueIssue(kind="length", detail=f"{len(draft['cover_letter'])} chars; policy max {limit}"))
     partly = [c for c in (verification or {}).get("claims", []) if c["status"] == "partly_supported"]
-    for c in partly[:2]:
-        issues.append(CritiqueIssue(kind="grounding", detail=f"only partly supported: {c['text'][:90]}"))
+    for c in partly[:2]:  # soft: shown to the human next to the claim; unsupported claims were already removed
+        issues.append(CritiqueIssue(kind="other", detail=f"partly supported (check before approving): {c['text'][:90]}"))
+    if verification and verification.get("unsupported_after", 0) > 0:
+        issues.append(CritiqueIssue(kind="grounding", detail=f"{verification['unsupported_after']} unsupported claim(s) remain"))
     return issues
 
 
@@ -56,8 +58,10 @@ async def critic(state: dict, ctx: NodeContext) -> dict:
     c.issues = issues + c.issues
     hard = any(i.kind in ("generic_opening", "grounding") for i in issues) or any(i.kind == "length" and "policy" in i.detail
                                                                                   for i in issues)
+    # Approval is decided here, not by the model's own flag: a draft with no hard issues and a good-enough score is
+    # accepted, so soft nits (tone, wording) no longer cost a full rewrite (measured in docs/adr/0004).
+    c.approve = (not hard) and c.score >= settings().thresholds.get("critic_min_score", 7.0)
     if hard:
-        c.approve = False
         c.instructions = (c.instructions + " " + "; ".join(i.detail for i in issues)).strip()
     revision = int(state.get("revision") or 0)
     send_back = not c.approve and revision < settings().budgets["max_revisions"]
