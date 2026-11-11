@@ -69,8 +69,9 @@ async def match(job: dict, toolbox, requirements: list[str] | None = None, k: in
     results = await asyncio.gather(*(one(r) for r in reqs))
     skills_res = await toolbox.call("portfolio", "list_skills", {})
     portfolio_skills = {canon(s["skill"]) for s in skills_res.get("skills", [])}
-    matrix, variant = [], ""
-    for r, items, variant in results:
+    matrix = []
+    variant = results[0][2] if results else ""
+    for r, items, _variant in results:
         status = requirement_status(r, items)
         matrix.append(RequirementMatch(
             requirement=r, skill=next(iter(key_terms(r)), None), status=status,

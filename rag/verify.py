@@ -59,8 +59,12 @@ def is_claim(sentence: str) -> bool:
 
 
 def numbers(s: str) -> set[str]:
-    return {re.sub(r"[,\s$]", "", m.group(0)).lower().rstrip("hoursminutesdaysweeksmonthsyear")
-            for m in NUM.finditer(CITE.sub("", s)) if re.search(r"\d", m.group(0))}
+    out = set()
+    for m in NUM.finditer(CITE.sub("", s)):
+        if re.search(r"\d", m.group(0)):
+            n = re.sub(r"[,\s$]", "", m.group(0)).lower()
+            out.add(re.sub(r"(hours?|minutes?|days?|weeks?|months?|years?|h)$", "", n))
+    return out
 
 
 def deterministic_check(claim: str, evidence: list[dict], min_overlap: float) -> tuple[str, list[str], str]:
@@ -149,8 +153,9 @@ async def verify_text(text: str, evidence: list[dict], min_overlap: float = 0.45
         rw = rewrites.get(idx)
         if rw:
             st, ids, _ = deterministic_check(rw, evidence, min_overlap * 0.8)
-            if st != "unsupported" and not CITE.search(rw) and (ids or c.evidence_ids):
-                rw = re.sub(r"([.!?])?\s*$", lambda m: f" [{(ids or c.evidence_ids)[0]}]" + (m.group(1) or "."), rw, count=1)
+            cite_id = (ids or c.evidence_ids or [None])[0]
+            if st != "unsupported" and not CITE.search(rw) and cite_id:
+                rw = re.sub(r"([.!?])?\s*$", lambda m, cid=cite_id: f" [{cid}]" + (m.group(1) or "."), rw, count=1)
             if st != "unsupported":
                 out_sentences[idx] = rw
                 c.action = "rewritten"

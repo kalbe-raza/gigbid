@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS runs (
 CREATE TABLE IF NOT EXISTS run_events (
   id BIGSERIAL PRIMARY KEY, thread_id TEXT, user_id TEXT, node TEXT, kind TEXT, payload JSONB,
   created_at TIMESTAMPTZ DEFAULT now());
+ALTER TABLE runs ADD COLUMN IF NOT EXISTS pending_resume JSONB;
 CREATE INDEX IF NOT EXISTS run_events_thread ON run_events (thread_id, id);
 CREATE TABLE IF NOT EXISTS pipeline (
   user_id TEXT REFERENCES users ON DELETE CASCADE, job_id TEXT, proposal_id TEXT, thread_id TEXT, title TEXT,

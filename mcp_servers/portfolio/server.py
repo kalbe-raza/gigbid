@@ -11,6 +11,7 @@ Inside GigBid it runs over streamable HTTP with bearer auth:  python -m mcp_serv
 
 from __future__ import annotations
 
+import asyncio
 import os
 import sys
 from typing import Annotated
@@ -52,7 +53,7 @@ async def search_evidence(ctx: Context, requirement: Annotated[str, Field(min_le
     """Find portfolio evidence (case studies, repos/code, reviews, CV) that proves one requirement. Each item has
     an id to cite, its type, source, date and, for proposals, the outcome."""
     corpus, user, trace = _corpus(ctx)
-    res = T.search_evidence(corpus, requirement, k, filters)
+    res = await asyncio.to_thread(T.search_evidence, corpus, requirement, k, filters)  # CPU work off the event loop
     await audit(SERVER, user, "search_evidence", {"requirement": requirement, "k": k}, {"ids": [i.id for i in res.items]},
                 trace, True)
     return res
@@ -63,7 +64,7 @@ async def get_case_study(ctx: Context, case_id: Annotated[str, Field(min_length=
     """Full text of one case study (id like `case:helpdesk-rag` or just `helpdesk-rag`) plus related evidence ids."""
     corpus, user, trace = _corpus(ctx)
     try:
-        res = T.get_case_study(corpus, case_id)
+        res = await asyncio.to_thread(T.get_case_study, corpus, case_id)
     except KeyError as e:
         raise ToolError(str(e)) from e
     await audit(SERVER, user, "get_case_study", {"case_id": case_id}, {"id": res.id}, trace, True)
@@ -74,7 +75,7 @@ async def get_case_study(ctx: Context, case_id: Annotated[str, Field(min_length=
 async def list_skills(ctx: Context) -> T.SkillList:
     """Every skill the portfolio has evidence for, with how many evidence items and which projects show it."""
     corpus, user, trace = _corpus(ctx)
-    return T.list_skills(corpus)
+    return await asyncio.to_thread(T.list_skills, corpus)
 
 
 # ------------------------------------------------------------------------------------------ resources

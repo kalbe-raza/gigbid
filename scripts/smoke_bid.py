@@ -61,13 +61,12 @@ async def main() -> None:
         print("status:", snap.values.get("status"), "| next:", snap.next, "| gold:", row["gold"]["decision"])
         if snap.next and snap.next[0] == "human_approval":
             d = snap.values["drafts"][-1]
-            print("\n--- draft v%d (%d words) ---\n%s\n" % (d["version"], d["word_count"], d["cover_letter"]))
+            print(f"\n--- draft v{d['version']} ({d['word_count']} words) ---\n{d['cover_letter']}\n")
             ver = snap.values["verification"][-1]
             print("claims:", ver["total_claims"], "unsupported before/after:", ver["unsupported_before"], ver["unsupported_after"])
             print("dry run:", json.dumps({k: snap.values["dry_run"].get(k) for k in ("connects_cost", "connects_balance_after",
                                                                                      "policy_warnings")}))
             if a.approve:
-                p = snap.values["price"]
                 sent = snap.values["dry_run"]["would_send"]  # sign exactly what will be sent, as the API does
                 chash = approval_tokens.proposal_hash(sent["job_id"], sent["cover_letter"], sent["bid_amount"], sent["bid_type"])
                 token = approval_tokens.sign("demo", "proposal", chash)

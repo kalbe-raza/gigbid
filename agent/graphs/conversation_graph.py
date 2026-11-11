@@ -13,7 +13,13 @@ from langgraph.types import RetryPolicy
 
 from agent.nodes.common import STOP_STATUSES
 from agent.nodes.liaison import (
-    classify_intent, draft_reply, load_thread, message_approval, message_compliance, propose_slots, send_reply,
+    classify_intent,
+    draft_reply,
+    load_thread,
+    message_approval,
+    message_compliance,
+    propose_slots,
+    send_reply,
 )
 from agent.state import ConversationState
 
