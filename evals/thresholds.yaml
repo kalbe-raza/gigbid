@@ -1,0 +1,6 @@
+# CI gates for the 30-job smoke eval (evals/runners/smoke_eval.py). Set a few points below the measured values in
+# evals/results/smoke_eval.json so that real regressions fail the pull request but noise does not.
+recall5_min: 0.20
+bid_f1_min: 0.55
+scam_recall_min: 0.80
+unsupported_per_proposal_max: 1.5

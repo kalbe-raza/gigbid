@@ -1,0 +1,22 @@
+name: Smoke eval
+# 30-job smoke eval on every pull request; fails if bid/skip F1 drops or unsupported claims rise past the thresholds
+# in evals/thresholds.yaml. Retrieval metrics need no LLM; the decision run uses GROQ_API_KEY from repo secrets
+# (if the secret is absent, e.g. on forks, the LLM-dependent gate is skipped and reported, not silently passed).
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      LLM_CACHE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: "0.13.7"}
+      - run: uv python install 3.12 && uv sync --frozen --extra dev
+      - name: Retrieval smoke (10 jobs per persona = 30 jobs)
+        run: uv run python -m evals.runners.smoke_eval --jobs-per-persona 10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: smoke-eval, path: evals/results/smoke_*.json}

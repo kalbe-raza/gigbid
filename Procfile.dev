@@ -1,0 +1,7 @@
+gigsim: uvicorn gigsim.app:app --port 8081
+portfolio: python -m mcp_servers.portfolio.server --http
+marketplace: python -m mcp_servers.marketplace.server
+workspace: python -m mcp_servers.workspace.server
+api: uvicorn apps.api.main:app --port 8000 --reload
+worker: arq worker.main.WorkerSettings
+web: cd apps/web && npm run dev
