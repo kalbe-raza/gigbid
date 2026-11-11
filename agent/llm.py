@@ -153,7 +153,7 @@ def price(spec: str, pt: int, ct: int) -> float:
 
 def _extra_params(model: str, node: str) -> dict:
     if "gpt-oss" in model:
-        return {"reasoning_effort": "medium" if node in ("writer", "liaison") else "low"}
+        return {"reasoning_effort": "low"}  # reasoning tokens count against max_tokens and the 8k TPM budget
     if "qwen" in model:
         return {"reasoning_effort": "none"}
     return {}
@@ -197,6 +197,11 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
                     raise LLMError(f"{spec} unavailable ({r.status_code}, retry-after {retry_after}s)")
                 await asyncio.sleep(max(retry_after, cfg["backoff_base_s"] * (2 ** attempt)))
                 last = LLMError(f"{spec} HTTP {r.status_code}")
+                continue
+            if r.status_code == 400 and json_mode and ("json_validate_failed" in r.text or "validate JSON" in r.text):
+                # provider-side JSON validation failed (often truncation); retry once in plain mode, parse leniently
+                body.pop("response_format", None)
+                json_mode = False
                 continue
             if r.status_code >= 400:
                 raise LLMError(f"{spec} HTTP {r.status_code}: {mask_pii(r.text[:300])}")

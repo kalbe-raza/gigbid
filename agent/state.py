@@ -33,8 +33,10 @@ class BidState(TypedDict, total=False):
     corpus: str
     trace_id: str
     autonomy: str
+    profile: dict          # freelancer rates/floor/domain (from user settings)
     # input
     job: dict
+    duplicate_of: str
     client: dict
     # analyses (one writer each, run in parallel)
     job_spec: dict

@@ -119,7 +119,7 @@ compliance:
   banned_patterns:             # deterministic checks run before the LLM check
     contact: '[\w.+-]+@[\w-]+\.[\w.]+|\+?\d[\d\s().-]{8,}\d|\b(whats ?app|telegram|skype|signal)\b'
     guarantee: '\b(guarantee[sd]?|100% (success|satisfaction|accuracy)|risk[- ]free|first[- ]page results)\b'
-    off_platform_payment: '\b(paypal|wise|western union|crypto|bitcoin|usdt|bank transfer)\b'
+    off_platform_payment: '\b(paypal|transferwise|wise\.com|western union|crypto|bitcoin|usdt|bank transfer)\b'
     urls: 'https?://(?!portfolio\b)[^\s)]+'
 
 autonomy:
