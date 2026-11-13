@@ -1,0 +1,24 @@
+# GigBid public entry point: automatic HTTPS for $DOMAIN.
+{$DOMAIN} {
+	redir /phoenix /phoenix/ 308
+	# Phoenix trace UI, public for reviewers. Outside requests may only read pages and use the UI's GraphQL endpoint;
+	# REST writes (span ingestion, deletes) are refused. Services inside the network export traces to phoenix:6006 directly.
+	handle_path /phoenix/* {
+		@write {
+			not method GET HEAD
+			not path /graphql
+		}
+		respond @write "read-only" 403
+		reverse_proxy phoenix:6006
+	}
+	# API straight to FastAPI so server-sent events stream without buffering
+	handle /api/* {
+		reverse_proxy api:8000 {
+			flush_interval -1
+		}
+	}
+	handle {
+		encode zstd gzip
+		reverse_proxy web:3000
+	}
+}

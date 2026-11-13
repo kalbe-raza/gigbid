@@ -7,8 +7,7 @@ It also catches scam posts and instructions hidden inside job posts, and helps y
 
 ![20-second tour: the inbox, one job's analysis, the proposal studio waiting for approval, analytics](docs/images/demo.gif)
 
-**Live demo:** given with the submission (served from the author's machine through a free Cloudflare tunnel during demo and grading sessions, `scripts/live_demo.sh`; see [RUNBOOK](docs/RUNBOOK.md#deploy-free-public)) · reviewer login in the private comment on the submission (synthetic full-stack persona; the
-marketplace is GigSim, a simulator, so nothing reaches a real client).
+**Live demo:** https://80-225-228-150.sslip.io (always on: a free Oracle Cloud ARM VM, [RUNBOOK](docs/RUNBOOK.md#deploy-free-public)) · reviewer login in the private comment on the submission (synthetic full-stack persona; the marketplace is GigSim, a simulator, so nothing reaches a real client) · live traces: https://80-225-228-150.sslip.io/phoenix/  
 **Demo video (2:28):** [kalbe-raza.github.io/gigbid/#demo](https://kalbe-raza.github.io/gigbid/#demo) · **Write-up:** [My agent's reply rate was 0%. The bug was in the simulator I wrote to grade it.](https://kalbe-raza.github.io/gigbid/blog/reply-rate-was-the-simulator.html) · [Playwright report](https://kalbe-raza.github.io/gigbid/playwright-report/)  
 **Public traces** (exported from Phoenix; every run page in the app also links to its live trace): [approved proposal](https://kalbe-raza.github.io/gigbid/trace.html?t=approved_proposal) · [skipped scam](https://kalbe-raza.github.io/gigbid/trace.html?t=scam_skipped) · [Critic loop](https://kalbe-raza.github.io/gigbid/trace.html?t=critic_loop) · [crash and resume](https://kalbe-raza.github.io/gigbid/trace.html?t=crash_resume) ([log](https://kalbe-raza.github.io/gigbid/traces/crash_resume_log.txt)) · [injected instruction ignored](https://kalbe-raza.github.io/gigbid/trace.html?t=injection_ignored)
 

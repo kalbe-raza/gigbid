@@ -1,0 +1,31 @@
+# Always-on server overlay: HTTPS through Caddy, only ports 80/443 published, restart on failure or reboot.
+#   docker compose -f infra/docker-compose.yml -f infra/docker-compose.server.yml --env-file .env up -d --build
+services:
+  postgres: {restart: unless-stopped}
+  redis: {restart: unless-stopped}
+  qdrant: {restart: unless-stopped}
+  phoenix:
+    restart: unless-stopped
+    ports: !reset []
+    environment: {PHOENIX_HOST_ROOT_PATH: /phoenix}
+  ollama: {profiles: [ollama]}
+  gigsim: {restart: unless-stopped}
+  mcp-portfolio: {restart: unless-stopped}
+  mcp-marketplace: {restart: unless-stopped}
+  mcp-workspace: {restart: unless-stopped}
+  api:
+    restart: unless-stopped
+    ports: !reset []
+    environment: {COOKIE_SECURE: "1"}
+  worker: {restart: unless-stopped}
+  web:
+    restart: unless-stopped
+    ports: !reset []
+  caddy:
+    image: caddy:2.10.2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment: {DOMAIN: "${DOMAIN:?set DOMAIN in .env}"}
+    volumes: [./Caddyfile:/etc/caddy/Caddyfile:ro, caddy_data:/data, caddy_config:/config]
+    depends_on: [web, api, phoenix]
+volumes: {caddy_data: {}, caddy_config: {}}

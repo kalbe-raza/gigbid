@@ -10,17 +10,22 @@ Local development without containers for the app: `make infra` (Postgres, Redis,
 `Procfile.dev`. Reviewer accounts are created at startup from `REVIEWER_ACCOUNTS`.
 
 ## Deploy (free, public)
-**Live link:** `scripts/live_demo.sh` starts the whole stack on the author's machine (the `gb-*` dev containers for
-Postgres, Redis, Qdrant and Phoenix, then GigSim, the three MCP servers, API, worker and the production web build)
-and publishes it through a free Cloudflare quick tunnel; it prints `https://<random>.trycloudflare.com` for the web
-app and a second URL for Phoenix, so trace links open from anywhere. Ctrl+C stops everything. The URL changes on every
-start, so the current one is given with the submission. `NO_TUNNEL=1` runs the same stack locally only.
+**Live link:** https://80-225-228-150.sslip.io, an Oracle Cloud "Always Free" VM (VM.Standard.A1.Flex, 4 Arm cores,
+24 GB RAM, Oracle Linux 9) running the compose stack plus Caddy for automatic HTTPS (Let's Encrypt; the hostname is
+an sslip.io name for the VM's IP). Only ports 80 and 443 are open. Every service restarts on failure and after a reboot
+(tested). Phoenix is public read-only at `/phoenix/`: page loads and the UI's GraphQL endpoint pass, REST writes are
+refused at the proxy.
 
-**Why not an always-on host:** the single-container image for a Hugging Face Docker Space is ready
-(`deploy/space/Dockerfile`: nginx on 7860 → web / API (SSE unbuffered) / Phoenix (`/phoenix`), state in `/tmp`,
-reviewer re-seeded on start; `HF_TOKEN=... make deploy SPACE=<user>/gigbid`), but Hugging Face now runs Docker Spaces
-only for PRO accounts (its API answered 402 Payment Required on 2026-11-13), and the other free hosts offer 512 MB of RAM, too little
-for this stack. With a PRO account the same command deploys it unchanged.
+Set up once on a fresh VM (Docker CE, then the repo and a server `.env` with fresh secrets, the Groq key and
+`REVIEWER_ACCOUNTS`, plus `DOMAIN`, `CORS_ORIGINS=https://$DOMAIN` and `PHOENIX_PUBLIC_URL=https://$DOMAIN/phoenix`):
+```bash
+sudo firewall-cmd --permanent --add-service=http --add-service=https && sudo firewall-cmd --reload
+docker compose -f infra/docker-compose.yml -f infra/docker-compose.server.yml --env-file .env up -d --build
+```
+The cloud's security list must also allow TCP 80 and 443. Update after a push: `git pull` and the same `up -d --build`.
+
+**Local alternative:** `scripts/live_demo.sh` runs the same stack on a laptop and publishes it through a free Cloudflare
+quick tunnel (the URL changes on every start); `NO_TUNNEL=1` keeps it local.
 
 ## Scheduling and rate limits
 | Thing | Interval | Why |

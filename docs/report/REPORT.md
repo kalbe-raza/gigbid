@@ -29,8 +29,8 @@ the portfolio does not prove. Live Upwork mode creates drafts only; the user con
 
 Hard runtime limits stop runaway threads: at most 40 graph steps and 30,000 tokens per job, at most two critic
 revisions; a thread that crosses one is parked as `needs_attention` with the reason, never silently retried.
-Everything runs on free tiers (Groq, OpenRouter's free model, a CPU-only laptop with 8 GB RAM that also serves
-the live link through a free Cloudflare tunnel), so the token-per-minute limits of the free tier shape both latency and the size of every experiment.
+Everything runs on free tiers (Groq, OpenRouter's free model, a CPU-only laptop with 8 GB RAM for the experiments,
+and an Oracle Cloud Always Free Arm VM for the always-on live link), so the token-per-minute limits of the free tier shape both latency and the size of every experiment.
 
 ## 2. Architecture
 
