@@ -46,11 +46,13 @@ def documents(corpus: str) -> dict[str, Document]:
 def index(corpus: str) -> CorpusIndex:
     rag = settings().rag
     scheme = rag["best"]["chunking"] if rag["variant"] == "best" else "structured"
-    idx = get_index(corpus, scheme, rag["embed_model"])
-    if idx.size == 0:
-        docs = list(documents(corpus).values())
-        if docs:
-            idx.upsert_documents(docs)
+    # under the lock: on a fresh store, concurrent first searches must not each embed the whole corpus
+    with _lock:
+        idx = get_index(corpus, scheme, rag["embed_model"])
+        if idx.size == 0:
+            docs = list(documents(corpus).values())
+            if docs:
+                idx.upsert_documents(docs)
     return idx
 
 
