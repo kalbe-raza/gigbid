@@ -55,6 +55,6 @@ files for key patterns. OAuth tokens and marketplace credentials are Fernet-encr
 through a PII/secret mask.
 
 ## Recovery checklist
-- Dead-letter runs (after 4 failures) appear in Agent runs with the error; fix the cause, then "Analyse" again.
+- Dead-letter runs (after 4 failures) appear in Agent runs with the error; fix the cause, then press **Analyse again** on the job page.
 - `needs_attention` threads (step/token budget, not enough Connects) show the reason in the studio.
 - LLM quota exhausted: nodes fall back to the OpenRouter free model; the analyst/critic have deterministic fallbacks.

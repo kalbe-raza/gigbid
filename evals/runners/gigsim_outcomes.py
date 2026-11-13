@@ -122,7 +122,8 @@ async def run_one(graph, row: dict, persona: str, profile: dict, extra: dict | N
     except Exception as e:  # noqa: BLE001 - record and continue: a failed job is a result too
         out.update(error=f"{type(e).__name__}: {str(e)[:300]}")
     finally:
-        out.update(tokens=led.tokens, cost_usd=led.cost, nodes=led.by_node(), latency_s=round(time.perf_counter() - t0, 2))
+        out.update(tokens=led.tokens, cost_usd=led.cost, nodes=led.by_node(), latency_s=round(time.perf_counter() - t0, 2),
+                   llm_calls=len(led.calls), cached_calls=sum(c.cached for c in led.calls))
         current_ledger.reset(tok)
     return out
 
@@ -168,6 +169,9 @@ async def main() -> None:
         "critic_rounds_mean": mean(r["critic_rounds"] for r in props),
         "tokens_per_proposal": mean(r["tokens"] for r in props),
         "usd_per_proposal": mean(r["cost_usd"] for r in props),
+        # LLM calls answered from the eval cache take 0 s, so latency is only a fair measurement when this is ~0
+        "cached_call_share": round(sum(r.get("cached_calls", 0) for r in props) /
+                                   max(1, sum(r.get("llm_calls", 0) for r in props)), 3) if props else None,
         "latency_p50_s": pctl([r["latency_s"] for r in props], .5),
         "latency_p95_s": pctl([r["latency_s"] for r in props], .95),
         "by_persona": {p: {"proposals": len([r for r in props if r["persona"] == p]),

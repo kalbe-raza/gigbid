@@ -171,6 +171,9 @@ def extract_json(text: str) -> Any:
         raise
 
 
+_OUTPUT_CAPS: dict[str, int] = {}  # per-request output caps learned from provider "request too large" answers
+
+
 async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, temperature: float,
                 json_mode: bool) -> tuple[str, int, int]:
     provider, model = _split(spec)
@@ -179,7 +182,8 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
         raise LLMError(f"no API key for provider {provider}")
     # some free-tier organisations cap output tokens per minute per model below what a node asks for (Groq answers
     # "Request too large"); models.max_output_tokens clamps the request so it can succeed
-    max_tokens = min(max_tokens, settings().models.get("max_output_tokens", {}).get(spec, max_tokens))
+    max_tokens = min(max_tokens, settings().models.get("max_output_tokens", {}).get(spec, max_tokens),
+                     _OUTPUT_CAPS.get(spec, max_tokens))
     body: dict[str, Any] = {"model": model, "messages": messages, "max_tokens": max_tokens,
                             "temperature": temperature, **_extra_params(model, node)}
     if json_mode:
@@ -201,7 +205,14 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
                     raise LLMError(f"{spec} unavailable ({r.status_code}, retry-after {retry_after}s)")
                 last = LLMError(f"{spec} HTTP {r.status_code}: {mask_pii(r.text[:240])}")
                 if r.status_code == 429 and "too large" in r.text.lower():
-                    raise last  # one request above the per-minute limit can never succeed by waiting
+                    # the account's per-minute output limit is below what this request reserves: shrink the request to
+                    # the limit the provider reports (remembered for this process), otherwise it can never succeed
+                    lim = re.search(r"\(OTPM\): Limit (\d+), Requested (\d+)", r.text)
+                    if lim and int(lim.group(1)) < body["max_tokens"]:
+                        _OUTPUT_CAPS[spec] = int(lim.group(1))
+                        body["max_tokens"] = int(lim.group(1))
+                        continue
+                    raise last
                 if r.status_code == 429 and rate_limited < 6:
                     # per-minute limit (TPM/RPM): the window frees up within a minute, so wait it out rather than
                     # spending the bounded attempts meant for server errors

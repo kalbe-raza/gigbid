@@ -34,7 +34,7 @@ models:
     groq: 7500
     openrouter: 20000
     ollama: 1000000
-  max_output_tokens: {}    # per-model output cap per request (an account's output-tokens-per-minute limit)
+  max_output_tokens: {"groq:qwen/qwen3.8-27b": 1000}    # per-model output cap per request (an account's output-tokens-per-minute limit)
   profiles:
     open:
       nodes:

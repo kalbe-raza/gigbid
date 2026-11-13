@@ -10,6 +10,7 @@ and does not count toward the 10-page limit.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
@@ -46,6 +47,42 @@ blockquote { margin: 1.5mm 0; padding: 1mm 3mm; border-left: 1mm solid #c9ced6; 
 """
 
 
+REF = re.compile(r"\{\{([A-Za-z0-9_]+):([^|}]+)(?:\|([^}]+))?\}\}")
+
+
+def fill_numbers(text: str) -> str:
+    """Replace {{file:a/b/c|fmt}} with the value at a/b/c in evals/results/file.json, formatted with fmt
+    (a format spec such as .3f or .0%, or 'pp' for a 0-1 value shown as points). Fails if any value is missing, so
+    the PDF can never contain a number that does not come from a results file."""
+    cache: dict[str, object] = {}
+    missing: list[str] = []
+
+    def value(m: re.Match) -> str:
+        name, path, fmt = m.group(1), m.group(2), m.group(3)
+        if name not in cache:
+            f = ROOT / "evals/results" / f"{name}.json"
+            cache[name] = json.loads(f.read_text()) if f.exists() else None
+        node = cache[name]
+        for part in path.split("/"):
+            if isinstance(node, dict) and part in node:
+                node = node[part]
+            elif isinstance(node, list) and part.isdigit() and int(part) < len(node):
+                node = node[int(part)]
+            else:
+                missing.append(m.group(0))
+                return m.group(0)
+        if node is None:
+            return "n/a"
+        if fmt == "pp":
+            return f"{node * 100:.1f}"
+        return format(node, fmt) if fmt else str(node)
+
+    out = REF.sub(value, text)
+    if missing:
+        raise SystemExit("missing result values:\n  " + "\n  ".join(sorted(set(missing))))
+    return out
+
+
 def find_chrome(explicit: str | None) -> str:
     for c in [explicit, "google-chrome", "chromium", "chromium-browser", "chrome"]:
         if c and shutil.which(c):
@@ -57,7 +94,15 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--chrome")
     a = ap.parse_args()
-    text = SRC.read_text()
+    for tmpl in sorted(ROOT.glob("**/*.tmpl.md")):  # README.tmpl.md, docs/EXTENSION.tmpl.md -> .md, numbers filled
+        if ".venv" in tmpl.parts or "node_modules" in tmpl.parts:
+            continue
+        out = tmpl.with_name(tmpl.name.replace(".tmpl.md", ".md"))
+        out.write_text("<!-- generated from " + tmpl.name + " by scripts/build_report.py; edit the template -->\n"
+                       + fill_numbers(tmpl.read_text()))
+        print(f"wrote {out.relative_to(ROOT)}")
+    text = fill_numbers(SRC.read_text())
+    (SRC.parent / "REPORT.rendered.md").write_text(text)  # the same text with numbers filled in, for reading on GitHub
     text = re.sub(r"```mermaid.*?```", "", text, flags=re.S)
     main_part, _, appendix = text.partition("<!-- APPENDIX -->")
     md = markdown.Markdown(extensions=["tables", "fenced_code", "sane_lists"])

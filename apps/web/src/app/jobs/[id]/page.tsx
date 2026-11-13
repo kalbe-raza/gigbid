@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { use } from "react";
+import { use, useState } from "react";
 import { ActionBadge, ErrorState, Loading, Meter, RiskBadge } from "@/components/States";
 import { RunTimeline } from "@/components/RunTimeline";
 import { api, unwrap } from "@/lib/api/client";
@@ -12,6 +12,7 @@ type Flag = { code: string; severity: string; quote: string };
 
 export default function JobDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const [queued, setQueued] = useState(false);
   const d = useLoad(() => api.GET("/api/jobs/{job_id}", { params: { path: { job_id: id } } }).then(unwrap), [id], 8000);
   if (d.loading && !d.data) return <Loading />;
   if (d.error) return <ErrorState error={d.error} onRetry={d.reload} />;
@@ -38,6 +39,13 @@ export default function JobDetail({ params }: { params: Promise<{ id: string }> 
           </div>
         </div>
         {v.status === "awaiting_approval" && <Link className="btn primary" href={`/studio/${id}`}>Open proposal studio</Link>}
+        {!["awaiting_approval", "running", "resuming", "submitted"].includes(String(v.status)) && (
+          <button className="btn" disabled={queued} onClick={async () => {
+            setQueued(true);
+            await api.POST("/api/jobs/{job_id}/analyse", { params: { path: { job_id: id } } });
+            d.reload();
+          }}>{queued ? "Queued for analysis" : v.thread_id ? "Analyse again" : "Analyse now"}</button>
+        )}
       </div>
 
       {!v.thread_id && <div className="banner info">This job is queued for analysis.</div>}
