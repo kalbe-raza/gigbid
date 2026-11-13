@@ -113,6 +113,8 @@ def main() -> None:
     if appendix:
         md.reset()
         body += '<div class="appendix">' + md.convert(appendix) + "</div>"
+    # repo-relative links would become file:// paths on the build machine inside the PDF; keep only their text
+    body = re.sub(r'<a href="(?!https?:|mailto:|#)[^"]*">(.*?)</a>', r"\1", body, flags=re.S)
     html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{body}</body></html>'
     page = SRC.parent / ".report_build.html"  # next to REPORT.md so relative image paths resolve
     page.write_text(html)
