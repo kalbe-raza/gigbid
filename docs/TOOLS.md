@@ -49,4 +49,14 @@ append-only `audit_log` table (user, tool, masked arguments, result, trace id); 
 
 ## MCP Inspector
 `npx @modelcontextprotocol/inspector` → Streamable HTTP → `http://localhost:8101/mcp` (header
-`Authorization: Bearer $MCP_SERVICE_TOKEN`). Screenshots: `docs/images/inspector_*.png`.
+`Authorization: Bearer $MCP_SERVICE_TOKEN`). Screenshots (MCP Inspector 2.12.0 against the running servers):
+
+| Server | Screenshot |
+|---|---|
+| Portfolio | [`search_evidence` call and result](images/inspector_portfolio_search_evidence.png) |
+| Marketplace | [`search_jobs` call and result](images/inspector_marketplace_search_jobs.png) |
+| Marketplace | [`create_proposal_draft` with `dry_run: true`: the preview and Connects cost, nothing created](images/inspector_marketplace_dry_run.png) |
+| Marketplace | [`submit_proposal` schema with its DESTRUCTIVE and IDEMPOTENT annotations](images/inspector_marketplace_submit_annotations.png) |
+| Workspace | [`list_free_slots` call and result](images/inspector_workspace_free_slots.png) |
+
+![MCP Inspector: Portfolio server, search_evidence](images/inspector_portfolio_search_evidence.png)
