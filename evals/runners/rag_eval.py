@@ -12,6 +12,8 @@ from __future__ import annotations
 import argparse
 import csv
 import dataclasses
+import hashlib
+import json
 import time
 from collections import defaultdict
 
@@ -42,7 +44,26 @@ def metrics(ranking: list[str], gold: list[dict]) -> dict:
     return {"recall@5": rec5, "mrr": rr, "ndcg@10": ndcg(ranking, grades, 10)}
 
 
+PARTIAL = RESULTS.parent / ".cache" / "rag_partial"
+
+
 def run_variant(name: str, cfg, rows_by_persona: dict) -> tuple[dict, list[dict]]:
+    """Resumable: a finished variant is saved under evals/.cache/rag_partial/, keyed by its name, its full config and
+    the exact job ids, so an interrupted run picks up where it stopped and never mixes in a stale configuration."""
+    ids = sorted(r["job"]["job_id"] for rows in rows_by_persona.values() for r in rows)
+    key = hashlib.sha1(json.dumps([name, dataclasses.asdict(cfg), ids], sort_keys=True, default=str).encode()).hexdigest()
+    f = PARTIAL / f"{key[:16]}.json"
+    if f.exists():
+        cached = json.loads(f.read_text())
+        print(f"{name:<30} (resumed from {f.name})", flush=True)
+        return cached["summary"], cached["per_job"]
+    summ, per = _run_variant(name, cfg, rows_by_persona)
+    PARTIAL.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps({"name": name, "summary": summ, "per_job": per}))
+    return summ, per
+
+
+def _run_variant(name: str, cfg, rows_by_persona: dict) -> tuple[dict, list[dict]]:
     per_job, t0 = [], time.perf_counter()
     for persona, rows in rows_by_persona.items():
         pipe = Pipeline(cfg, persona)

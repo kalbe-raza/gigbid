@@ -38,7 +38,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-asyncio", "ruff", "pandas", "openpyxl"]
+dev = ["pytest", "pytest-asyncio", "ruff", "pandas", "openpyxl", "markdown"]
 
 [project.scripts]
 gigbid-portfolio-mcp = "mcp_servers.portfolio.server:main"

@@ -45,9 +45,9 @@ TOKEN = os.getenv("GIGSIM_EVAL_TOKEN", "gs-eval-token")
 ADMIN = os.getenv("GIGSIM_ADMIN_TOKEN", "gigsim-admin")
 
 
-def fixed_job_set(per_persona: int) -> dict[str, list[dict]]:
+def fixed_job_set(per_persona: int, split: str = "dev") -> dict[str, list[dict]]:
     """Gold-bid, real, non-injected jobs; seeded so every configuration sees exactly the same jobs."""
-    return {p: sample(dev(p), per_persona, seed=2024,
+    return {p: sample(dev(p, split), per_persona, seed=2024,
                       key=lambda r: r["gold"]["decision"] == "bid" and r["gold"]["kind"] == "real_in_domain")
             for p in PERSONAS}
 
@@ -131,12 +131,13 @@ async def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-persona", type=int, default=6)
     ap.add_argument("--tag", required=True)
+    ap.add_argument("--split", default="dev", choices=["dev", "test"], help="test = the held-out split (report only)")
     a = ap.parse_args()
     from langgraph.store.memory import InMemoryStore
 
     set_store(InMemoryStore())
     build_indexes(schemes=("structured", "fixed"))
-    jobs = fixed_job_set(a.per_persona)
+    jobs = fixed_job_set(a.per_persona, a.split)
     for rows in jobs.values():
         register_jobs(rows)
     graph = build_bid_graph(InMemorySaver())
@@ -176,7 +177,7 @@ async def main() -> None:
     write_result(f"gigsim_outcomes_{a.tag}", {"rag_variant": settings().rag["variant"],
                                                "model_profile": os.getenv("MODEL_PROFILE", settings().models["profile"]),
                                                "writer_model": settings().model_for("writer"),
-                                               "per_persona": a.per_persona, "summary": summary})
+                                               "per_persona": a.per_persona, "split": a.split, "summary": summary})
     (RESULTS / f"gigsim_outcomes_{a.tag}_per_job.jsonl").write_text("".join(json.dumps(r, default=str) + "\n" for r in results))
     print(json.dumps(summary, indent=1))
 
