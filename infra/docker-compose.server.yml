@@ -9,7 +9,11 @@ services:
     ports: !reset []
     environment: {PHOENIX_HOST_ROOT_PATH: /phoenix}
   ollama: {profiles: [ollama]}
-  gigsim: {restart: unless-stopped}
+  gigsim:
+    restart: unless-stopped
+    # always-on: a slow trickle of new jobs keeps automatic analysis well inside the free Groq daily token quota,
+    # leaving it for reviewers' own runs (default is 4 jobs every 10 minutes)
+    environment: {GIGSIM_RELEASE_SECONDS: "14400", GIGSIM_RELEASE_BATCH: "2"}
   mcp-portfolio: {restart: unless-stopped}
   mcp-marketplace: {restart: unless-stopped}
   mcp-workspace: {restart: unless-stopped}
