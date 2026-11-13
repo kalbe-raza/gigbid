@@ -18,3 +18,4 @@ evals/.cache/
 apps/web/test-results/
 apps/web/playwright-report/
 .DS_Store
+*.tsbuildinfo
