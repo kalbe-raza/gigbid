@@ -33,6 +33,8 @@ def main() -> None:
     groups: dict[str, list[dict]] = defaultdict(list)
 
     decision_files = sorted(f for f in RESULTS.glob("decisions_*_per_job.jsonl") if "_test_" not in f.name)
+    # the full dev run that report sections 4 and 10 use; the smaller risk-LLM runs are not a fair sample
+    decision_files.sort(key=lambda f: f.name != "decisions_never_per_job.jsonl")
     dec = _jsonl(decision_files[0].name) if decision_files else []
     for r in dec:
         g = gold.get(r["job_id"], {}).get("gold", {})

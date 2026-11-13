@@ -1,0 +1,92 @@
+{
+ "generated_at": "2026-11-13T16:49:40+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "declared": {
+  "p95_latency_s_per_job_analysed": 25,
+  "p95_latency_s_per_proposal": 90,
+  "usd_per_job_analysed": 0.002,
+  "usd_per_proposal": 0.01
+ },
+ "measured": {
+  "per_job_analysed": {
+   "decisions_ambiguous": {
+    "p95_latency_s": 1.7112,
+    "usd_mean": 0.0001,
+    "tokens_mean": 583.3333
+   },
+   "decisions_never": {
+    "p95_latency_s": 10.734,
+    "usd_mean": 0.0,
+    "tokens_mean": 161.4217
+   },
+   "decisions_test_never": {
+    "p95_latency_s": 10.5246,
+    "usd_mean": 0.0,
+    "tokens_mean": 132.1528
+   }
+  },
+  "per_proposal": {
+   "gigsim_outcomes_baseline_trial": {
+    "p95_latency_s": 234.192,
+    "usd_mean": 0.0038,
+    "tokens_mean": 18234.6667
+   },
+   "gigsim_outcomes_best_open": {
+    "p95_latency_s": 89.831,
+    "usd_mean": 0.0026,
+    "tokens_mean": 12862.5714
+   },
+   "gigsim_outcomes_best_openb": {
+    "p95_latency_s": 82.424,
+    "usd_mean": 0.0026,
+    "tokens_mean": 11741.0
+   },
+   "gigsim_outcomes_test_best_open": {
+    "p95_latency_s": 200.1835,
+    "usd_mean": 0.0014,
+    "tokens_mean": 7424.0
+   },
+   "gigsim_outcomes_v0_openb": {
+    "p95_latency_s": 46.327,
+    "usd_mean": 0.0022,
+    "tokens_mean": 10515.8571
+   }
+  }
+ },
+ "verdict": {
+  "decisions_ambiguous": {
+   "latency_ok": true,
+   "cost_ok": true
+  },
+  "decisions_never": {
+   "latency_ok": true,
+   "cost_ok": true
+  },
+  "decisions_test_never": {
+   "latency_ok": true,
+   "cost_ok": true
+  },
+  "gigsim_outcomes_baseline_trial": {
+   "latency_ok": false,
+   "cost_ok": true
+  },
+  "gigsim_outcomes_best_open": {
+   "latency_ok": true,
+   "cost_ok": true
+  },
+  "gigsim_outcomes_best_openb": {
+   "latency_ok": true,
+   "cost_ok": true
+  },
+  "gigsim_outcomes_test_best_open": {
+   "latency_ok": false,
+   "cost_ok": true
+  },
+  "gigsim_outcomes_v0_openb": {
+   "latency_ok": true,
+   "cost_ok": true
+  }
+ },
+ "note": "USD is list-price equivalent (free tier was used, actual spend $0)."
+}

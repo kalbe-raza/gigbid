@@ -124,9 +124,9 @@ def main() -> None:
         sub = {p: sample(rs, 40, seed=11) for p, rs in rows.items()}
         for label, change in {"embed=bge-small-en-v1.5 (shipped)": {},
                               "embed=nomic-embed-text-v1.5-Q": {"embed_model": "nomic-ai/nomic-embed-text-v1.5-Q"},
-                              "+rerank MiniLM-L6": {"rerank": "cross"},
-                              "+rerank bge-reranker-v2-m3-int8": {"rerank": "cross",
-                                                                  "rerank_model": "BAAI/bge-reranker-v2-m3-int8"}}.items():
+                              "+rerank MiniLM-L6": {"rerank": "cross"}}.items():
+            # BAAI/bge-reranker-v2-m3 (568M) was dropped: on CPU it needs over 2 GB of RAM per process, which the
+            # 8 GB laptop cannot spare next to the stack; the MiniLM cross-encoder covers the reranking question
             cfg = dataclasses.replace(best, **change)
             if "embed_model" in change:
                 build_indexes(models=[change["embed_model"]], schemes=("structured",))

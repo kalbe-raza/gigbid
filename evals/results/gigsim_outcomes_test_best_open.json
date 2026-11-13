@@ -1,0 +1,50 @@
+{
+ "generated_at": "2026-11-13T16:35:30+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "rag_variant": "best",
+ "model_profile": "open",
+ "writer_model": "groq:openai/gpt-oss-120b",
+ "per_persona": 3,
+ "split": "test",
+ "summary": {
+  "jobs": 9,
+  "proposals": 8,
+  "errors": 0,
+  "no_bid": 1,
+  "reply_rate": 0.75,
+  "reply_ci95": [
+   0.4093,
+   0.9285
+  ],
+  "interview_rate": 0.0,
+  "client_mode": [
+   "llm"
+  ],
+  "unsupported_claims_per_proposal_before": 0.25,
+  "unsupported_claims_per_proposal_after": 0.0,
+  "claims_per_proposal": 1.875,
+  "unsupported_rate_before": 0.1333,
+  "judge_overall_mean": 8.3125,
+  "critic_rounds_mean": 1.25,
+  "tokens_per_proposal": 7424.0,
+  "usd_per_proposal": 0.0014,
+  "cached_call_share": 0.0,
+  "latency_p50_s": 65.405,
+  "latency_p95_s": 200.1835,
+  "by_persona": {
+   "ai_ml": {
+    "proposals": 3,
+    "reply_rate": 0.3333
+   },
+   "fullstack": {
+    "proposals": 3,
+    "reply_rate": 1.0
+   },
+   "data_analyst": {
+    "proposals": 2,
+    "reply_rate": 1.0
+   }
+  }
+ }
+}

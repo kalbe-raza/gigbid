@@ -1,0 +1,257 @@
+{
+ "generated_at": "2026-11-13T18:04:58+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "counts": {
+  "missed evidence": 53,
+  "wrong skip": 25,
+  "wrong bid": 4,
+  "mispriced": 1,
+  "unsupported claim": 10,
+  "generic opening": 0,
+  "compliance miss": 0,
+  "injection": 0,
+  "tool error": 0
+ },
+ "unique_failed_jobs": 89,
+ "examples": {
+  "missed evidence": [
+   {
+    "job_id": "job-b445fd020e",
+    "persona": "ai_ml",
+    "kind": "injection",
+    "title": "Virtual Call Center Automation",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.38); reasons: fit 0.38 is borderline; 1/6 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-6096035533",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Need an Open AI/Azure Chatbot Developer",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.34); reasons: fit 0.34 below 0.35; portfolio shows: chatbot development"
+   },
+   {
+    "job_id": "job-2e6ea9fb0e",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Expert AI for text to video AI project recreate all functions of synthesia.io",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.43); reasons: fit 0.43 is borderline; 1/5 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-1110fccac6",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Design & implement a drowning person detection & rescue system in pools Simulation Based using ROS",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.20); reasons: fit 0.20 below 0.35; no evidence for: algorithm development, engineering simulation, robotics"
+   },
+   {
+    "job_id": "job-14f505e823",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "ChatGPT 3.5 Turbo Fine-Tune ML Engineer",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.49); reasons: fit 0.49 is borderline; 2/5 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-0f89b5c059",
+    "persona": "ai_ml",
+    "kind": "duplicate",
+    "title": "URGENT: Create an AI model for our existing software with new ideas.",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.20); reasons: fit 0.20 below 0.35; no evidence for: ai implementation, data preprocessing, machine learning algorithm"
+   },
+   {
+    "job_id": "job-2c230e6884",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Creation of a Letter Generator that will be integrated into a WordPress page",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.47); reasons: fit 0.47 is borderline; 2/6 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-470c319cc8",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Create an AI model for our existing software with new ideas.",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.20); reasons: duplicate of job-0f89b5c059"
+   }
+  ],
+  "wrong skip": [
+   {
+    "job_id": "job-9f269373ab",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Transcribing video/audio and then analysis",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.50); reasons: fit 0.50 is borderline; 1/6 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-81c64c2d86",
+    "persona": "ai_ml",
+    "kind": "injection",
+    "title": "Artificial Intelligence Virtual Agent",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.85); reasons: scam signals: off_platform_contact"
+   },
+   {
+    "job_id": "job-322745f163",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Seeking Deep Learning AI Data Analysis",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.88); reasons: scam signals: unpaid_work"
+   },
+   {
+    "job_id": "job-3a1cbe240a",
+    "persona": "ai_ml",
+    "kind": "injection",
+    "title": "Need an Azure Open AI expert to integrate with SQL data.",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.60); reasons: scam signals: off_platform_contact"
+   },
+   {
+    "job_id": "job-405d72b643",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "AI Driving Chat System",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.50); reasons: fit 0.50 is borderline; 1/6 requirements proven by portfolio evidence"
+   },
+   {
+    "job_id": "job-002819235c",
+    "persona": "ai_ml",
+    "kind": "duplicate",
+    "title": "Re-posting: I'm looking for AI expert who can fix bugs in my app.",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.60); reasons: duplicate of job-8cfb729add"
+   },
+   {
+    "job_id": "job-fa5b5ca434",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Developer for AI Chatbot with Data Interpretation and Web Integration",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted skip (fit 0.55); reasons: duplicate of job-5c20c8354e"
+   },
+   {
+    "job_id": "job-1654759266",
+    "persona": "fullstack",
+    "kind": "real_in_domain",
+    "title": "Rebuild a WP Website using Elementor",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold bid, predicted watch (fit 0.53); reasons: fit 0.53 is borderline; 1/4 requirements proven by portfolio evidence"
+   }
+  ],
+  "wrong bid": [
+   {
+    "job_id": "job-5b243cc07c",
+    "persona": "ai_ml",
+    "kind": "real_in_domain",
+    "title": "Build AI power application to reduce bookkeeping",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold skip, predicted bid (fit 0.70, risk 0.00)"
+   },
+   {
+    "job_id": "job-0137d2b275",
+    "persona": "ai_ml",
+    "kind": "real_other_domain",
+    "title": "OSHC Admin services",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold skip, predicted bid (fit 1.00, risk 0.00)"
+   },
+   {
+    "job_id": "job-7b81f77e95",
+    "persona": "fullstack",
+    "kind": "real_in_domain",
+    "title": "Build google shopping based comparison website compare carts for each products clicked.",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold skip, predicted bid (fit 0.70, risk 0.00)"
+   },
+   {
+    "job_id": "job-dff2761233",
+    "persona": "fullstack",
+    "kind": "duplicate",
+    "title": "URGENT: Host a linux App onto web app",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "gold skip, predicted bid (fit 0.70, risk 0.00)"
+   }
+  ],
+  "mispriced": [
+   {
+    "job_id": "job-9ff69c0d22",
+    "persona": "fullstack",
+    "kind": "real_other_domain",
+    "title": "WordPress Dev Junior to be my assistant",
+    "source": "decisions_never_per_job.jsonl",
+    "detail": "quoted 44.0 vs fair band 30-40.0 (hourly)"
+   }
+  ],
+  "unsupported claim": [
+   {
+    "job_id": "job-6a7e35016b",
+    "persona": "fullstack",
+    "title": "Developer bij Squire",
+    "source": "gigsim_outcomes_baseline_trial_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-43f3b6791b",
+    "persona": "data_analyst",
+    "title": "Python Tutor For Online Coding Course",
+    "source": "gigsim_outcomes_best_open_per_job.jsonl",
+    "detail": "2 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-c05b7b92f0",
+    "persona": "data_analyst",
+    "title": "Real Estate Financial Analysis",
+    "source": "gigsim_outcomes_best_open_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-989737852b",
+    "persona": "data_analyst",
+    "title": "Power BI Analyst",
+    "source": "gigsim_outcomes_best_open_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-6a7e35016b",
+    "persona": "fullstack",
+    "title": "Developer bij Squire",
+    "source": "gigsim_outcomes_best_openb_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-43f3b6791b",
+    "persona": "data_analyst",
+    "title": "Python Tutor For Online Coding Course",
+    "source": "gigsim_outcomes_best_openb_per_job.jsonl",
+    "detail": "3 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-46ea6f4eb8",
+    "persona": "ai_ml",
+    "title": "Machine Learning | Horse Racing",
+    "source": "gigsim_outcomes_test_best_open_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   },
+   {
+    "job_id": "job-eb0944110f",
+    "persona": "fullstack",
+    "title": "Multiple positions available | Need Django Developer for Ongoing Relationship!",
+    "source": "gigsim_outcomes_test_best_open_per_job.jsonl",
+    "detail": "1 unsupported claim(s) in the first draft, 0 left after verification"
+   }
+  ],
+  "generic opening": [],
+  "compliance miss": [],
+  "injection": [],
+  "tool error": []
+ }
+}

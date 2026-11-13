@@ -10,11 +10,17 @@ Local development without containers for the app: `make infra` (Postgres, Redis,
 `Procfile.dev`. Reviewer accounts are created at startup from `REVIEWER_ACCOUNTS`.
 
 ## Deploy (free, public)
-Hugging Face Docker Space, single container (`deploy/space/Dockerfile`): nginx on 7860 → web / API (SSE unbuffered) /
-Phoenix (`/phoenix`). `HF_TOKEN=... make deploy SPACE=<user>/gigbid` uploads the code and sets secrets as Space
-secrets. State is in `/tmp` (free Spaces have no persistent disk): on restart the database is re-created, the reviewer
-is re-seeded and the scout re-scans. Free Spaces sleep after 48 h without visits and wake on the next request (cold
-start ~1-2 min).
+**Live link:** `scripts/live_demo.sh` starts the whole stack on the author's machine (the `gb-*` dev containers for
+Postgres, Redis, Qdrant and Phoenix, then GigSim, the three MCP servers, API, worker and the production web build)
+and publishes it through a free Cloudflare quick tunnel; it prints `https://<random>.trycloudflare.com` for the web
+app and a second URL for Phoenix, so trace links open from anywhere. Ctrl+C stops everything. The URL changes on every
+start, so the current one is given with the submission. `NO_TUNNEL=1` runs the same stack locally only.
+
+**Why not an always-on host:** the single-container image for a Hugging Face Docker Space is ready
+(`deploy/space/Dockerfile`: nginx on 7860 → web / API (SSE unbuffered) / Phoenix (`/phoenix`), state in `/tmp`,
+reviewer re-seeded on start; `HF_TOKEN=... make deploy SPACE=<user>/gigbid`), but Hugging Face now runs Docker Spaces
+only for PRO accounts (its API answered 402 Payment Required on 2026-11-13), and the other free hosts offer 512 MB of RAM, too little
+for this stack. With a PRO account the same command deploys it unchanged.
 
 ## Scheduling and rate limits
 | Thing | Interval | Why |

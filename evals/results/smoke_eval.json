@@ -1,0 +1,17 @@
+{
+ "generated_at": "2026-11-13T18:08:17+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "recall@5": 0.3329,
+ "bid_f1": 0.5,
+ "scam_recall": 1.0,
+ "unsupported_per_proposal": 1.625,
+ "n_jobs": 30,
+ "thresholds": {
+  "recall5_min": 0.28,
+  "bid_f1_min": 0.4,
+  "scam_recall_min": 0.8,
+  "unsupported_per_proposal_max": 2.0
+ },
+ "failures": []
+}

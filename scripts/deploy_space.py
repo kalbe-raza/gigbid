@@ -66,7 +66,9 @@ def main() -> None:
                                                                    ".git", ".env", "processed", "uploads", ".cache",
                                                                    "state", "test-results", "playwright-report", "*.db"))
         shutil.copy(ROOT / "deploy/space/Dockerfile", stage / "Dockerfile")
-        (stage / "README.md").write_text(FRONT + (ROOT / "README.md").read_text())
+        readme = ROOT / "README.md"  # rendered by scripts/build_report.py; a short stub until then
+        body = readme.read_text() if readme.exists() else "# GigBid\n\nMulti-agent freelancer copilot. Code, results and report: see the GitHub repository.\n"
+        (stage / "README.md").write_text(FRONT + body)
         api.upload_folder(repo_id=a.space, repo_type="space", folder_path=str(stage), ignore_patterns=IGNORE,
                           commit_message="Deploy GigBid")
     print(f"https://huggingface.co/spaces/{a.space}  ->  https://{a.space.replace('/', '-').lower()}.hf.space")

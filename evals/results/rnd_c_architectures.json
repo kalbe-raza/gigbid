@@ -1,0 +1,94 @@
+{
+ "generated_at": "2026-11-13T17:32:26+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "question": "Single ReAct agent vs prebuilt supervisor vs hand-built graph",
+ "model_profile": "open",
+ "baseline_model": "groq:openai/gpt-oss-120b",
+ "writer_model": "groq:openai/gpt-oss-120b",
+ "jobs_per_persona": 3,
+ "summary": {
+  "graph": {
+   "n": 9,
+   "errors": 0,
+   "bid_skip_accuracy": 0.4444,
+   "proposals": 1,
+   "unsupported_claims_per_proposal": 1.0,
+   "violations_left_in_final_text": 0,
+   "violations_caught_by_guard": 0,
+   "gigsim_reply_rate": 1.0,
+   "reply_ci95": [
+    0.2065,
+    1.0
+   ],
+   "tokens_mean": 1939.8889,
+   "latency_p50_s": 0.32,
+   "latency_p95_s": 2.106,
+   "by_kind": {
+    "real_in_domain": {
+     "n": 6,
+     "accuracy": 0.1667
+    },
+    "real_other_domain": {
+     "n": 3,
+     "accuracy": 1.0
+    }
+   }
+  },
+  "react": {
+   "n": 9,
+   "errors": 0,
+   "bid_skip_accuracy": 0.6667,
+   "proposals": 3,
+   "unsupported_claims_per_proposal": 2.3333,
+   "violations_left_in_final_text": 0,
+   "violations_caught_by_guard": 0,
+   "gigsim_reply_rate": 1.0,
+   "reply_ci95": [
+    0.4385,
+    1.0
+   ],
+   "tokens_mean": 4931.6667,
+   "latency_p50_s": 20.32,
+   "latency_p95_s": 69.69,
+   "by_kind": {
+    "real_in_domain": {
+     "n": 6,
+     "accuracy": 0.5
+    },
+    "real_other_domain": {
+     "n": 3,
+     "accuracy": 1.0
+    }
+   }
+  },
+  "supervisor": {
+   "n": 9,
+   "errors": 6,
+   "bid_skip_accuracy": 0.3333,
+   "proposals": 3,
+   "unsupported_claims_per_proposal": 5.0,
+   "violations_left_in_final_text": 2,
+   "violations_caught_by_guard": 0,
+   "gigsim_reply_rate": 0.3333,
+   "reply_ci95": [
+    0.0615,
+    0.7923
+   ],
+   "tokens_mean": 12369.0,
+   "latency_p50_s": 152.39,
+   "latency_p95_s": 266.63,
+   "by_kind": {
+    "real_in_domain": {
+     "n": 6,
+     "accuracy": 0.5
+    },
+    "real_other_domain": {
+     "n": 3,
+     "accuracy": 0.0
+    }
+   }
+  }
+ },
+ "supervisor_rerun": "the supervisor arm was re-run on its own at 2026-11-13T18:01:15+0500 because its first run hit the provider's daily token quota; graph and ReAct rows are from the first run"
+}

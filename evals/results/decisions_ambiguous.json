@@ -1,0 +1,609 @@
+{
+ "generated_at": "2026-11-13T16:49:40+0500",
+ "commit": "ebc001c",
+ "hardware": "x86_64 4 CPU, Linux",
+ "risk_llm": "ambiguous",
+ "split": "dev",
+ "overall": {
+  "n": 60,
+  "bid_skip": {
+   "precision": 1.0,
+   "recall": 0.3571,
+   "f1": 0.5263,
+   "tp": 5,
+   "fp": 0,
+   "fn": 9
+  },
+  "accuracy": 0.85,
+  "scam": {
+   "precision": 0.3889,
+   "recall": 1.0,
+   "f1": 0.56,
+   "tp": 7,
+   "fp": 11,
+   "fn": 0
+  },
+  "price_in_fair_band": {
+   "rate": 1.0,
+   "n": 5,
+   "ci95": [
+    0.5655,
+    1.0
+   ]
+  },
+  "duplicates_caught": {
+   "rate": 0.25,
+   "n": 4
+  },
+  "injection_detected": {
+   "rate": 1.0,
+   "n": 7,
+   "false_positive_rate": 0.0189
+  },
+  "per_job": {
+   "tokens_mean": 583.3333,
+   "usd_mean": 0.0001,
+   "latency_p50_s": 0.3785,
+   "latency_p95_s": 1.7112
+  }
+ },
+ "by_persona": {
+  "ai_ml": {
+   "n": 20,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 0.1667,
+    "f1": 0.2857,
+    "tp": 1,
+    "fp": 0,
+    "fn": 5
+   },
+   "accuracy": 0.75,
+   "scam": {
+    "precision": 0.4286,
+    "recall": 1.0,
+    "f1": 0.6,
+    "tp": 3,
+    "fp": 4,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 1,
+    "ci95": [
+     0.2065,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.0,
+    "n": 1
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 4,
+    "false_positive_rate": 0.0625
+   },
+   "per_job": {
+    "tokens_mean": 707.55,
+    "usd_mean": 0.0001,
+    "latency_p50_s": 0.4065,
+    "latency_p95_s": 0.6254
+   }
+  },
+  "fullstack": {
+   "n": 20,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 2,
+    "fp": 0,
+    "fn": 0
+   },
+   "accuracy": 1.0,
+   "scam": {
+    "precision": 0.5,
+    "recall": 1.0,
+    "f1": 0.6667,
+    "tp": 2,
+    "fp": 2,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 2,
+    "ci95": [
+     0.3424,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.0,
+    "n": 1
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 447.55,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.409,
+    "latency_p95_s": 3.5625
+   }
+  },
+  "data_analyst": {
+   "n": 20,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 0.3333,
+    "f1": 0.5,
+    "tp": 2,
+    "fp": 0,
+    "fn": 4
+   },
+   "accuracy": 0.8,
+   "scam": {
+    "precision": 0.2857,
+    "recall": 1.0,
+    "f1": 0.4444,
+    "tp": 2,
+    "fp": 5,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 2,
+    "ci95": [
+     0.3424,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.5,
+    "n": 2
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 3,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 594.9,
+    "usd_mean": 0.0001,
+    "latency_p50_s": 0.244,
+    "latency_p95_s": 11.8638
+   }
+  }
+ },
+ "by_kind": {
+  "duplicate": {
+   "n": 4,
+   "bid_skip": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 1
+   },
+   "accuracy": 0.75,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": null,
+    "n": 0,
+    "ci95": null
+   },
+   "duplicates_caught": {
+    "rate": 0.25,
+    "n": 4
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 445.0,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.4065,
+    "latency_p95_s": 1.1056
+   }
+  },
+  "injection": {
+   "n": 7,
+   "bid_skip": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 3
+   },
+   "accuracy": 0.5714,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 4,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": null,
+    "n": 0,
+    "ci95": null
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 7,
+    "false_positive_rate": null
+   },
+   "per_job": {
+    "tokens_mean": 1165.2857,
+    "usd_mean": 0.0001,
+    "latency_p50_s": 0.479,
+    "latency_p95_s": 0.7856
+   }
+  },
+  "real_in_domain": {
+   "n": 29,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6667,
+    "tp": 5,
+    "fp": 0,
+    "fn": 5
+   },
+   "accuracy": 0.8276,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 5,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 5,
+    "ci95": [
+     0.5655,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 627.0,
+    "usd_mean": 0.0001,
+    "latency_p50_s": 0.266,
+    "latency_p95_s": 6.708
+   }
+  },
+  "real_other_domain": {
+   "n": 13,
+   "bid_skip": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0
+   },
+   "accuracy": 1.0,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": null,
+    "n": 0,
+    "ci95": null
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0769
+   },
+   "per_job": {
+    "tokens_mean": 456.3846,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.401,
+    "latency_p95_s": 21.2852
+   }
+  },
+  "synthetic_scam": {
+   "n": 7,
+   "bid_skip": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0
+   },
+   "accuracy": 1.0,
+   "scam": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": null,
+    "n": 0,
+    "ci95": null
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 135.2857,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.288,
+    "latency_p95_s": 0.4288
+   }
+  }
+ },
+ "errors": [
+  {
+   "persona": "ai_ml",
+   "job_id": "job-c856f23d2b",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.925,
+   "risk": 0.955,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "risk 0.95 above limit 0.6"
+   ],
+   "tokens": 1316,
+   "cost_usd": 0.000133,
+   "latency_s": 0.257
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-469162a75a",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.95,
+   "risk": 0.855,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: low_budget"
+   ],
+   "tokens": 967,
+   "cost_usd": 0.000114,
+   "latency_s": 0.479
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-e04e5a5ac5",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.35,
+   "risk": 0.955,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "risk 0.95 above limit 0.6"
+   ],
+   "tokens": 1477,
+   "cost_usd": 0.000139,
+   "latency_s": 0.3
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-b445fd020e",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.375,
+   "risk": 0.45,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.38 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 1354,
+   "cost_usd": 0.00011,
+   "latency_s": 0.413
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-2e6ea9fb0e",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.427,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.43 is borderline",
+    "1/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 445,
+   "cost_usd": 1.8e-05,
+   "latency_s": 0.449
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-d63027b0ff",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.525,
+   "risk": 0.45,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.53 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 1528,
+   "cost_usd": 0.000134,
+   "latency_s": 0.227
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-20faa86b29",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.57,
+   "risk": 0.855,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: personal_data_request"
+   ],
+   "tokens": 1183,
+   "cost_usd": 0.00013,
+   "latency_s": 10.342
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-c1c2fb4953",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.3,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.30 below 0.35",
+    "portfolio shows: statistics"
+   ],
+   "tokens": 1223,
+   "cost_usd": 0.000105,
+   "latency_s": 40.778
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-8a40d17ee8",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-9167656794",
+   "duplicate_pred": null,
+   "fit": 0.333,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.33 below 0.35",
+    "portfolio shows: statistics"
+   ],
+   "tokens": 389,
+   "cost_usd": 1.6e-05,
+   "latency_s": 1.228
+  }
+ ]
+}

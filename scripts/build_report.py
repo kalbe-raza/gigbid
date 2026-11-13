@@ -14,6 +14,7 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import markdown
@@ -101,6 +102,8 @@ def main() -> None:
         out.write_text("<!-- generated from " + tmpl.name + " by scripts/build_report.py; edit the template -->\n"
                        + fill_numbers(tmpl.read_text()))
         print(f"wrote {out.relative_to(ROOT)}")
+    if (ROOT / "README.tmpl.md").exists():  # the RESULTS tables inside README.md come from results_table.py
+        subprocess.run([sys.executable, "-m", "evals.runners.results_table"], cwd=ROOT, check=True, capture_output=True)
     text = fill_numbers(SRC.read_text())
     (SRC.parent / "REPORT.rendered.md").write_text(text)  # the same text with numbers filled in, for reading on GitHub
     text = re.sub(r"```mermaid.*?```", "", text, flags=re.S)
