@@ -1,0 +1,30 @@
+{
+ "generated_at": "2026-11-13T13:19:33+0500",
+ "commit": "1515e82",
+ "hardware": "x86_64 4 CPU, Linux",
+ "design": "paired, both strategies per job, LLM-driven GigSim clients",
+ "summary": {
+  "pairs": 7,
+  "reply_rate_A": 0.7143,
+  "reply_rate_B": 0.7143,
+  "ci95_A": [
+   0.3589,
+   0.9178
+  ],
+  "ci95_B": [
+   0.3589,
+   0.9178
+  ],
+  "discordant_A_only": 1,
+  "discordant_B_only": 1,
+  "mcnemar_exact_p": 1.0,
+  "two_proportion_z": 0.0,
+  "two_proportion_p": 1.0,
+  "words_A": 140.0,
+  "words_B": 118.0,
+  "tokens_A": 11481.1429,
+  "tokens_B": 12065.1429,
+  "significant_at_0.05": false,
+  "writer_model": "groq:qwen/qwen3.8-27b"
+ }
+}

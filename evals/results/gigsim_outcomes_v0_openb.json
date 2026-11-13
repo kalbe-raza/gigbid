@@ -1,39 +1,40 @@
 {
- "generated_at": "2026-11-13T11:21:27+0500",
- "commit": "f26e39c",
+ "generated_at": "2026-11-13T13:17:51+0500",
+ "commit": "1515e82",
  "hardware": "x86_64 4 CPU, Linux",
  "rag_variant": "v0_naive",
  "model_profile": "open_b",
  "writer_model": "groq:qwen/qwen3.8-27b",
  "per_persona": 4,
+ "split": "dev",
  "summary": {
   "jobs": 12,
   "proposals": 7,
   "errors": 0,
   "no_bid": 5,
-  "reply_rate": 0.8571,
+  "reply_rate": 0.7143,
   "reply_ci95": [
-   0.4869,
-   0.9743
+   0.3589,
+   0.9178
   ],
   "interview_rate": 0.0,
   "client_mode": [
    "llm"
   ],
-  "unsupported_claims_per_proposal_before": 0.4286,
+  "unsupported_claims_per_proposal_before": 0.2857,
   "unsupported_claims_per_proposal_after": 0.0,
   "claims_per_proposal": 3.4286,
-  "unsupported_rate_before": 0.125,
-  "judge_overall_mean": 8.0,
+  "unsupported_rate_before": 0.0833,
+  "judge_overall_mean": 8.0714,
   "critic_rounds_mean": 1.7143,
-  "tokens_per_proposal": 10587.7143,
+  "tokens_per_proposal": 10515.8571,
   "usd_per_proposal": 0.0022,
-  "latency_p50_s": 111.84,
-  "latency_p95_s": 121.652,
+  "latency_p50_s": 2.44,
+  "latency_p95_s": 46.327,
   "by_persona": {
    "ai_ml": {
     "proposals": 2,
-    "reply_rate": 1.0
+    "reply_rate": 0.5
    },
    "fullstack": {
     "proposals": 1,

@@ -1,0 +1,1882 @@
+{
+ "generated_at": "2026-11-13T12:49:26+0500",
+ "commit": "1515e82",
+ "hardware": "x86_64 4 CPU, Linux",
+ "risk_llm": "never",
+ "split": "dev",
+ "overall": {
+  "n": 600,
+  "bid_skip": {
+   "precision": 0.9664,
+   "recall": 0.5959,
+   "f1": 0.7372,
+   "tp": 115,
+   "fp": 4,
+   "fn": 78
+  },
+  "accuracy": 0.8633,
+  "scam": {
+   "precision": 0.8152,
+   "recall": 1.0,
+   "f1": 0.8982,
+   "tp": 75,
+   "fp": 17,
+   "fn": 0
+  },
+  "price_in_fair_band": {
+   "rate": 0.9913,
+   "n": 115,
+   "ci95": [
+    0.9524,
+    0.9985
+   ]
+  },
+  "duplicates_caught": {
+   "rate": 0.4,
+   "n": 30
+  },
+  "injection_detected": {
+   "rate": 1.0,
+   "n": 45,
+   "false_positive_rate": 0.0036
+  },
+  "per_job": {
+   "tokens_mean": 161.4217,
+   "usd_mean": 0.0,
+   "latency_p50_s": 0.4085,
+   "latency_p95_s": 10.734
+  }
+ },
+ "by_persona": {
+  "ai_ml": {
+   "n": 200,
+   "bid_skip": {
+    "precision": 0.9556,
+    "recall": 0.6232,
+    "f1": 0.7544,
+    "tp": 43,
+    "fp": 2,
+    "fn": 26
+   },
+   "accuracy": 0.86,
+   "scam": {
+    "precision": 0.7576,
+    "recall": 1.0,
+    "f1": 0.8621,
+    "tp": 25,
+    "fp": 8,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 43,
+    "ci95": [
+     0.918,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.4,
+    "n": 10
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 15,
+    "false_positive_rate": 0.0108
+   },
+   "per_job": {
+    "tokens_mean": 168.53,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.332,
+    "latency_p95_s": 10.5248
+   }
+  },
+  "fullstack": {
+   "n": 200,
+   "bid_skip": {
+    "precision": 0.9412,
+    "recall": 0.5714,
+    "f1": 0.7111,
+    "tp": 32,
+    "fp": 2,
+    "fn": 24
+   },
+   "accuracy": 0.87,
+   "scam": {
+    "precision": 0.8621,
+    "recall": 1.0,
+    "f1": 0.9259,
+    "tp": 25,
+    "fp": 4,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 0.9688,
+    "n": 32,
+    "ci95": [
+     0.8426,
+     0.9945
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.3,
+    "n": 10
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 15,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 161.58,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.4095,
+    "latency_p95_s": 10.6373
+   }
+  },
+  "data_analyst": {
+   "n": 200,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 0.5882,
+    "f1": 0.7407,
+    "tp": 40,
+    "fp": 0,
+    "fn": 28
+   },
+   "accuracy": 0.86,
+   "scam": {
+    "precision": 0.8333,
+    "recall": 1.0,
+    "f1": 0.9091,
+    "tp": 25,
+    "fp": 5,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 40,
+    "ci95": [
+     0.9124,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.5,
+    "n": 10
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 15,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 154.155,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.513,
+    "latency_p95_s": 10.8773
+   }
+  }
+ },
+ "by_kind": {
+  "duplicate": {
+   "n": 30,
+   "bid_skip": {
+    "precision": 0.8333,
+    "recall": 0.4167,
+    "f1": 0.5556,
+    "tp": 5,
+    "fp": 1,
+    "fn": 7
+   },
+   "accuracy": 0.7333,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 5,
+    "ci95": [
+     0.5655,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": 0.4,
+    "n": 30
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 209.6333,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.4645,
+    "latency_p95_s": 10.9904
+   }
+  },
+  "injection": {
+   "n": 45,
+   "bid_skip": {
+    "precision": 1.0,
+    "recall": 0.4,
+    "f1": 0.5714,
+    "tp": 8,
+    "fp": 0,
+    "fn": 12
+   },
+   "accuracy": 0.7333,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 10,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 8,
+    "ci95": [
+     0.6756,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": 1.0,
+    "n": 45,
+    "false_positive_rate": null
+   },
+   "per_job": {
+    "tokens_mean": 212.7556,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.41,
+    "latency_p95_s": 10.8152
+   }
+  },
+  "real_in_domain": {
+   "n": 330,
+   "bid_skip": {
+    "precision": 0.9802,
+    "recall": 0.6471,
+    "f1": 0.7795,
+    "tp": 99,
+    "fp": 2,
+    "fn": 54
+   },
+   "accuracy": 0.8303,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 6,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 1.0,
+    "n": 99,
+    "ci95": [
+     0.9626,
+     1.0
+    ]
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 176.5303,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.4095,
+    "latency_p95_s": 10.7875
+   }
+  },
+  "real_other_domain": {
+   "n": 120,
+   "bid_skip": {
+    "precision": 0.75,
+    "recall": 0.375,
+    "f1": 0.5,
+    "tp": 3,
+    "fp": 1,
+    "fn": 5
+   },
+   "accuracy": 0.95,
+   "scam": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": 0.6667,
+    "n": 3,
+    "ci95": [
+     0.2077,
+     0.9385
+    ]
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0167
+   },
+   "per_job": {
+    "tokens_mean": 161.1667,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.41,
+    "latency_p95_s": 10.7093
+   }
+  },
+  "synthetic_scam": {
+   "n": 75,
+   "bid_skip": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0
+   },
+   "accuracy": 1.0,
+   "scam": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 75,
+    "fp": 0,
+    "fn": 0
+   },
+   "price_in_fair_band": {
+    "rate": null,
+    "n": 0,
+    "ci95": null
+   },
+   "duplicates_caught": {
+    "rate": null,
+    "n": 0
+   },
+   "injection_detected": {
+    "rate": null,
+    "n": 0,
+    "false_positive_rate": 0.0
+   },
+   "per_job": {
+    "tokens_mean": 45.2667,
+    "usd_mean": 0.0,
+    "latency_p50_s": 0.289,
+    "latency_p95_s": 10.6102
+   }
+  }
+ },
+ "errors": [
+  {
+   "persona": "ai_ml",
+   "job_id": "job-b445fd020e",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.375,
+   "risk": 0.45,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.38 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 422,
+   "cost_usd": 1.7e-05,
+   "latency_s": 0.41
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-9f269373ab",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.5,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.50 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 134,
+   "cost_usd": 5e-06,
+   "latency_s": 0.301
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-81c64c2d86",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.85,
+   "risk": 0.72,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 133,
+   "cost_usd": 5e-06,
+   "latency_s": 0.238
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-6096035533",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.337,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.34 below 0.35",
+    "portfolio shows: chatbot development"
+   ],
+   "tokens": 68,
+   "cost_usd": 3e-06,
+   "latency_s": 0.381
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-5b243cc07c",
+   "kind": "real_in_domain",
+   "gold": "skip",
+   "pred": "bid",
+   "pred_bid": true,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.7,
+   "risk": 0.0,
+   "price": 300.0,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.70 >= 0.55",
+    "0/1 requirements proven by portfolio evidence"
+   ],
+   "tokens": 312,
+   "cost_usd": 1.2e-05,
+   "latency_s": 0.223
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-2e6ea9fb0e",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.427,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.43 is borderline",
+    "1/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 445,
+   "cost_usd": 1.8e-05,
+   "latency_s": 0.331
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-1110fccac6",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: algorithm development, engineering simulation, robotics"
+   ],
+   "tokens": 231,
+   "cost_usd": 9e-06,
+   "latency_s": 0.24
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-14f505e823",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.487,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.49 is borderline",
+    "2/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 396,
+   "cost_usd": 1.6e-05,
+   "latency_s": 0.354
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-0f89b5c059",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-470c319cc8",
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: ai implementation, data preprocessing, machine learning algorithm"
+   ],
+   "tokens": 52,
+   "cost_usd": 2e-06,
+   "latency_s": 0.253
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-2c230e6884",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.467,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.47 is borderline",
+    "2/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 399,
+   "cost_usd": 1.6e-05,
+   "latency_s": 0.37
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-470c319cc8",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": "job-0f89b5c059",
+   "fit": 0.2,
+   "risk": 0.02,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-0f89b5c059"
+   ],
+   "tokens": 43,
+   "cost_usd": 2e-06,
+   "latency_s": 0.412
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-90881e81b7",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.35,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.35 is borderline",
+    "1/2 requirements proven by portfolio evidence"
+   ],
+   "tokens": 98,
+   "cost_usd": 4e-06,
+   "latency_s": 0.212
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-e4d14f1c81",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.375,
+   "risk": 0.02,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.38 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 388,
+   "cost_usd": 1.6e-05,
+   "latency_s": 10.384
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-322745f163",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.88,
+   "risk": 0.66,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: unpaid_work"
+   ],
+   "tokens": 404,
+   "cost_usd": 1.6e-05,
+   "latency_s": 0.615
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-f00fdaa85d",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.417,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.42 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 191,
+   "cost_usd": 8e-06,
+   "latency_s": 0.334
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-8d1629a3d6",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.467,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.47 is borderline",
+    "1/3 requirements proven by portfolio evidence"
+   ],
+   "tokens": 134,
+   "cost_usd": 5e-06,
+   "latency_s": 0.207
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-1fd13c5078",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.46,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.46 is borderline",
+    "1/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 86,
+   "cost_usd": 3e-06,
+   "latency_s": 0.301
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-d7c0569741",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.3,
+   "risk": 0.02,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.30 below 0.35",
+    "no evidence for: algorithm development, classification, feature engineering"
+   ],
+   "tokens": 368,
+   "cost_usd": 1.5e-05,
+   "latency_s": 0.259
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-6e0f211a70",
+   "kind": "real_other_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.375,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.38 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 115,
+   "cost_usd": 5e-06,
+   "latency_s": 0.409
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-e04e5a5ac5",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.35,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.35 is borderline",
+    "1/2 requirements proven by portfolio evidence"
+   ],
+   "tokens": 396,
+   "cost_usd": 1.6e-05,
+   "latency_s": 0.763
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-3a1cbe240a",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.6,
+   "risk": 0.69,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 70,
+   "cost_usd": 3e-06,
+   "latency_s": 0.411
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-0137d2b275",
+   "kind": "real_other_domain",
+   "gold": "skip",
+   "pred": "bid",
+   "pred_bid": true,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 1.0,
+   "risk": 0.0,
+   "price": 300.0,
+   "price_in_band": null,
+   "reasons": [
+    "fit 1.00 >= 0.55",
+    "1/1 requirements proven by portfolio evidence"
+   ],
+   "tokens": 45,
+   "cost_usd": 2e-06,
+   "latency_s": 0.297
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-405d72b643",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.5,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.50 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 100,
+   "cost_usd": 4e-06,
+   "latency_s": 0.708
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-0a2ecabcd9",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.35,
+   "risk": 0.02,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.35 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 91,
+   "cost_usd": 4e-06,
+   "latency_s": 0.463
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-e3a95f89cc",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.475,
+   "risk": 0.66,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 416,
+   "cost_usd": 1.7e-05,
+   "latency_s": 0.329
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-80b8305705",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: microsoft azure"
+   ],
+   "tokens": 83,
+   "cost_usd": 3e-06,
+   "latency_s": 0.547
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-002819235c",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-8cfb729add",
+   "duplicate_pred": "job-8cfb729add",
+   "fit": 0.6,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-8cfb729add"
+   ],
+   "tokens": 52,
+   "cost_usd": 2e-06,
+   "latency_s": 14.674
+  },
+  {
+   "persona": "ai_ml",
+   "job_id": "job-fa5b5ca434",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": "job-5c20c8354e",
+   "fit": 0.547,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-5c20c8354e"
+   ],
+   "tokens": 249,
+   "cost_usd": 1e-05,
+   "latency_s": 0.227
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-1654759266",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.525,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.53 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 124,
+   "cost_usd": 5e-06,
+   "latency_s": 1.574
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-2e65e8bf03",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.475,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.47 is borderline",
+    "3/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 401,
+   "cost_usd": 1.6e-05,
+   "latency_s": 8.175
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-a9502e64b8",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.3,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.30 below 0.35",
+    "no evidence for: bootstrap"
+   ],
+   "tokens": 35,
+   "cost_usd": 1e-06,
+   "latency_s": 0.435
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-e24f4abcef",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.683,
+   "risk": 0.855,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 69,
+   "cost_usd": 3e-06,
+   "latency_s": 10.633
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-7b81f77e95",
+   "kind": "real_in_domain",
+   "gold": "skip",
+   "pred": "bid",
+   "pred_bid": true,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.7,
+   "risk": 0.0,
+   "price": 502.0,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.70 >= 0.55",
+    "0/1 requirements proven by portfolio evidence"
+   ],
+   "tokens": 119,
+   "cost_usd": 5e-06,
+   "latency_s": 0.236
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-9ca473ebf1",
+   "kind": "real_other_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: business card"
+   ],
+   "tokens": 45,
+   "cost_usd": 2e-06,
+   "latency_s": 0.32
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-c09dbf7423",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.418,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.42 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 425,
+   "cost_usd": 1.7e-05,
+   "latency_s": 10.391
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-42f2e7b9b8",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.442,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.44 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 192,
+   "cost_usd": 8e-06,
+   "latency_s": 0.585
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-eebc162cbd",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: erp software, odoo, odoo development"
+   ],
+   "tokens": 115,
+   "cost_usd": 5e-06,
+   "latency_s": 10.689
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-74f990f704",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.417,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.42 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 144,
+   "cost_usd": 6e-06,
+   "latency_s": 0.454
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-cb95259e47",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: erpnext, hr & business services, payroll accounting"
+   ],
+   "tokens": 378,
+   "cost_usd": 1.5e-05,
+   "latency_s": 0.472
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-888e415974",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.85,
+   "risk": 0.69,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: personal_data_request"
+   ],
+   "tokens": 307,
+   "cost_usd": 1.2e-05,
+   "latency_s": 0.203
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-f9e796458d",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-e556c19f90",
+   "duplicate_pred": "job-e556c19f90",
+   "fit": 0.6,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-e556c19f90"
+   ],
+   "tokens": 146,
+   "cost_usd": 6e-06,
+   "latency_s": 0.508
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-727ce2e182",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: bigcommerce, page speed optimization"
+   ],
+   "tokens": 35,
+   "cost_usd": 1e-06,
+   "latency_s": 0.279
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-dff2761233",
+   "kind": "duplicate",
+   "gold": "skip",
+   "pred": "bid",
+   "pred_bid": true,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-94ef2ded45",
+   "duplicate_pred": null,
+   "fit": 0.7,
+   "risk": 0.0,
+   "price": 35.0,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.70 >= 0.55",
+    "0/1 requirements proven by portfolio evidence"
+   ],
+   "tokens": 80,
+   "cost_usd": 3e-06,
+   "latency_s": 10.619
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-eb5ebcd212",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": "job-d7447f3518",
+   "fit": 0.65,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-d7447f3518"
+   ],
+   "tokens": 413,
+   "cost_usd": 1.7e-05,
+   "latency_s": 0.309
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-bbbb08d356",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.427,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.43 is borderline",
+    "1/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 71,
+   "cost_usd": 3e-06,
+   "latency_s": 0.548
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-a94e01d434",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: twilio api, zoho crm"
+   ],
+   "tokens": 55,
+   "cost_usd": 2e-06,
+   "latency_s": 10.614
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-457c3da48f",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.45,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.45 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 335,
+   "cost_usd": 1.3e-05,
+   "latency_s": 0.414
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-131d15590d",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.442,
+   "risk": 0.855,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 206,
+   "cost_usd": 8e-06,
+   "latency_s": 0.285
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-634cd0cc90",
+   "kind": "real_other_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.445,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.45 is borderline",
+    "2/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 232,
+   "cost_usd": 9e-06,
+   "latency_s": 0.363
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-c747be254d",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-662f5ffd64",
+   "duplicate_pred": "job-662f5ffd64",
+   "fit": 0.75,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-662f5ffd64"
+   ],
+   "tokens": 322,
+   "cost_usd": 1.3e-05,
+   "latency_s": 0.371
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-c7ace0c2c0",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.51,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.51 is borderline",
+    "1/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 117,
+   "cost_usd": 5e-06,
+   "latency_s": 0.411
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-26677a60e2",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.417,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.42 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 143,
+   "cost_usd": 6e-06,
+   "latency_s": 0.379
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-155df521f8",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.2,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.20 below 0.35",
+    "no evidence for: payment gateway integration"
+   ],
+   "tokens": 309,
+   "cost_usd": 1.2e-05,
+   "latency_s": 0.58
+  },
+  {
+   "persona": "fullstack",
+   "job_id": "job-1237e6960c",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": "job-bb9c1b0623",
+   "fit": 0.9,
+   "risk": 0.0,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "duplicate of job-bb9c1b0623"
+   ],
+   "tokens": 417,
+   "cost_usd": 1.7e-05,
+   "latency_s": 0.474
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-26c2835660",
+   "kind": "duplicate",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": "job-322fa5f0b1",
+   "duplicate_pred": null,
+   "fit": 0.4,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.40 is borderline",
+    "2/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 419,
+   "cost_usd": 1.7e-05,
+   "latency_s": 10.633
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-88b90639cb",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.442,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.44 is borderline",
+    "1/4 requirements proven by portfolio evidence"
+   ],
+   "tokens": 461,
+   "cost_usd": 1.8e-05,
+   "latency_s": 10.585
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-6ec7dd6fe0",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "skip",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": true,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.5,
+   "risk": 0.66,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "scam signals: off_platform_contact"
+   ],
+   "tokens": 483,
+   "cost_usd": 1.9e-05,
+   "latency_s": 9.826
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-c141eb7e41",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.5,
+   "risk": 0.45,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.50 is borderline",
+    "1/6 requirements proven by portfolio evidence"
+   ],
+   "tokens": 238,
+   "cost_usd": 1e-05,
+   "latency_s": 0.778
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-a8b560f5e7",
+   "kind": "injection",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": true,
+   "pred_injection": true,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.487,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.49 is borderline",
+    "2/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 217,
+   "cost_usd": 9e-06,
+   "latency_s": 0.254
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "job-ff9dd51df5",
+   "kind": "real_in_domain",
+   "gold": "bid",
+   "pred": "watch",
+   "pred_bid": false,
+   "gold_scam": false,
+   "pred_scam": false,
+   "injection": false,
+   "pred_injection": false,
+   "duplicate_gold": null,
+   "duplicate_pred": null,
+   "fit": 0.4,
+   "risk": 0.505,
+   "price": null,
+   "price_in_band": null,
+   "reasons": [
+    "fit 0.40 is borderline",
+    "0/5 requirements proven by portfolio evidence"
+   ],
+   "tokens": 179,
+   "cost_usd": 7e-06,
+   "latency_s": 10.533
+  }
+ ]
+}

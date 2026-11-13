@@ -1,0 +1,81 @@
+{
+ "generated_at": "2026-11-13T13:39:01+0500",
+ "commit": "1515e82",
+ "hardware": "x86_64 4 CPU, Linux",
+ "proposals": 7,
+ "zero_must_have_exact_121": 5,
+ "zero_must_have_stem_122": 2,
+ "mean_must_have_exact_121": 0.143,
+ "mean_must_have_stem_122": 0.429,
+ "rows": [
+  {
+   "job_id": "job-c037002a7f",
+   "must_have": [
+    "chatbot development",
+    "looker studio"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.5,
+   "must_have_hit_stem_122": 0.5
+  },
+  {
+   "job_id": "job-6347eae0d4",
+   "must_have": [
+    "machine learning",
+    "computer vision"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.5,
+   "must_have_hit_stem_122": 0.5
+  },
+  {
+   "job_id": "job-6a7e35016b",
+   "must_have": [
+    "mysql"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.0,
+   "must_have_hit_stem_122": 0.0
+  },
+  {
+   "job_id": "job-43f3b6791b",
+   "must_have": [
+    "python",
+    "statistics"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.0,
+   "must_have_hit_stem_122": 0.0
+  },
+  {
+   "job_id": "job-c05b7b92f0",
+   "must_have": [
+    "financial analysis",
+    "microsoft excel"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.0,
+   "must_have_hit_stem_122": 1.0
+  },
+  {
+   "job_id": "job-989737852b",
+   "must_have": [
+    "api integration",
+    "data visualization"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.0,
+   "must_have_hit_stem_122": 0.5
+  },
+  {
+   "job_id": "job-de1cabbd66",
+   "must_have": [
+    "microsoft excel",
+    "financial analysis"
+   ],
+   "decision_121": "ignored",
+   "must_have_hit_exact_121": 0.0,
+   "must_have_hit_stem_122": 0.5
+  }
+ ]
+}
