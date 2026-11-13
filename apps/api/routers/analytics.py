@@ -29,7 +29,12 @@ async def analytics(user=CurrentUser):
     cards = await db.fetch("SELECT * FROM pipeline WHERE user_id=%s", uid)
     by_cat: dict[str, Counter] = defaultdict(Counter)
     funnel = Counter()
+    arms: dict[str, Counter] = defaultdict(Counter)
     for c in cards:
+        arm = (c.get("features") or {}).get("strategy")
+        if arm and c["stage"] != "drafted":
+            arms[arm]["sent"] += 1
+            arms[arm]["replied"] += c["stage"] in REPLIED
         cat = c["category"] or "other"
         if c["stage"] != "drafted":
             by_cat[cat]["sent"] += 1
@@ -66,4 +71,6 @@ async def analytics(user=CurrentUser):
                       "per_proposal": {"cost_usd": stats(proposals, "cost_usd"), "latency_s": stats(proposals, "latency_s")}},
         rejection_reasons=[{"reason": k, "count": v} for k, v in reasons.most_common(8)],
         funnel={k: funnel.get(k, 0) for k in ("drafted", "submitted", "viewed", "replied", "interview", "hired", "lost")},
+        experiment=[{"arm": k, "sent": v["sent"], "replied": v["replied"],
+                     "reply_rate": round(v["replied"] / v["sent"], 3) if v["sent"] else None} for k, v in sorted(arms.items())],
     )

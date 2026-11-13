@@ -86,7 +86,7 @@ REQ_CUES = re.compile(r"\b(need|needs|must|require|required|build|develop|create
 def heuristic_requirements(job: dict, limit: int = 6) -> list[str]:
     """Cheap requirement extraction (no LLM): specific skills first, then requirement-like sentences."""
     reqs: list[str] = []
-    specific = [s for s in canon_set(job.get("skills", [])) if s not in GENERIC_SKILLS]
+    specific = [s for s in sorted(canon_set(job.get("skills", []))) if s not in GENERIC_SKILLS]  # sorted: sets iterate in hash order
     for s in specific[:4]:
         reqs.append(f"experience with {s}")
     for sent in SENT_SPLIT.split(job.get("description", "")):

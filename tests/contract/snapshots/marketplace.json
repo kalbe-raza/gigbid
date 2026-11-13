@@ -357,7 +357,7 @@
    "openWorldHint": true,
    "readOnlyHint": true
   },
-  "description": "Full job post, including the Connects cost under the current platform policy.",
+  "description": "Full job post for a job id you already have (from search_jobs or the inbox), including the Connects cost under\n    the current platform policy. To find jobs, use search_jobs.",
   "inputSchema": {
    "properties": {
     "job_id": {

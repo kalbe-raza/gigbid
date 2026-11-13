@@ -48,6 +48,17 @@ export default function Analytics() {
         )}
       </section>
       <section className="panel">
+        <h2>Proposal experiment (A/B)</h2>
+        <p className="muted small">Strategy A is evidence-first; strategy B is short and consultative. Each job gets an arm by a stable hash of its id.</p>
+        {(d.experiment ?? []).length === 0 ? <p className="muted">No experiment proposals sent yet.</p> : (
+          <table><thead><tr><th>Strategy</th><th>Sent</th><th>Replied</th><th>Reply rate</th></tr></thead><tbody>
+            {(d.experiment ?? []).map((r) => (
+              <tr key={String(r.arm)}><td>{String(r.arm)}</td><td>{String(r.sent)}</td><td>{String(r.replied)}</td><td>{pct(r.reply_rate as number | null)}</td></tr>
+            ))}
+          </tbody></table>
+        )}
+      </section>
+      <section className="panel">
         <h2>Top rejection reasons</h2>
         {d.rejection_reasons.length === 0 ? <p className="muted">You have not rejected any drafts.</p> : <ol>{d.rejection_reasons.map((r) => <li key={String(r.reason)}>{String(r.reason)} <span className="badge neutral">{String(r.count)}</span></li>)}</ol>}
       </section>

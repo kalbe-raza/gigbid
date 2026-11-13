@@ -201,6 +201,7 @@ class Analytics(BaseModel):
     cost_latency: dict[str, Any]
     rejection_reasons: list[dict[str, Any]]
     funnel: dict[str, int]
+    experiment: list[dict[str, Any]] = Field(default_factory=list)  # X2: reply rate per writer strategy arm
 
 
 class MemoryItem(BaseModel):

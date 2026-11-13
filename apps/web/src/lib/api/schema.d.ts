@@ -588,6 +588,10 @@ export interface components {
             funnel: {
                 [key: string]: number;
             };
+            /** Experiment */
+            experiment?: {
+                [key: string]: unknown;
+            }[];
         };
         /** ApprovalIn */
         ApprovalIn: {

@@ -112,7 +112,8 @@ async def search_jobs(ctx: Context, query: Annotated[str, Field(max_length=200)]
 
 @mcp.tool(annotations=READ)
 async def get_job(ctx: Context, job_id: JobId) -> JobDetail:
-    """Full job post, including the Connects cost under the current platform policy."""
+    """Full job post for a job id you already have (from search_jobs or the inbox), including the Connects cost under
+    the current platform policy. To find jobs, use search_jobs."""
     async def fn(a, _):
         return JobDetail.model_validate(await a.get_job(job_id))
     return await _run(ctx, "get_job", {"job_id": job_id}, fn)
