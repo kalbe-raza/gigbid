@@ -1,0 +1,19 @@
+GigBid crash-and-resume demonstration (13 Nov 2026, times UTC). Job job-5b02b520e1, thread bid-u-4681a3d4c12f-job-5b02b520e1,
+trace 8fc8c21a1b4941f8805b7cc25cf4dc41. 'GigSim' lines are the simulator's own record of proposals (GET /admin/outcomes).
+
+18:38:09 run status (status|pending_resume): awaiting_approval|f
+18:38:09 GigSim: 0 proposal(s) in GigSim []
+18:38:09 kill -9 API and worker while the proposal waits for approval
+18:38:11 API health after kill: HTTP 000
+18:38:11 restart the API only (worker still down)
+18:38:13 API health after restart: HTTP 200
+18:38:13 approve from the UI (Playwright clicks 'Approve & send' in the proposal studio)
+UI: Your decision dry run Sends a hourly bid of $30/h and spends 4 Connects; balance after: 68 Exactly what the client will receive Approve & send (4 Connects) Edit Reject Nothing is sent to the marketpla
+18:38:17 run status: resuming|t   (approval stored on the run; nothing submitted while the worker is down)
+18:38:17 GigSim: 0 proposal(s) in GigSim []
+18:38:17 start the worker: its startup sweep re-enqueues the resuming run
+18:38:22 run status: submitted|f
+18:38:22 GigSim: 1 proposal(s) in GigSim [('pr-745c13b99c7e', 4)]
+18:38:22 retry the approval (as a double click or a duplicate resume would)
+         API answered HTTP 409 Conflict: no approval is pending for this thread, so nothing is resumed or sent again
+18:38:37 GigSim: 1 proposal(s) in GigSim [('pr-745c13b99c7e', 4)]

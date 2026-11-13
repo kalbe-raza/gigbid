@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GigBid trace</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" style="max-width:1280px">
+  <header class="site">
+    <a class="brand" href="./">GigBid</a>
+    <nav><a href="./#demo">Demo video</a><a href="./#traces">Traces</a><a href="blog/reply-rate-was-the-simulator.html">Write-up</a><a href="https://github.com/kalbe-raza/gigbid">GitHub</a></nav>
+  </header>
+  <h1 id="title">Loading trace…</h1>
+  <p class="lede" id="desc"></p>
+  <div class="stats" id="stats"></div>
+  <p class="small muted">Exported from the project's self-hosted Arize Phoenix (OpenInference spans). Every span carries the same trace id from the
+    API through the LangGraph graph and the MCP servers. Click a span to see its input, output, model and tokens; long values are truncated.</p>
+  <div class="tv">
+    <div class="tree" id="tree" role="listbox" aria-label="Spans"></div>
+    <aside class="detail" id="detail"><p class="muted">Select a span.</p></aside>
+  </div>
+  <footer>Synthetic persona and simulated marketplace (GigSim); no real client data. <a href="./">Back to the project page</a></footer>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ms = (a, b) => new Date(b) - new Date(a);
+const fmtDur = (x) => x < 1000 ? `${x} ms` : x < 60000 ? `${(x / 1000).toFixed(2)} s` : x < 3600000 ? `${(x / 60000).toFixed(1)} min` : `${(x / 3600000).toFixed(2)} h`;
+const pretty = (v) => { if (typeof v !== "string") return JSON.stringify(v, null, 2); try { return JSON.stringify(JSON.parse(v), null, 2); } catch { return v; } };
+const slug = new URLSearchParams(location.search).get("t") || "approved_proposal";
+fetch(`traces/${encodeURIComponent(slug)}.json`).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(render)
+  .catch((e) => { $("title").textContent = "Trace not found"; $("desc").textContent = `No trace named "${slug}" (${e.message}).`; });
+
+function render(t) {
+  document.title = `${t.title} · GigBid trace`;
+  $("title").textContent = t.title;
+  $("desc").textContent = t.description;
+  const spans = t.spans, byId = Object.fromEntries(spans.map((s) => [s.id, s]));
+  const t0 = Math.min(...spans.map((s) => +new Date(s.start))), t1 = Math.max(...spans.map((s) => +new Date(s.end)));
+  const total = Math.max(1, t1 - t0);
+  const tok = spans.reduce((a, s) => a + (+s.attributes["llm.token_count.total"] || 0), 0);
+  const cost = spans.reduce((a, s) => a + (+s.attributes["llm.cost.total"] || 0), 0);
+  const llm = spans.filter((s) => s.kind === "LLM").length, tools = spans.filter((s) => s.name.startsWith("mcp.")).length;
+  $("stats").innerHTML = [["Trace id", `<code>${esc(t.trace_id)}</code>`], ["Wall time", fmtDur(total)], ["Spans", spans.length],
+    ["LLM calls", llm], ["MCP tool calls", tools], ["Tokens", tok.toLocaleString()], ["Cost (USD)", `$${cost.toFixed(5)}`]]
+    .map(([k, v]) => `<div><span class="muted small">${k}</span><b>${v}</b></div>`).join("");
+  const kids = {}; spans.forEach((s) => { const p = s.parent && byId[s.parent] ? s.parent : "root"; (kids[p] ||= []).push(s); });
+  const rows = [];
+  (function walk(p, depth) { (kids[p] || []).sort((a, b) => new Date(a.start) - new Date(b.start)).forEach((s) => { rows.push([s, depth]); walk(s.id, depth + 1); }); })("root", 0);
+  $("tree").innerHTML = rows.map(([s, d], i) => {
+    const left = ((new Date(s.start) - t0) / total) * 100, w = (ms(s.start, s.end) / total) * 100;
+    const tk = s.attributes["llm.token_count.total"];
+    return `<button class="row${s.status === "ERROR" ? " err" : ""}" role="option" data-i="${i}" aria-selected="false">
+      <span class="nm" style="padding-left:${d * 14}px"><span class="k ${esc(s.kind)}">${esc(s.kind)}</span>${esc(s.name)}${tk ? ` <span class="muted">· ${tk} tok</span>` : ""}</span>
+      <span class="bar"><i style="left:${left}%;width:${w}%"></i></span><span class="d">${fmtDur(ms(s.start, s.end))}</span></button>`;
+  }).join("");
+  const show = (i) => {
+    document.querySelectorAll(".row").forEach((r) => r.setAttribute("aria-selected", r.dataset.i == i));
+    const [s] = rows[i], a = s.attributes;
+    const kv = [["Kind", s.kind], ["Status", s.status + (s.status_message ? ` (${s.status_message.slice(0, 160)})` : "")], ["Start", s.start], ["Duration", fmtDur(ms(s.start, s.end))],
+      ["Model", a["llm.model_name"]], ["Tokens", a["llm.token_count.total"] && `${a["llm.token_count.prompt"]} prompt + ${a["llm.token_count.completion"]} completion`],
+      ["Cost", a["llm.cost.total"] != null && `$${(+a["llm.cost.total"]).toFixed(6)}`], ["Graph node", a["metadata.langgraph_node"]], ["Tool", a["tool.name"]], ["Thread", a["metadata.thread_id"] || a["session.id"]]]
+      .filter(([, v]) => v != null && v !== "" && v !== false);
+    $("detail").innerHTML = `<h3>${esc(s.name)}</h3><div class="kv">${kv.map(([k, v]) => `<div>${k}</div><div>${esc(v)}</div>`).join("")}</div>` +
+      (a["input.value"] != null ? `<h3>Input</h3><pre>${esc(pretty(a["input.value"]))}</pre>` : "") +
+      (a["output.value"] != null ? `<h3>Output</h3><pre>${esc(pretty(a["output.value"]))}</pre>` : "");
+  };
+  $("tree").addEventListener("click", (e) => { const r = e.target.closest(".row"); if (r) show(+r.dataset.i); });
+  if (rows.length) show(0);
+}
+</script>
+</body>
+</html>

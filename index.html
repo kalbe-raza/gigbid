@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GigBid demo and traces</title>
+<meta name="description" content="GigBid: LangGraph agents that find freelance jobs, write evidence-grounded proposals and wait for human approval. Demo video, public traces, write-up and test report.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="brand" href="./">GigBid</a>
+    <nav><a href="#demo">Demo video</a><a href="#traces">Traces</a><a href="blog/reply-rate-was-the-simulator.html">Write-up</a><a href="playwright-report/">Playwright report</a><a href="https://github.com/kalbe-raza/gigbid">GitHub</a></nav>
+  </header>
+
+  <h1>GigBid: a multi-agent freelancer copilot</h1>
+  <p class="lede">LangGraph agents watch a freelance marketplace, decide which jobs are worth a bid, write proposals in which every claim
+    cites the freelancer's own portfolio, catch scams and injected instructions, and stop before anything is sent: a human approves every
+    proposal and every message. AI-4016 R&amp;D assignment by Syed Kalbe Raza (22i-0794), FAST-NUCES Islamabad.</p>
+
+  <h2 id="demo">3-minute demo</h2>
+  <video controls preload="metadata" poster="media/poster.jpg" playsinline>
+    <source src="media/gigbid_demo.mp4" type="video/mp4">
+    Your browser cannot play this video. <a href="media/gigbid_demo.mp4">Download it (MP4, 12 MB)</a>.
+  </video>
+  <p class="small muted">2 min 28 s, captioned (no voice-over). Recorded on the full local stack against GigSim, the project's marketplace simulator,
+    with a synthetic full-stack persona. The two minutes in which the agents analyse the job and write the draft are shown at 12× speed;
+    everything else is real time. <a href="media/gigbid_demo.mp4" download>Download MP4</a></p>
+  <table>
+    <thead><tr><th style="width:70px">Time</th><th>What you see</th></tr></thead>
+    <tbody>
+      <tr><td>0:00</td><td>Job inbox: new GigSim jobs ranked by fit, with risk badges and recommendations</td></tr>
+      <tr><td>0:11</td><td>A new job is posted; the scout scan picks it up and the bid graph starts (agents shown at 12× speed from 0:21)</td></tr>
+      <tr><td>0:31</td><td>Bid decision, JobSpec, risk report, requirement-to-evidence matrix and price rationale</td></tr>
+      <tr><td>0:48</td><td>Proposal studio: evidence on hover, Critic and Compliance notes, the dry-run preview; approved at 0:56</td></tr>
+      <tr><td>0:57</td><td>Run viewer (node-by-node progress, tokens and cost, checkpoint history), then the Phoenix trace at 1:06</td></tr>
+      <tr><td>1:16</td><td><span class="badge bad">scam caught</span> "contact me on Telegram, paid in crypto": skipped before any writing</td></tr>
+      <tr><td>1:33</td><td><span class="badge warn">injection ignored</span> the post tells AI tools to start with "I AM A BOT"; the draft does not</td></tr>
+      <tr><td>1:52</td><td><span class="badge ok">client reply</span> the client of the approved job asks for an interview; slots from the calendar; approved and sent</td></tr>
+      <tr><td>2:07</td><td>Pipeline board and analytics</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="traces">Public traces</h2>
+  <p>Exported from the project's self-hosted Arize Phoenix. One trace id flows from the UI request through the API, the LangGraph graph, every
+    MCP server and the audit log; each LLM span carries its model, tokens and cost.</p>
+  <div class="cards">
+    <a class="card" href="trace.html?t=approved_proposal"><strong>Approved proposal</strong><span>The job from the video, from analysis through two Critic send-backs to the human approval and one <code>submit_proposal</code> call.</span></a>
+    <a class="card" href="trace.html?t=scam_skipped"><strong>Skipped scam</strong><span>Off-platform contact and crypto payment flagged; skipped with no writer or critic tokens spent.</span></a>
+    <a class="card" href="trace.html?t=critic_loop"><strong>Critic loop</strong><span>Critic scores 6.0 then 5.0 and sends the draft back twice; the loop stops at its limit of two revisions.</span></a>
+    <a class="card" href="trace.html?t=crash_resume"><strong>Crash and resume</strong><span>API and worker killed while the proposal waited; approved with the worker down; resumed from the Postgres checkpoint and submitted exactly once. <a href="traces/crash_resume_log.txt">Log</a></span></a>
+    <a class="card" href="trace.html?t=injection_ignored"><strong>Injected instruction ignored</strong><span>Prompt-injection flag raised (Prompt Guard 0.997); the draft contains no injected phrase.</span></a>
+  </div>
+
+  <h2>More</h2>
+  <div class="cards">
+    <a class="card" href="blog/reply-rate-was-the-simulator.html"><strong>Write-up</strong><span>"My agent's reply rate was 0%. The bug was in the simulator I wrote to grade it." (1,300 words)</span></a>
+    <a class="card" href="playwright-report/"><strong>Playwright report</strong><span>UI tests: onboarding, approve, reject with a reason, edit a draft, degraded-mode banner, keyboard access (desktop and phone).</span></a>
+    <a class="card" href="https://github.com/kalbe-raza/gigbid"><strong>Source code</strong><span>Repository with the R&amp;D report, eval results and every runner that produced them.</span></a>
+    <a class="card" href="https://github.com/kalbe-raza/gigbid/tree/main/mcp_servers/portfolio"><strong>Portfolio MCP server</strong><span>Installable with <code>uvx --from git+https://github.com/kalbe-raza/gigbid gigbid-portfolio-mcp</code></span></a>
+  </div>
+
+  <footer>Persona data and GigSim are synthetic; nothing here reaches a real client. Reviewer login for the live app is given privately with the submission.</footer>
+</div>
+</body>
+</html>
