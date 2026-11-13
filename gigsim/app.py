@@ -48,7 +48,7 @@ ACCOUNTS = dict(
     pair.split(":", 1) for pair in os.getenv("GIGSIM_TOKENS", "gs-dev-token:demo,gs-eval-token:eval").split(",") if ":" in pair
 )
 
-app = FastAPI(title="GigSim", version="1.2.1", description="Marketplace simulator for GigBid (synthetic).")
+app = FastAPI(title="GigSim", version="1.2.2", description="Marketplace simulator for GigBid (synthetic).")
 _lock = threading.RLock()
 _hits: dict[str, deque] = {}
 _rng = random.Random(int(os.getenv("GIGSIM_SEED", "794")))
@@ -218,6 +218,24 @@ GENERIC_OPENERS = re.compile(r"^(dear (sir|madam|hiring)|hello,? i am|hi there!?
 CONTACT = re.compile(r"[\w.+-]+@[\w-]+\.\w+|\+?\d[\d\s-]{8,}\d|whatsapp|telegram|skype", re.I)
 
 
+VENDOR = {"microsoft", "google", "amazon", "apple", "adobe", "the", "and", "for", "development", "developer"}
+
+
+def _skill_hit(skill: str, low: str) -> float:
+    """v1.2.2: credit for naming a must-have skill. The exact phrase scores 1; otherwise the share of its distinctive
+    tokens present (6-letter stem match, vendor prefixes ignored), so "Excel" counts for "microsoft excel" and
+    "financial models" half-counts for "financial analysis". v1.2.1 required the exact phrase."""
+    skill = skill.lower()
+    if skill in low:
+        return 1.0
+    toks = [t for t in re.findall(r"[a-z0-9+#.]+", skill) if t not in VENDOR and len(t) >= 2]
+    if not toks:
+        return 0.0
+    words = set(re.findall(r"[a-z0-9+#.]+", low))
+    stems = {w[:6] for w in words if len(w) >= 6}
+    return sum(t in words or (len(t) >= 6 and t[:6] in stems) for t in toks) / len(toks)
+
+
 def proposal_features(job: dict, client: dict, p: dict) -> dict:
     text = p["cover_letter"]
     low = text.lower()
@@ -228,7 +246,7 @@ def proposal_features(job: dict, client: dict, p: dict) -> dict:
     amount = p.get("bid_amount") or 0
     return {
         "generic_opening": bool(GENERIC_OPENERS.search(text.strip()[:120])),
-        "must_have_hit": (sum(m.lower() in low for m in must) / len(must)) if must else 1.0,
+        "must_have_hit": (sum(_skill_hit(m, low) for m in must) / len(must)) if must else 1.0,
         "evidence": len(re.findall(r"\[(?:case|repo|review|proposal|cv)[:\]]|portfolio://|case study|repository", low)),
         "personalised": len([w for w in title_words if w in low]) >= 2,
         "price_ratio": (amount / ceiling) if ceiling and amount else 1.0,

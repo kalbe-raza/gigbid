@@ -74,6 +74,7 @@ async def write(state: dict, ctx: NodeContext) -> tuple[ProposalDraft, list[dict
     parts = [
         f"JOB: {spec.get('title')}\nSummary: {spec.get('summary')}\nDeliverables: {'; '.join(spec.get('deliverables', []))}",
         "Requirements: " + "; ".join(r["text"] for r in spec.get("requirements", [])),
+        "LISTED SKILLS: " + (", ".join(state["job"].get("skills") or []) or "none"),
         "Screening questions: " + (" | ".join(spec.get("screening_questions", [])) or "none"),
         f"PRICE: {price['bid_type']} ${price['amount']:,.0f}{'/h' if price['bid_type'] == 'hourly' else ''}",
         f"EVIDENCE (cite only these ids):\n{ev_text or '- none'}",

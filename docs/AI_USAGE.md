@@ -20,3 +20,6 @@ labelled by me), the demo video, the write-up and the viva.
    (hash randomisation). Fixed with sorted iteration; verified byte-identical across `PYTHONHASHSEED`.
 5. The cross-encoder reranker was assumed to help; measurement showed it lowered Recall@5, so it is off in the shipped
    config (ADR 0002).
+6. GigSim's client model counted a must-have skill only on an exact phrase match, so a letter saying "Excel" scored
+   0% on "microsoft excel" and every proposal of the first calibrated run was ignored. Found by recomputing the
+   features of the ignored proposals; fixed in GigSim 1.2.2 (token/stem matching) and all outcome runs were redone.

@@ -177,6 +177,9 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
     base, key = _provider(provider)
     if provider != "ollama" and not key:
         raise LLMError(f"no API key for provider {provider}")
+    # some free-tier organisations cap output tokens per minute per model below what a node asks for (Groq answers
+    # "Request too large"); models.max_output_tokens clamps the request so it can succeed
+    max_tokens = min(max_tokens, settings().models.get("max_output_tokens", {}).get(spec, max_tokens))
     body: dict[str, Any] = {"model": model, "messages": messages, "max_tokens": max_tokens,
                             "temperature": temperature, **_extra_params(model, node)}
     if json_mode:
@@ -186,7 +189,8 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
     await PACER.acquire(spec, est, tpm)
     cfg = settings().marketplace["retries"]
     last: Exception | None = None
-    for attempt in range(cfg["attempts"]):
+    attempt, rate_limited = 0, 0
+    while attempt < cfg["attempts"]:
         try:
             async with httpx.AsyncClient(timeout=90) as client:
                 r = await client.post(f"{base}/chat/completions", json=body,
@@ -195,13 +199,23 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
                 retry_after = float(r.headers.get("retry-after", "0") or 0)
                 if retry_after > 30:  # daily quota or long cool-down: let the caller fall back
                     raise LLMError(f"{spec} unavailable ({r.status_code}, retry-after {retry_after}s)")
+                last = LLMError(f"{spec} HTTP {r.status_code}: {mask_pii(r.text[:240])}")
+                if r.status_code == 429 and "too large" in r.text.lower():
+                    raise last  # one request above the per-minute limit can never succeed by waiting
+                if r.status_code == 429 and rate_limited < 6:
+                    # per-minute limit (TPM/RPM): the window frees up within a minute, so wait it out rather than
+                    # spending the bounded attempts meant for server errors
+                    rate_limited += 1
+                    await asyncio.sleep(max(retry_after, 10.0))
+                    continue
                 await asyncio.sleep(max(retry_after, cfg["backoff_base_s"] * (2 ** attempt)))
-                last = LLMError(f"{spec} HTTP {r.status_code}")
+                attempt += 1
                 continue
             if r.status_code == 400 and json_mode and ("json_validate_failed" in r.text or "validate JSON" in r.text):
                 # provider-side JSON validation failed (often truncation); retry once in plain mode, parse leniently
                 body.pop("response_format", None)
                 json_mode = False
+                attempt += 1
                 continue
             if r.status_code >= 400:
                 raise LLMError(f"{spec} HTTP {r.status_code}: {mask_pii(r.text[:300])}")
@@ -212,6 +226,7 @@ async def _post(spec: str, node: str, messages: list[dict], max_tokens: int, tem
         except (httpx.TimeoutException, httpx.TransportError) as e:
             last = e
             await asyncio.sleep(cfg["backoff_base_s"] * (2 ** attempt))
+            attempt += 1
     raise LLMError(f"{spec} failed after retries: {last}")
 
 
