@@ -1,0 +1,107 @@
+{
+ "generated_at": "2026-11-13T22:10:52+0500",
+ "commit": "9c7925e",
+ "hardware": "x86_64 4 CPU, Linux",
+ "n": 30,
+ "cohens_kappa": 0.1209,
+ "agreement": 0.4667,
+ "disagreements": [
+  {
+   "item_id": "gigsim_outcomes_best_openb:job-6347eae0d4",
+   "human": "ok",
+   "judge": "poor",
+   "judge_score": 5.0
+  },
+  {
+   "item_id": "gigsim_outcomes_best_openb:job-c037002a7f",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  },
+  {
+   "item_id": "gigsim_outcomes_v0_openb:job-43f3b6791b",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 8.5
+  },
+  {
+   "item_id": "gigsim_outcomes_test_best_open:job-7a90b03813",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 9.0
+  },
+  {
+   "item_id": "gigsim_outcomes_best_open:job-c037002a7f",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  },
+  {
+   "item_id": "gigsim_outcomes_best_openb:job-43f3b6791b",
+   "human": "poor",
+   "judge": "good",
+   "judge_score": 8.0
+  },
+  {
+   "item_id": "gigsim_outcomes_best_open:job-6a7e35016b",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 9.0
+  },
+  {
+   "item_id": "gigsim_outcomes_test_best_open:job-c8871ecc57",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 9.0
+  },
+  {
+   "item_id": "gigsim_outcomes_v0_openb:job-de1cabbd66",
+   "human": "good",
+   "judge": "ok",
+   "judge_score": 7.0
+  },
+  {
+   "item_id": "gigsim_outcomes_test_best_open:job-111604ea5e",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 9.0
+  },
+  {
+   "item_id": "gigsim_outcomes_best_openb:job-de1cabbd66",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 9.0
+  },
+  {
+   "item_id": "gigsim_outcomes_v0_openb:job-6a7e35016b",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  },
+  {
+   "item_id": "gigsim_outcomes_test_best_open:job-eb0944110f",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  },
+  {
+   "item_id": "gigsim_outcomes_baseline_trial:job-6a7e35016b",
+   "human": "poor",
+   "judge": "ok",
+   "judge_score": 7.0
+  },
+  {
+   "item_id": "gigsim_outcomes_best_open:job-43f3b6791b",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  },
+  {
+   "item_id": "gigsim_outcomes_test_best_open:job-70bf5d6673",
+   "human": "ok",
+   "judge": "good",
+   "judge_score": 7.5
+  }
+ ],
+ "mapping": ">=7.5 good, >=5.5 ok, else poor"
+}
