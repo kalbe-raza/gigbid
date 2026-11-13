@@ -24,12 +24,12 @@ HYPOTHESIS = ("H-B (stated before running): requirement decomposition + hybrid B
               "adds precision (MRR) on top.")
 
 VARIANTS = ["v0_naive", "v1_decompose", "v2_hybrid", "v3_rerank", "v4_outcome", "v8_corrective", "best"]
-ABLATIONS = {  # best pipeline with one component removed at a time
+ABLATIONS = {  # shipped pipeline with one component removed (or the rejected components added back) at a time
     "best-minus-decomposition": {"query": "whole"},
     "best-minus-hybrid(dense only)": {"retrieval": "dense"},
-    "best-minus-rerank": {"rerank": "none"},
-    "best-minus-outcome": {"outcome": False},
     "best-minus-structured-chunks": {"chunking": "fixed"},
+    "best-plus-rerank": {"rerank": "cross"},
+    "best-plus-outcome": {"outcome": True},
 }
 
 
@@ -101,9 +101,11 @@ def main() -> None:
     models = {}
     if a.models:
         sub = {p: sample(rs, 40, seed=11) for p, rs in rows.items()}
-        for label, change in {"embed=bge-small-en-v1.5 (default)": {},
+        for label, change in {"embed=bge-small-en-v1.5 (shipped)": {},
                               "embed=nomic-embed-text-v1.5-Q": {"embed_model": "nomic-ai/nomic-embed-text-v1.5-Q"},
-                              "rerank=bge-reranker-v2-m3-int8": {"rerank_model": "BAAI/bge-reranker-v2-m3-int8"}}.items():
+                              "+rerank MiniLM-L6": {"rerank": "cross"},
+                              "+rerank bge-reranker-v2-m3-int8": {"rerank": "cross",
+                                                                  "rerank_model": "BAAI/bge-reranker-v2-m3-int8"}}.items():
             cfg = dataclasses.replace(best, **change)
             if "embed_model" in change:
                 build_indexes(models=[change["embed_model"]], schemes=("structured",))
